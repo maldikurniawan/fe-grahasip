@@ -18,6 +18,7 @@ const Header: React.FC = () => {
   const ref = useRef<HTMLDivElement>(null);
   const { width } = useWindowSize();
   const [navOpen, setNavOpen] = useState<boolean>(false);
+  const [scrolled, setScrolled] = useState<boolean>(false);
 
   const menu: MenuItem[] = [
     { title: "Home", link: "#Home" },
@@ -34,38 +35,44 @@ const Header: React.FC = () => {
     }
   }, [width]);
 
+  useEffect(() => {
+    window.addEventListener("scroll", () => {
+      setScrolled(window.scrollY >= 100);
+    });
+  }, []);
+
   return (
     <>
       <header
-        className="px-4 md:px-[30px] h-20 mt-4 rounded-2xl flex items-center justify-between bg-white fixed top-10 shadow hover:shadow-lg left-1/2 transform -translate-x-1/2 -translate-y-1/2 z-40 transition-all duration-300"
-        style={{ width: '1320px' }}
+        className={`px-4 md:px-[30px] h-20 mt-4 rounded-2xl flex items-center justify-between bg-white fixed top-10 shadow left-1/2 transform -translate-x-1/2 -translate-y-1/2 z-40 transition-all duration-300 ${scrolled ? "shadow-lg bg-opacity-90 backdrop-blur-sm hover:bg-opacity-100" : "shadow"}`}
+        style={{ width: '920px', height: "70px" }}
       >
-        <div className="font-bold text-xl md:text-3xl text-[#4479BC]">
-          <Link href="#Home" scroll={false} className="cursor-pointer flex items-center text-[15px] gap-2">
+        <div className="font-bold text-sm md:text-3xl text-[#4479BC]">
+          <Link href="#Home" scroll={false} className="cursor-pointer flex items-center text-[14px] gap-2">
             <img
               src="assets/images/logo.png"
               alt="logo"
-              className="w-[32px] h-[24px]"
+              className="w-[28px] h-[20px]"
             />
             Graha Skrip Infra Prima
           </Link>
         </div>
 
-        <div className="hidden xl:flex items-center gap-x-2">
+        <div className="hidden xl:flex items-center">
           {menu.map((item, index) => (
             <Link
               key={index}
               href={item.link}
               scroll={false}
-              className="text-gray-500 rounded-md px-4 py-2 hover:text-[#4479BC] hover:underline hover:underline-offset-[33px] hover:decoration-2 font-medium whitespace-nowrap cursor-pointer"
+              className="text-gray-500 rounded-md px-3 text-sm hover:text-[#4479BC] hover:underline hover:underline-offset-[28px] hover:decoration-2 font-medium whitespace-nowrap cursor-pointer"
             >
               {item.title}
             </Link>
           ))}
         </div>
 
-        <div className="text-xl md:text-3xl font-semibold text-white bg-[#4479BC] p-1 px-6 rounded-md">
-          <a href="/" className="cursor-pointer flex items-center text-[15px] gap-2">
+        <div className="text-xl md:text-3xl font-bold text-white bg-[#4479BC] px-4 rounded-md">
+          <a href="/" className="cursor-pointer flex items-center text-[14px] gap-2">
             <FiPhone className="w-[20px] h-[20px]" />
             Hubungi Kami
           </a>
