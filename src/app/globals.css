@@ -21,3 +21,16 @@ body {
   background: var(--background);
   overflow-x: hidden;
 }
+
+/* Custom Swiper Arrows */
+.swiper-button-prev-custom,
+.swiper-button-next-custom {
+  cursor: pointer;
+  transition: transform 0.3s ease;
+}
+
+.swiper-button-prev-custom:hover,
+.swiper-button-next-custom:hover {
+  transform: scale(1.1);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
