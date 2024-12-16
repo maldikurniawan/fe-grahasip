@@ -4,11 +4,11 @@ const Hero = () => {
     return (
         <div className='min-h-screen bg-[#FAFAFA] pt-[160px] pb-[90px] px-4 md:px-[220px]'>
             <div className='flex justify-between mb-[80px]'>
-                <div className='text-[49px] font-bold leading-[55px]'>
+                <div className='text-[48px] font-bold leading-[55px] text-[#061C3D]'>
                     Partner terpercaya <br /> dalam pembangunan
                     <div>
                         infrastruktur
-                        <span className='text-white bg-[#4479BC] ml-2'>Modern</span>
+                        <span className='text-white bg-[#4479BC] bg-opacity-90 ml-2'>Modern</span>
                     </div>
                 </div>
                 <div className='pt-[50px] text-[14px]'>

@@ -61,17 +61,17 @@ const Team = () => {
     ]);
 
     return (
-        <div className="relative min-h-screen px-[215px] bg-[#FAFAFA] flex flex-col py-[70px] items-center justify-center">
+        <div className="relative min-h-screen px-4 sm:px-8 md:px-16 lg:px-32 xl:px-[215px] bg-[#FAFAFA] flex flex-col py-[90px] items-center">
             {/* Section Title */}
-            <div className="text-center text-[#4479BC] text-[40px] font-bold mb-2">
+            <div className="text-center text-[#4479BC] text-2xl sm:text-3xl md:text-[40px] font-bold mb-2">
                 Team Graha Skrip Infra Prima
             </div>
-            <div className="text-center text-[#42526B] text-[14px] mb-[120px]">
+            <div className="text-center text-[#42526B] text-sm sm:text-base md:text-[14px] mb-8 md:mb-[100px]">
                 Unit kami terdiri dari para ahli di bidangnya masing-masing, siap mendukung Anda.
             </div>
 
             {/* Navigation Arrows */}
-            <div className="absolute top-[200px] right-0 left-[820px] flex justify-center gap-4 z-10">
+            <div className="absolute top-[180px] right-[220px] gap-4 flex items-center z-10">
                 <button className="swiper-button-prev-custom border-[2px] border-[#4479BC] text-[#4479BC] rounded-full p-2 shadow-md">
                     <FaArrowLeft />
                 </button>
@@ -83,8 +83,8 @@ const Team = () => {
             {/* Swiper Wrapper */}
             <div className="w-full">
                 <Swiper
-                    slidesPerView={4} // Default untuk layar besar
-                    spaceBetween={20}
+                    slidesPerView={4} // Default for large screens
+                    spaceBetween={0}
                     centeredSlides={false}
                     loop={true}
                     autoplay={{
@@ -96,30 +96,31 @@ const Team = () => {
                         prevEl: ".swiper-button-prev-custom",
                     }}
                     breakpoints={{
-                        320: { slidesPerView: 1 }, // Untuk layar kecil
-                        768: { slidesPerView: 2 }, // Untuk tablet
-                        1024: { slidesPerView: 3 }, // Untuk laptop
-                        1280: { slidesPerView: 4 }, // Untuk layar besar
+                        320: { slidesPerView: 1, spaceBetween: 10 }, // Small screens
+                        640: { slidesPerView: 2, spaceBetween: 10 }, // Tablets
+                        768: { slidesPerView: 2, spaceBetween: 20 }, // Small laptops
+                        1024: { slidesPerView: 3, spaceBetween: 20 }, // Laptops
+                        1280: { slidesPerView: 4, spaceBetween: 20 }, // Desktops
                     }}
                     modules={[Autoplay, Navigation]}
                 >
                     {teams.map((team, index) => (
                         <SwiperSlide key={index}>
-                            <div
-                                className="flex flex-col items-center justify-center  h-fit border"
-
-                            >
+                            <div className="flex flex-col items-center justify-center rounded-md">
                                 {/* Team Image */}
-                                <div style={{ backgroundColor: team.background }}>
+                                <div
+                                    style={{ backgroundColor: team.background }}
+                                    className="w-full rounded-3xl overflow-hidden mb-4"
+                                >
                                     <img
                                         src={team.image}
                                         alt={team.nama}
-                                        className="h-full w-full object-cover mb-4"
+                                        className="h-full w-full object-cover pt-8"
                                     />
                                 </div>
                                 {/* Team Name and Job Title */}
-                                <div className="text-start">
-                                    <h3 className="text-lg font-semibold text-[#2C3E50]">
+                                <div className="text-start whitespace-nowrap w-[210px]">
+                                    <h3 className="text-[14px] font-bold text-[#2C3E50]">
                                         {team.nama}
                                     </h3>
                                     <p className="text-sm text-[#7F8C8D]">{team.jabatan}</p>
