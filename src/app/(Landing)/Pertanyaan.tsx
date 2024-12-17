@@ -3,7 +3,7 @@ import { FiPhone } from 'react-icons/fi'
 
 const Pertanyaan = () => {
     return (
-        <div className='h-[420px] bg-gradient-to-r from-[#1D65C0] via-[#4479BC] to-[#4479BC] bg-opacity-90 py-[70px] px-[220px]'>
+        <div className='relative h-[420px] bg-gradient-to-r from-[#1D65C0] via-[#4479BC] to-[#4479BC] bg-opacity-90 py-[70px] px-[220px]'>
             <div className='text-white font-bold text-[40px] leading-[40px]'>
                 Ada Pertanyaan? <br /> Jangan Ragu untuk Bertanya!
             </div>
@@ -16,6 +16,16 @@ const Pertanyaan = () => {
                     Hubungi Kami
                 </a>
             </div>
+            <img
+                src="assets/images/ellipse.png"
+                alt="ellipse"
+                className='absolute top-0 right-0 w-[600px]'
+            />
+            <img
+                src="assets/images/businessman.png"
+                alt="ellipse"
+                className='absolute bottom-0 right-0 w-[870px] object-cover'
+            />
         </div>
     )
 }
