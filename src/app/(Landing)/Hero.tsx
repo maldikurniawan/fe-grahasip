@@ -1,46 +1,59 @@
-import React from 'react'
+import React from 'react';
 
 const Hero = () => {
     return (
-        <div className='min-h-screen bg-[#FAFAFA] pt-[160px] pb-[90px] px-4 md:px-[220px]'>
-            <div className='flex justify-between mb-[80px]'>
-                <div className='text-[48px] font-bold leading-[55px] text-[#061C3D]'>
+        <div className="min-h-screen bg-[#FAFAFA] pt-[120px] pb-[60px] px-4 sm:px-[20px] md:px-[36px] lg:px-[120px] xl:px-[220px] relative">
+            {/* Flex Container */}
+            <div className="flex flex-col xl:flex-row justify-between items-start xl:items-center mb-[40px] md:mb-[60px] xl:mb-[80px]">
+                {/* Left Section */}
+                <div className="text-[28px] sm:text-[36px] md:text-[48px] font-bold leading-[40px] sm:leading-[48px] md:leading-[55px] text-[#061C3D]">
                     Partner terpercaya <br /> dalam pembangunan
                     <div>
                         infrastruktur
-                        <span className='text-white bg-[#4479BC] bg-opacity-90 ml-2'>Modern</span>
+                        <span className="text-white bg-[#4479BC] bg-opacity-90 ml-2 px-1 sm:px-2 rounded-md">
+                            Modern
+                        </span>
                     </div>
                 </div>
-                <div className='pt-[50px] text-[14px]'>
+                {/* Right Section */}
+                <div className="mt-6 xl:mt-0 text-[14px] sm:text-[16px] text-left text-[#061C3D]">
                     Nikmati kemudahan manajemen bisnis ISP anda dengan <br />
                     <div>
-                        <span className='text-white bg-[#4479BC] px-1'>ERPSKRIP</span>
-                        , dan EGAWI. yang sudah terhubung dalam
+                        <span className="text-white bg-[#4479BC] px-1 sm:px-2 rounded-md">
+                            ERPSKRIP
+                        </span>
+                        , dan EGAWI, yang sudah terhubung dalam
                     </div>
                     satu platform terpadu.
                 </div>
             </div>
+
+            {/* Decorative Image */}
             <img
                 src="assets/images/vector32.png"
                 alt="Vector 32"
-                className='absolute top-[350px] left-[240px] w-[340px]'
+                className="absolute left-[110px] -translate-x-1/2 top-[245px] sm:top-[340px] md:left-[20%] lg:left-[30%] xl:left-[400px] w-[180px] sm:w-[240px] md:w-[320px]"
             />
-            <video
-                className="w-full h-[300px] rounded-2xl object-cover"
-                autoPlay
-                poster={""}
-                preload="none"
-                muted
-                loop
-            >
-                <source
-                    src={"assets/videos/intro.mp4"}
-                    type="video/mp4"
-                />
-                Your browser does not support the video tag.
-            </video>
-        </div>
-    )
-}
 
-export default Hero
+            {/* Video Section */}
+            <div className="mt-10 sm:mt-10">
+                <video
+                    className="w-full h-[180px] sm:h-[250px] md:h-[300px] lg:h-[400px] rounded-2xl object-cover"
+                    autoPlay
+                    poster=""
+                    preload="none"
+                    muted
+                    loop
+                >
+                    <source
+                        src={"assets/videos/intro.mp4"}
+                        type="video/mp4"
+                    />
+                    Your browser does not support the video tag.
+                </video>
+            </div>
+        </div>
+    );
+};
+
+export default Hero;

@@ -1,7 +1,7 @@
 /* eslint-disable @next/next/no-img-element */
 "use client";
 
-import React, { useState } from 'react'
+import React, { useState } from 'react';
 
 const Keuntungan = () => {
     const [keuntungan] = useState([
@@ -13,7 +13,7 @@ const Keuntungan = () => {
         },
         {
             title: "Penanganan Cepat",
-            description: "GrahaSkrip selalu melakukan penangan cepat yang dikeluhkaan User.",
+            description: "GrahaSkrip selalu melakukan penangan cepat yang dikeluhkan User.",
             image: "assets/images/k2.png",
             background: "#F0FFEE",
         },
@@ -24,30 +24,44 @@ const Keuntungan = () => {
             background: "#FFFDEE",
         },
     ]);
+
     return (
-        <div className='min-h-screen bg-[#FAFAFA] py-[90px] px-4 md:px-[220px] text-center'>
-            <p className='text-[42px] font-bold leading-none tracking-tight text-[#4479BC]'>
+        <div className="min-h-screen bg-[#FAFAFA] py-[60px] px-4 sm:px-[20px] md:px-[80px] lg:px-[150px] xl:px-[220px] text-center">
+            {/* Title Section */}
+            <p className="text-[28px] sm:text-[36px] md:text-[42px] font-bold leading-none tracking-tight text-[#4479BC]">
                 Keuntungan Memilih Kami
             </p>
-            <p className='text-[12px] mt-[24px] text-[#42526B]'>Dapatkan keuntungan maksimal dengan solusi yang disesuaikan dengan kebutuhan Anda</p>
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 mt-[28px] gap-2">
+            <p className="text-[12px] sm:text-[14px] mt-[16px] sm:mt-[20px] md:mt-[24px] text-[#42526B]">
+                Dapatkan keuntungan maksimal dengan solusi yang disesuaikan dengan kebutuhan Anda
+            </p>
+
+            {/* Cards Grid */}
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 mt-[20px] sm:mt-[28px]">
                 {keuntungan.map((item, itemIdx) => (
                     <div
                         key={itemIdx}
                         style={{ backgroundColor: item.background }}
-                        className="w-full p-[26px] rounded-xl text-left"
+                        className="p-6 sm:p-[20px] md:p-[26px] rounded-xl text-left shadow-md"
                     >
-                        <img src={item.image} alt={item.title} className='w-[165px] h-[165px] object-cover' />
-                        <div>
-                            <div className='text-[#061C3D] text-[16px] mb-[6px] font-semibold'>{item.title}
-                            </div>
-                            <div className='text-[#42526B] text-[12px] leading-[18px]'>{item.description}</div>
+                        {/* Image */}
+                        <img
+                            src={item.image}
+                            alt={item.title}
+                            className="w-[120px] sm:w-[140px] md:w-[165px] h-[120px] sm:h-[140px] md:h-[165px] object-cover mx-auto mb-4"
+                        />
+                        {/* Title */}
+                        <div className="text-[#061C3D] text-[14px] sm:text-[16px] font-semibold mb-2 text-center">
+                            {item.title}
+                        </div>
+                        {/* Description */}
+                        <div className="text-[#42526B] text-[12px] sm:text-[14px] leading-[18px] sm:leading-[20px] text-center">
+                            {item.description}
                         </div>
                     </div>
                 ))}
             </div>
         </div>
-    )
-}
+    );
+};
 
-export default Keuntungan
+export default Keuntungan;

@@ -61,9 +61,9 @@ const Team = () => {
     ]);
 
     return (
-        <div className="relative min-h-screen px-4 sm:px-8 md:px-16 lg:px-32 xl:px-[215px] bg-[#FAFAFA] flex flex-col py-[90px] items-center">
+        <div className="relative min-h-screen px-4 sm:px-8 md:px-16 lg:px-32 xl:px-[215px] bg-[#FAFAFA] flex flex-col py-[60px] sm:py-[80px] md:py-[90px] items-center">
             {/* Section Title */}
-            <div className="text-center text-[#4479BC] text-2xl sm:text-3xl md:text-[40px] font-bold mb-2">
+            <div className="text-center text-[#4479BC] text-2xl sm:text-3xl md:text-[40px] font-bold mb-4">
                 Team Graha Skrip Infra Prima
             </div>
             <div className="text-center text-[#42526B] text-sm sm:text-base md:text-[14px] mb-8 md:mb-[100px]">
@@ -71,7 +71,7 @@ const Team = () => {
             </div>
 
             {/* Navigation Arrows */}
-            <div className="absolute top-[180px] right-[220px] gap-4 flex items-center z-10">
+            <div className="absolute top-[180px] sm:top-[200px] right-[20px] sm:right-[50px] md:right-[100px] gap-4 flex items-center z-10">
                 <button className="swiper-button-prev-custom border-[2px] border-[#4479BC] text-[#4479BC] rounded-full p-2 shadow-md">
                     <FaArrowLeft />
                 </button>
@@ -84,8 +84,7 @@ const Team = () => {
             <div className="w-full">
                 <Swiper
                     slidesPerView={4} // Default for large screens
-                    spaceBetween={0}
-                    centeredSlides={false}
+                    spaceBetween={20}
                     loop={true}
                     autoplay={{
                         delay: 4000,
@@ -97,7 +96,7 @@ const Team = () => {
                     }}
                     breakpoints={{
                         320: { slidesPerView: 1, spaceBetween: 10 }, // Small screens
-                        640: { slidesPerView: 2, spaceBetween: 10 }, // Tablets
+                        640: { slidesPerView: 2, spaceBetween: 15 }, // Tablets
                         768: { slidesPerView: 2, spaceBetween: 20 }, // Small laptops
                         1024: { slidesPerView: 3, spaceBetween: 20 }, // Laptops
                         1280: { slidesPerView: 4, spaceBetween: 20 }, // Desktops
@@ -119,7 +118,7 @@ const Team = () => {
                                     />
                                 </div>
                                 {/* Team Name and Job Title */}
-                                <div className="text-start whitespace-nowrap w-[210px]">
+                                <div className="md:text-start whitespace-nowrap w-[210px] text-center">
                                     <h3 className="text-[14px] font-bold text-[#2C3E50]">
                                         {team.nama}
                                     </h3>

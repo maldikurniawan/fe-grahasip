@@ -33,6 +33,20 @@ const Kegiatan = () => {
             date: "25 Sep, 2024",
         },
         {
+            title: "ERPSKRIP ke Batam",
+            description:
+                "Aenean interdum arcu sit amet nulla lacinia suscipit. Vivamus at laoreet mi. Fusce pulvinar commodo ligula, et egestas dolor. Ut hendrerit blandit neque in tempor.",
+            image: "assets/images/kegiatan.png",
+            date: "15 Sep, 2024",
+        },
+        {
+            title: "Workshop ReactJS",
+            description:
+                "Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Curabitur vel eros eu nulla luctus eleifend.",
+            image: "assets/images/kegiatan.png",
+            date: "20 Sep, 2024",
+        },
+        {
             title: "Company Outing",
             description:
                 "Praesent in augue non purus tincidunt placerat. Aliquam erat volutpat. Proin nec orci id turpis suscipit vehicula.",
@@ -49,16 +63,16 @@ const Kegiatan = () => {
             }}
         >
             {/* Section Title */}
-            <div className="text-center text-[#FFFFFF] text-[40px] font-bold mb-2">
+            <div className="text-center text-[#FFFFFF] text-[24px] md:text-[40px] font-bold mb-2 px-4">
                 Kegiatan & Berita Terbaru
             </div>
-            <div className="text-center text-[#B6D6FF] text-[12px] mb-[70px]">
+            <div className="text-center text-[#B6D6FF] text-[10px] md:text-[12px] mb-[30px] md:mb-[70px] px-4">
                 Dapatkan keuntungan maksimal dengan solusi yang disesuaikan dengan
                 kebutuhan Anda
             </div>
 
             {/* Navigation Arrows */}
-            <div className="absolute top-[170px] right-0 left-[880px] flex justify-center gap-4 z-10">
+            <div className="absolute top-[140px] md:top-[170px] right-4 left-auto md:right-auto md:left-[880px] flex justify-center gap-4 z-10">
                 <button className="swiper-button-prev-custom border-[2px] border-white text-white rounded-full p-2 shadow-md">
                     <FaArrowLeft />
                 </button>
@@ -68,11 +82,15 @@ const Kegiatan = () => {
             </div>
 
             {/* Swiper Wrapper */}
-            <div className="w-[2500px]">
+            <div className="w-full md:w-[80%] lg:w-[70%]">
                 <Swiper
-                    slidesPerView={2.5}
-                    spaceBetween={15}
+                    slidesPerView={1}
+                    spaceBetween={10}
                     centeredSlides={true}
+                    breakpoints={{
+                        768: { slidesPerView: 1.5 },
+                        1024: { slidesPerView: 2.5, spaceBetween: 15 },
+                    }}
                     loop={true}
                     autoplay={{
                         delay: 4000,
@@ -86,29 +104,29 @@ const Kegiatan = () => {
                 >
                     {activities.map((activity, index) => (
                         <SwiperSlide key={index}>
-                            <div className="flex flex-row items-center p-5 bg-white rounded-3xl shadow-lg h-[300px]">
+                            <div className="flex flex-col md:flex-row items-center md:items-start p-5 bg-white rounded-3xl shadow-lg h-auto md:h-[300px]">
                                 {/* Left Image */}
                                 <img
                                     src={activity.image}
                                     alt={activity.title}
-                                    className="h-full w-[40%] object-cover rounded-3xl"
+                                    className="h-[150px] w-full md:h-full md:w-[40%] object-cover rounded-3xl mb-4 md:mb-0"
                                 />
 
                                 {/* Right Content */}
-                                <div className="px-[60px] py-[30px] flex flex-col justify-between h-full">
+                                <div className="md:px-[60px] px-4 md:py-[30px] flex flex-col justify-between h-full">
                                     <div>
                                         <div className="text-[#4E89D4] flex items-center gap-2 text-sm mb-2">
                                             <LuCalendarDays />
                                             <span>{activity.date}</span>
                                         </div>
-                                        <h3 className="text-[#333] text-lg font-semibold mb-2">
+                                        <h3 className="text-[#333] text-base md:text-lg font-semibold mb-2">
                                             {activity.title}
                                         </h3>
-                                        <p className="text-[#666] text-sm line-clamp-3">
+                                        <p className="text-[#666] text-xs md:text-sm line-clamp-3">
                                             {activity.description}
                                         </p>
                                     </div>
-                                    <button className="text-white flex gap-2 text-[12px] items-center bg-[#6DA1EF] w-fit rounded-lg py-2 px-6 text-start">
+                                    <button className="text-white flex gap-2 text-[10px] md:text-[12px] items-center bg-[#6DA1EF] w-fit rounded-lg py-2 px-6 text-start">
                                         <span>Read More</span>
                                         <FaArrowRight />
                                     </button>
@@ -121,8 +139,8 @@ const Kegiatan = () => {
             <div className="text-white mt-10 border border-white py-3 px-12 rounded text-[12px]">
                 Lihat Semua
             </div>
-            <img src="assets/images/shape.png" alt="Shape" className="absolute top-0 right-0"/>
-            <img src="assets/images/vector.png" alt="Vector" className="absolute top-[100px] left-0 opacity-20 w-[350px]"/>
+            <img src="assets/images/shape.png" alt="Shape" className="absolute top-0 right-0 w-[150px] md:w-auto" />
+            <img src="assets/images/vector.png" alt="Vector" className="absolute top-[100px] left-0 opacity-20 w-[150px] md:w-[350px]" />
         </div>
     );
 };
