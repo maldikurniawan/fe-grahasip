@@ -20,12 +20,12 @@ const Solusi = () => {
     ]);
 
     return (
-        <div className="min-h-screen bg-white py-[60px] px-4 md:px-[60px] lg:px-[220px]">
-            <div className="flex flex-col md:flex-row justify-between gap-10">
+        <div className="relative min-h-screen bg-white py-[60px] px-4 md:px-[60px] xl:pr-0 lg:px-[220px]">
+            <div className="grid grid-cols-1 xl:grid-cols-2 gap-10">
                 {/* Text Section */}
                 <div className="flex-1">
                     <p className="text-[28px] md:text-[36px] lg:text-[42px] font-bold leading-tight tracking-tight">
-                        Solusi Digital <br /> Unggulan
+                        Solusi Digital <br className="sm:block hidden"/> Unggulan
                     </p>
                     <p className="text-[12px] md:text-[14px] lg:text-[16px] mt-4 text-[#42526B]">
                         Solusi digital untuk mendukung kebutuhan bisnis modern melalui
@@ -36,7 +36,7 @@ const Solusi = () => {
                         {solusi.map((item, itemIdx) => (
                             <div
                                 key={itemIdx}
-                                className="flex items-start gap-4 p-2 md:p-4 bg-white rounded-lg shadow-sm"
+                                className="flex items-start gap-4 p-2"
                             >
                                 <img
                                     src={item.image}
@@ -56,18 +56,24 @@ const Solusi = () => {
                     </div>
                 </div>
 
-                {/* Image Section */}
-                <div className="flex-1 flex justify-center">
-                    <img
-                        src="assets/images/laptop.png"
-                        alt="Laptop"
-                        className="w-[300px] h-[200px] md:w-[500px] md:h-[320px] lg:w-[800px] lg:h-[514px] object-contain"
-                    />
+                {/* Video Section */}
+                <div>
+                    <video
+                        className="w-full object-cover"
+                        autoPlay
+                        poster=""
+                        preload="none"
+                        muted
+                        loop
+                    >
+                        <source
+                            src={"assets/videos/solusi.mp4"}
+                            type="video/mp4"
+                        />
+                        Your browser does not support the video tag.
+                    </video>
                 </div>
             </div>
-
-            {/* Divider */}
-            <div className="w-full border-t border-gray-200 mt-10 md:mt-20"></div>
         </div>
     );
 };

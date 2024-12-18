@@ -29,7 +29,7 @@ const Keuntungan = () => {
         <div className="min-h-screen bg-[#FAFAFA] py-[60px] px-4 sm:px-[20px] md:px-[80px] lg:px-[150px] xl:px-[220px] text-center">
             {/* Title Section */}
             <p className="text-[28px] sm:text-[36px] md:text-[42px] font-bold leading-none tracking-tight text-[#4479BC]">
-                Keuntungan Memilih Kami
+                Keuntungan <br className='sm:hidden block'/> Memilih Kami
             </p>
             <p className="text-[12px] sm:text-[14px] mt-[16px] sm:mt-[20px] md:mt-[24px] text-[#42526B]">
                 Dapatkan keuntungan maksimal dengan solusi yang disesuaikan dengan kebutuhan Anda

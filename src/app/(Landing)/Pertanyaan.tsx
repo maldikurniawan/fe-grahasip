@@ -34,7 +34,7 @@ const Pertanyaan = () => {
             <img
                 src="assets/images/businessman.png"
                 alt="businessman"
-                className="absolute bottom-0 right-0 w-[300px] md:w-[600px] lg:w-[870px] object-cover"
+                className="absolute sm:block hidden bottom-0 right-0 w-[300px] md:w-[600px] lg:w-[870px] object-cover"
             />
         </div>
     );

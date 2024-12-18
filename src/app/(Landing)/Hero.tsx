@@ -2,7 +2,7 @@ import React from 'react';
 
 const Hero = () => {
     return (
-        <div className="min-h-screen bg-[#FAFAFA] pt-[120px] pb-[60px] px-4 sm:px-[20px] md:px-[36px] lg:px-[120px] xl:px-[220px] relative">
+        <div className="min-h-screen bg-[#FAFAFA] pt-[120px] sm:pb-[60px] px-4 sm:px-[20px] md:px-[36px] lg:px-[120px] xl:px-[220px] relative">
             {/* Flex Container */}
             <div className="flex flex-col xl:flex-row justify-between items-start xl:items-center mb-[40px] md:mb-[60px] xl:mb-[80px]">
                 {/* Left Section */}
@@ -17,13 +17,12 @@ const Hero = () => {
                 </div>
                 {/* Right Section */}
                 <div className="mt-6 xl:mt-0 text-[14px] sm:text-[16px] text-left text-[#061C3D]">
-                    Nikmati kemudahan manajemen bisnis ISP anda dengan <br />
-                    <div>
-                        <span className="text-white bg-[#4479BC] px-1 sm:px-2 rounded-md">
-                            ERPSKRIP
-                        </span>
-                        , dan EGAWI, yang sudah terhubung dalam
-                    </div>
+                    Nikmati kemudahan manajemen bisnis ISP anda dengan <br className='max-[450px]:hidden' />
+                    <span className="text-white bg-[#4479BC] px-1 sm:px-2 rounded-md">
+                        ERPSKRIP
+                    </span>
+                    , dan EGAWI, yang sudah terhubung dalam
+                    <br className='max-[450px]:hidden' />
                     satu platform terpadu.
                 </div>
             </div>
@@ -32,7 +31,7 @@ const Hero = () => {
             <img
                 src="assets/images/vector32.png"
                 alt="Vector 32"
-                className="absolute left-[110px] -translate-x-1/2 top-[245px] sm:top-[340px] md:left-[20%] lg:left-[30%] xl:left-[400px] w-[180px] sm:w-[240px] md:w-[320px]"
+                className="absolute left-[110px] -translate-x-1/2 top-[245px] sm:top-[270px] md:top-[290px] sm:left-[150px] md:left-[210px] lg:left-[290px] xl:left-[390px] w-[180px] sm:w-[240px] md:w-[320px]"
             />
 
             {/* Video Section */}

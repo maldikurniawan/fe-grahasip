@@ -64,14 +64,14 @@ const Team = () => {
         <div className="relative min-h-screen px-4 sm:px-8 md:px-16 lg:px-32 xl:px-[215px] bg-[#FAFAFA] flex flex-col py-[60px] sm:py-[80px] md:py-[90px] items-center">
             {/* Section Title */}
             <div className="text-center text-[#4479BC] text-2xl sm:text-3xl md:text-[40px] font-bold mb-4">
-                Team Graha Skrip Infra Prima
+                Team Graha Skrip <br className="block sm:hidden" /> Infra Prima
             </div>
             <div className="text-center text-[#42526B] text-sm sm:text-base md:text-[14px] mb-8 md:mb-[100px]">
                 Unit kami terdiri dari para ahli di bidangnya masing-masing, siap mendukung Anda.
             </div>
 
             {/* Navigation Arrows */}
-            <div className="absolute top-[180px] sm:top-[200px] right-[20px] sm:right-[50px] md:right-[100px] gap-4 flex items-center z-10">
+            <div className="absolute top-[195px] sm:top-[200px] right-[20px] sm:right-[50px] md:right-[230px] gap-4 flex items-center z-10">
                 <button className="swiper-button-prev-custom border-[2px] border-[#4479BC] text-[#4479BC] rounded-full p-2 shadow-md">
                     <FaArrowLeft />
                 </button>
@@ -81,7 +81,7 @@ const Team = () => {
             </div>
 
             {/* Swiper Wrapper */}
-            <div className="w-full">
+            <div className="w-full max-[450px]:mt-8">
                 <Swiper
                     slidesPerView={4} // Default for large screens
                     spaceBetween={20}

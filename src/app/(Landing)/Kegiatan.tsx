@@ -57,7 +57,7 @@ const Kegiatan = () => {
 
     return (
         <div
-            className="relative min-h-screen flex py-[70px] flex-col items-center justify-center"
+            className="relative min-h-screen flex py-[70px] max-[450px]:px-4 flex-col items-center justify-center"
             style={{
                 background: "linear-gradient(180deg, #4479BC 0%, #4E89D4 100%)",
             }}
@@ -72,7 +72,7 @@ const Kegiatan = () => {
             </div>
 
             {/* Navigation Arrows */}
-            <div className="absolute top-[140px] md:top-[170px] right-4 left-auto md:right-auto md:left-[880px] flex justify-center gap-4 z-10">
+            <div className="absolute max-[450px]:top-[170px] max-[450px]:right-6 top-[140px] md:top-[170px] right-4 left-auto md:right-auto md:left-[770px] lg:left-[860px] xl:left-[1020px] flex justify-center gap-4 z-10">
                 <button className="swiper-button-prev-custom border-[2px] border-white text-white rounded-full p-2 shadow-md">
                     <FaArrowLeft />
                 </button>
@@ -82,13 +82,13 @@ const Kegiatan = () => {
             </div>
 
             {/* Swiper Wrapper */}
-            <div className="w-full md:w-[80%] lg:w-[70%]">
+            <div className="w-full md:w-[80%] max-[450px]:mt-12 lg:w-[2200px]">
                 <Swiper
                     slidesPerView={1}
                     spaceBetween={10}
                     centeredSlides={true}
                     breakpoints={{
-                        768: { slidesPerView: 1.5 },
+                        768: { slidesPerView: 1 },
                         1024: { slidesPerView: 2.5, spaceBetween: 15 },
                     }}
                     loop={true}
@@ -104,16 +104,16 @@ const Kegiatan = () => {
                 >
                     {activities.map((activity, index) => (
                         <SwiperSlide key={index}>
-                            <div className="flex flex-col md:flex-row items-center md:items-start p-5 bg-white rounded-3xl shadow-lg h-auto md:h-[300px]">
+                            <div className="flex flex-col md:flex-row items-center md:items-start p-0 sm:p-5 bg-white rounded-xl sm:rounded-3xl shadow-lg h-auto md:h-[300px]">
                                 {/* Left Image */}
                                 <img
                                     src={activity.image}
                                     alt={activity.title}
-                                    className="h-[150px] w-full md:h-full md:w-[40%] object-cover rounded-3xl mb-4 md:mb-0"
+                                    className="h-auto sm:h-[150px] w-full md:h-full md:w-[40%] object-cover rounded-t-xl sm:rounded-3xl mb-4 md:mb-0"
                                 />
 
                                 {/* Right Content */}
-                                <div className="md:px-[60px] px-4 md:py-[30px] flex flex-col justify-between h-full">
+                                <div className="md:px-[60px] px-4 md:py-[30px] flex flex-col p-5 justify-between h-full">
                                     <div>
                                         <div className="text-[#4E89D4] flex items-center gap-2 text-sm mb-2">
                                             <LuCalendarDays />
@@ -126,7 +126,7 @@ const Kegiatan = () => {
                                             {activity.description}
                                         </p>
                                     </div>
-                                    <button className="text-white flex gap-2 text-[10px] md:text-[12px] items-center bg-[#6DA1EF] w-fit rounded-lg py-2 px-6 text-start">
+                                    <button className="text-white max-[450px]:mt-4 flex gap-2 text-[10px] md:text-[12px] items-center bg-[#6DA1EF] w-fit rounded-lg py-2 px-6 text-start">
                                         <span>Read More</span>
                                         <FaArrowRight />
                                     </button>
