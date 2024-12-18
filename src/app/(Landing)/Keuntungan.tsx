@@ -47,14 +47,14 @@ const Keuntungan = () => {
                         <img
                             src={item.image}
                             alt={item.title}
-                            className="w-[120px] sm:w-[140px] md:w-[165px] h-[120px] sm:h-[140px] md:h-[165px] object-cover mx-auto mb-4"
+                            className="w-[120px] sm:w-[140px] md:w-[165px] h-[120px] sm:h-[140px] md:h-[165px] object-cover mb-4"
                         />
                         {/* Title */}
-                        <div className="text-[#061C3D] text-[14px] sm:text-[16px] font-semibold mb-2 text-center">
+                        <div className="text-[#061C3D] text-[14px] sm:text-[16px] font-semibold mb-2 text-start">
                             {item.title}
                         </div>
                         {/* Description */}
-                        <div className="text-[#42526B] text-[12px] sm:text-[14px] leading-[18px] sm:leading-[20px] text-center">
+                        <div className="text-[#42526B] text-[12px] sm:text-[14px] leading-[18px] sm:leading-[20px] text-start">
                             {item.description}
                         </div>
                     </div>

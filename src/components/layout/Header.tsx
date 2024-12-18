@@ -63,7 +63,7 @@ const Header: React.FC = () => {
               key={index}
               href={item.link}
               scroll={false}
-              className="text-white rounded-md px-3 text-sm hover:text-[#4479BC] hover:underline hover:underline-offset-[28px] hover:decoration-2 font-medium whitespace-nowrap cursor-pointer"
+              className="text-[#6A778B] rounded-md px-3 text-sm hover:text-[#4479BC] hover:underline hover:underline-offset-[32px] hover:decoration-2 font-medium whitespace-nowrap cursor-pointer"
             >
               {item.title}
             </Link>

@@ -118,7 +118,7 @@ const Team = () => {
                                     />
                                 </div>
                                 {/* Team Name and Job Title */}
-                                <div className="md:text-start whitespace-nowrap w-[210px] text-center">
+                                <div className="text-start whitespace-nowrap w-full">
                                     <h3 className="text-[14px] font-bold text-[#2C3E50]">
                                         {team.nama}
                                     </h3>

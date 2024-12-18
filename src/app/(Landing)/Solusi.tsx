@@ -25,7 +25,7 @@ const Solusi = () => {
                 {/* Text Section */}
                 <div className="flex-1">
                     <p className="text-[28px] md:text-[36px] lg:text-[42px] font-bold leading-tight tracking-tight">
-                        Solusi Digital <br className="sm:block hidden"/> Unggulan
+                        Solusi Digital <br className="sm:block hidden" /> Unggulan
                     </p>
                     <p className="text-[12px] md:text-[14px] lg:text-[16px] mt-4 text-[#42526B]">
                         Solusi digital untuk mendukung kebutuhan bisnis modern melalui
@@ -74,6 +74,16 @@ const Solusi = () => {
                     </video>
                 </div>
             </div>
+            <img
+                src="assets/images/frame3.png"
+                alt="Frame 3"
+                className="absolute top-[550px] right-[90px] w-20 h-22 xl:right-[120px] xl:block xl:top-[140px] sm:hidden"
+            />
+            <img
+                src="assets/images/frame14.png"
+                alt="Frame 14"
+                className="absolute top-[740px] w-20 h-22 xl:right-[320px] xl:block xl:top-[440px] sm:hidden max-[450px]:left-[140px]"
+            />
         </div>
     );
 };
