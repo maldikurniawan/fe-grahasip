@@ -71,10 +71,10 @@ const Header: React.FC = () => {
         </div>
 
         <div className="hidden md:block text-xl md:text-3xl font-bold text-white bg-[#4479BC] px-4 rounded-md">
-          <a href="/" className="cursor-pointer flex items-center text-[14px] gap-2 whitespace-nowrap">
+          <div className="cursor-pointer flex items-center text-[14px] gap-2 whitespace-nowrap">
             <FiPhone className="w-[20px] h-[20px]" />
             Hubungi Kami
-          </a>
+          </div>
         </div>
 
         <button

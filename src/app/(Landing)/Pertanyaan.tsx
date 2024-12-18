@@ -16,13 +16,12 @@ const Pertanyaan = () => {
 
             {/* Button */}
             <div className="mt-6 md:mt-8">
-                <a
-                    href="/"
+                <div
                     className="cursor-pointer flex items-center text-[#4479BC] text-[14px] md:text-[16px] gap-2 bg-white px-4 py-2 rounded-md shadow-md w-max"
                 >
                     <FiPhone className="w-[20px] h-[20px]" />
                     Hubungi Kami
-                </a>
+                </div>
             </div>
 
             {/* Images */}
