@@ -25,7 +25,7 @@ const DetailKegiatan = () => {
                             <img
                                 src={kegiatan.image}
                                 alt={kegiatan.title}
-                                className="w-full h-auto object-cover md:rounded-xl rounded-t-xl"
+                                className="w-full h-auto object-cover rounded-xl"
                             />
                             <div className='flex items-center gap-2'>
                                 <LuCalendarDays className='text-[#4479BC]' />

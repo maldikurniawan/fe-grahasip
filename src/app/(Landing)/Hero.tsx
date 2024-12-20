@@ -7,7 +7,7 @@ const Hero = () => {
             <div className="flex flex-col xl:flex-row justify-between items-start xl:items-center mb-[40px] md:mb-[60px] xl:mb-[80px]">
                 {/* Left Section */}
                 <div className="text-[28px] sm:text-[36px] md:text-[48px] font-bold leading-[40px] sm:leading-[48px] md:leading-[55px] text-[#061C3D]">
-                    Partner terpercaya <br /> dalam pembangunan
+                    Partner terpercaya <br /> untuk pembangunan
                     <div>
                         infrastruktur
                         <span className="text-white bg-[#4479BC] bg-opacity-90 ml-2 px-1 sm:px-2 rounded-md">

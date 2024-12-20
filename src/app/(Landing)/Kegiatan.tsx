@@ -67,13 +67,13 @@ const Kegiatan = () => {
             <div className="text-center text-[#FFFFFF] text-[24px] md:text-[40px] font-bold mb-2 px-4">
                 Kegiatan & Berita Terbaru
             </div>
-            <div className="text-center text-[#B6D6FF] text-[10px] md:text-[12px] mb-[30px] md:mb-[70px] px-4">
+            <div className="text-center text-[#B6D6FF] text-[10px] md:text-[12px] mb-[30px] md:mb-[50px] px-4">
                 Dapatkan keuntungan maksimal dengan solusi yang disesuaikan dengan
                 kebutuhan Anda
             </div>
 
             {/* Navigation Arrows */}
-            <div className="absolute max-[450px]:top-[170px] max-[450px]:right-6 top-[140px] md:top-[170px] right-4 left-auto md:right-auto md:left-[770px] lg:left-[860px] xl:left-[1020px] flex justify-center gap-4 z-10">
+            <div className="relative flex ml-[220px] md:ml-[500px] lg:ml-[770px] gap-4 mb-4 z-10">
                 <button className="swiper-button-prev-custom border-[2px] border-white text-white rounded-full p-2 shadow-md">
                     <FaArrowLeft />
                 </button>
@@ -83,7 +83,7 @@ const Kegiatan = () => {
             </div>
 
             {/* Swiper Wrapper */}
-            <div className="w-full md:w-[80%] max-[450px]:mt-12 lg:w-[2200px]">
+            <div className="w-full md:w-[80%] lg:w-[2200px]">
                 <Swiper
                     slidesPerView={1}
                     spaceBetween={10}

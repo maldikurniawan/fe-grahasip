@@ -77,20 +77,20 @@ const ListKegiatan = () => {
                                 <img
                                     src={kegiatan.image}
                                     alt={kegiatan.title}
-                                    className="md:w-1/3 w-full h-auto object-cover md:rounded-xl rounded-t-xl"
+                                    className="md:w-1/2 w-full h-auto object-cover md:rounded-xl rounded-t-xl"
                                 />
-                                <div className="flex flex-col p-4 md:p-0 justify-between">
+                                <div className="flex flex-col p-4 md:p-10 justify-between">
                                     <div className='flex items-center gap-2'>
                                         <LuCalendarDays className='text-[#4479BC]' />
-                                        <span className='text-[#42526B]'>{kegiatan.date}</span>
+                                        <span className='text-[#42526B] text-[14px] font-normal'>{kegiatan.date}</span>
                                     </div>
                                     <div>
-                                        <h3 className="text-xl text-[#061C3D] font-semibold mb-4">{kegiatan.title}</h3>
-                                        <p className="text-[#42526B] mb-4">{kegiatan.description}</p>
+                                        <h3 className="text-base text-[#061C3D] font-semibold mb-2">{kegiatan.title}</h3>
+                                        <p className="text-[#42526B] text-[12px]">{kegiatan.description}</p>
                                     </div>
                                     <Link
                                         href={"/kegiatan/detail"}
-                                        className="text-white max-[450px]:mt-4 flex gap-2 text-[10px] md:text-[12px] items-center bg-[#6DA1EF] w-fit rounded-3xl py-2 px-6 text-start"
+                                        className="text-white mt-4 flex gap-2 text-[10px] md:text-[12px] items-center bg-[#6DA1EF] w-fit rounded-md py-2 px-6 text-start"
                                     >
                                         <span>Read More</span>
                                         <FaArrowRight />
@@ -112,10 +112,10 @@ const ListKegiatan = () => {
                                     <div className='p-4'>
                                         <div className='flex items-center gap-2'>
                                             <LuCalendarDays className='text-[#4479BC]' />
-                                            <span className='text-[#42526B]'>{kegiatan.date}</span>
+                                            <span className='text-[#42526B] text-[14px]'>{kegiatan.date}</span>
                                         </div>
-                                        <h3 className="text-lg font-semibold mb-8 mt-2">{kegiatan.title}</h3>
-                                        <button className="text-white max-[450px]:mt-4 flex gap-2 text-[10px] md:text-[12px] items-center bg-[#6DA1EF] w-fit rounded-3xl py-2 px-6 text-start">
+                                        <h3 className="text-base font-semibold mb-6 mt-2">{kegiatan.title}</h3>
+                                        <button className="text-white flex gap-2 text-[10px] md:text-[12px] items-center bg-[#6DA1EF] w-fit rounded-md py-2 px-6 text-start">
                                             <span>Read More</span>
                                             <FaArrowRight />
                                         </button>
