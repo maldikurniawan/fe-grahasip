@@ -7,13 +7,12 @@ import { loadSlim } from "tsparticles-slim";
 import type { Engine } from "tsparticles-engine";
 
 const LoginPage: React.FC = () => {
-    const [email, setEmail] = useState<string>("");
+    const [username, setUsername] = useState<string>("");
     const [password, setPassword] = useState<string>("");
-    const [errors, setErrors] = useState<Record<string, string>>({});
     const [isShow, setIsShow] = useState<boolean>(false);
 
     const themeColor = "#3498db"; // Example theme color
-    const colorMode: "dark" | "light" = "light"; // Define as a union type
+    const colorMode: "dark" | "light" = "light"
 
     const particlesInit = useCallback(async (engine: Engine) => {
         await loadSlim(engine);
@@ -42,10 +41,10 @@ const LoginPage: React.FC = () => {
         },
         particles: {
             color: {
-                value: colorMode === "dark" ? "#fff" : themeColor,
+                value: colorMode === "light" ? "#3498db" : themeColor,
             },
             links: {
-                color: colorMode === "dark" ? "#fff" : themeColor,
+                color: colorMode === "light" ? "#3498db" : themeColor,
                 distance: 100,
                 enable: true,
                 opacity: 0.5,
@@ -125,10 +124,10 @@ const LoginPage: React.FC = () => {
                         <form>
                             <div className="mb-2 flex flex-col gap-2">
                                 <input
-                                    type="email"
-                                    placeholder="Email"
-                                    value={email}
-                                    onChange={(e) => setEmail(e.target.value)}
+                                    type="text"
+                                    placeholder="Username"
+                                    value={username}
+                                    onChange={(e) => setUsername(e.target.value)}
                                     className="p-2 border rounded"
                                 />
                                 <div className="relative">
@@ -146,9 +145,6 @@ const LoginPage: React.FC = () => {
                                         {isShow ? <TbEyeOff /> : <TbEye />}
                                     </div>
                                 </div>
-                                {errors.password && (
-                                    <div className="text-red-500 text-sm">{errors.password}</div>
-                                )}
                             </div>
 
                             <button
