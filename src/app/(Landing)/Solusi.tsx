@@ -82,7 +82,7 @@ const Solusi = () => {
             <img
                 src="assets/images/frame14.png"
                 alt="Frame 14"
-                className="absolute top-[740px] w-20 h-22 xl:right-[320px] xl:block xl:top-[440px] sm:hidden left-[100px]"
+                className="absolute top-[740px] w-20 h-22 xl:right-[320px] xl:block xl:top-[440px] sm:hidden max-[450px]:left-[100px]"
             />
         </div>
     );
