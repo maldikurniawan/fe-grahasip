@@ -77,12 +77,12 @@ const Solusi = () => {
             <img
                 src="assets/images/frame3.png"
                 alt="Frame 3"
-                className="absolute top-[550px] right-[90px] w-20 h-22 xl:right-[120px] xl:block xl:top-[140px] sm:hidden"
+                className="absolute top-[540px] right-[90px] w-20 h-22 xl:right-[120px] xl:block xl:top-[140px] sm:hidden"
             />
             <img
                 src="assets/images/frame14.png"
                 alt="Frame 14"
-                className="absolute top-[740px] w-20 h-22 xl:right-[320px] xl:block xl:top-[440px] sm:hidden max-[450px]:left-[140px]"
+                className="absolute top-[740px] w-20 h-22 xl:right-[320px] xl:block xl:top-[440px] sm:hidden left-[100px]"
             />
         </div>
     );

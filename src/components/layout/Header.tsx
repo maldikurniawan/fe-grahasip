@@ -21,10 +21,10 @@ const Header: React.FC = () => {
   const [scrolled, setScrolled] = useState<boolean>(false);
 
   const menu: MenuItem[] = [
-    { title: "Home", link: "#Home" },
-    { title: "Aplikasi", link: "#Aplikasi" },
-    { title: "Keuntungan", link: "#Keuntungan" },
-    { title: "Kegiatan & Berita", link: "#Kegiatan" },
+    { title: "Home", link: "/" },
+    { title: "Aplikasi", link: "/" },
+    { title: "Keuntungan", link: "/" },
+    { title: "Kegiatan & Berita", link: "/" },
   ];
 
   useOnClickOutside(ref, () => setNavOpen(false));

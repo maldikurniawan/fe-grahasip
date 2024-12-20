@@ -71,7 +71,7 @@ const Team = () => {
             </div>
 
             {/* Navigation Arrows */}
-            <div className="absolute top-[195px] sm:top-[200px] right-[20px] sm:right-[50px] md:right-[230px] gap-4 flex items-center z-10">
+            <div className="absolute top-[195px] sm:top-[210px] right-[20px] sm:right-[50px] md:right-[215px] gap-4 flex items-center z-10">
                 <button className="swiper-button-prev-custom border-[2px] border-[#4479BC] text-[#4479BC] rounded-full p-2 shadow-md">
                     <FaArrowLeft />
                 </button>
