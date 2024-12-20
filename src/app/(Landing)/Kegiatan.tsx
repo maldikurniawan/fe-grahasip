@@ -8,6 +8,7 @@ import "swiper/css/navigation";
 import { Autoplay, Navigation } from "swiper/modules";
 import { FaArrowLeft, FaArrowRight } from "react-icons/fa";
 import { LuCalendarDays } from "react-icons/lu";
+import Link from "next/link";
 
 const Kegiatan = () => {
     const [activities] = useState([
@@ -15,42 +16,42 @@ const Kegiatan = () => {
             title: "ERPSKRIP ke Batam",
             description:
                 "Aenean interdum arcu sit amet nulla lacinia suscipit. Vivamus at laoreet mi. Fusce pulvinar commodo ligula, et egestas dolor. Ut hendrerit blandit neque in tempor.",
-            image: "assets/images/kegiatan.png",
+            image: "assets/images/kegiatan.jpeg",
             date: "15 Sep, 2024",
         },
         {
             title: "Workshop ReactJS",
             description:
                 "Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Curabitur vel eros eu nulla luctus eleifend.",
-            image: "assets/images/kegiatan.png",
+            image: "assets/images/kegiatan.jpeg",
             date: "20 Sep, 2024",
         },
         {
             title: "Company Outing",
             description:
                 "Praesent in augue non purus tincidunt placerat. Aliquam erat volutpat. Proin nec orci id turpis suscipit vehicula.",
-            image: "assets/images/kegiatan.png",
+            image: "assets/images/kegiatan.jpeg",
             date: "25 Sep, 2024",
         },
         {
             title: "ERPSKRIP ke Batam",
             description:
                 "Aenean interdum arcu sit amet nulla lacinia suscipit. Vivamus at laoreet mi. Fusce pulvinar commodo ligula, et egestas dolor. Ut hendrerit blandit neque in tempor.",
-            image: "assets/images/kegiatan.png",
+            image: "assets/images/kegiatan.jpeg",
             date: "15 Sep, 2024",
         },
         {
             title: "Workshop ReactJS",
             description:
                 "Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Curabitur vel eros eu nulla luctus eleifend.",
-            image: "assets/images/kegiatan.png",
+            image: "assets/images/kegiatan.jpeg",
             date: "20 Sep, 2024",
         },
         {
             title: "Company Outing",
             description:
                 "Praesent in augue non purus tincidunt placerat. Aliquam erat volutpat. Proin nec orci id turpis suscipit vehicula.",
-            image: "assets/images/kegiatan.png",
+            image: "assets/images/kegiatan.jpeg",
             date: "25 Sep, 2024",
         },
     ]);
@@ -136,9 +137,12 @@ const Kegiatan = () => {
                     ))}
                 </Swiper>
             </div>
-            <div className="text-white mt-10 border border-white py-3 px-12 rounded text-[12px]">
+            <Link
+                href={"/kegiatan"}
+                className="text-white mt-10 border border-white py-3 px-12 rounded text-[12px]"
+            >
                 Lihat Semua
-            </div>
+            </Link>
             <img src="assets/images/shape.png" alt="Shape" className="absolute top-0 right-0 w-[150px] md:w-auto" />
             <img src="assets/images/vector.png" alt="Vector" className="absolute top-[100px] left-0 opacity-20 w-[150px] md:w-[350px]" />
         </div>
