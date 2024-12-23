@@ -26,7 +26,7 @@ const Keuntungan = () => {
     ]);
 
     return (
-        <div className="min-h-screen bg-[#FAFAFA] py-[60px] px-4 sm:px-[20px] md:px-[80px] lg:px-[150px] xl:px-[220px] text-center">
+        <div id='Keuntungan' className="min-h-screen bg-[#FAFAFA] py-[60px] px-4 sm:px-[20px] md:px-[80px] lg:px-[150px] xl:px-[220px] text-center">
             {/* Title Section */}
             <p className="text-[28px] sm:text-[36px] md:text-[42px] font-bold leading-none tracking-tight text-[#4479BC]">
                 Keuntungan <br className='sm:hidden block'/> Memilih Kami

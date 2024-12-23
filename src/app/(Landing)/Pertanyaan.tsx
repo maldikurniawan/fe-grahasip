@@ -1,7 +1,30 @@
-import React from 'react';
+/* eslint-disable @next/next/no-img-element */
+"use client";
+
+import React, { useEffect, useState } from 'react';
+import { FaArrowUp } from 'react-icons/fa';
 import { FiPhone } from 'react-icons/fi';
 
-const Pertanyaan = () => {
+const Pertanyaan: React.FC = () => {
+    const [showScrollToTop, setShowScrollToTop] = useState<boolean>(false);
+
+    useEffect(() => {
+        const handleScroll = () => {
+            if (window.scrollY > 300) {
+                setShowScrollToTop(true);
+            } else {
+                setShowScrollToTop(false);
+            }
+        };
+
+        window.addEventListener('scroll', handleScroll);
+        return () => window.removeEventListener('scroll', handleScroll);
+    }, []);
+
+    const scrollToTop = () => {
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+    };
+
     return (
         <div className="relative bg-gradient-to-r from-[#1D65C0] via-[#4479BC] to-[#4479BC] bg-opacity-90 py-[50px] px-4 md:py-[70px] md:px-[60px] lg:px-[220px]">
             {/* Text Content */}
@@ -35,6 +58,23 @@ const Pertanyaan = () => {
                 alt="businessman"
                 className="absolute xl:block hidden bottom-0 right-0 w-[300px] md:w-[600px] lg:w-[870px] object-cover"
             />
+
+            {showScrollToTop && (
+                <button
+                    onClick={scrollToTop}
+                    className='opacity-100 z-40'
+                    style={{
+                        position: 'absolute',
+                        top: '-20px',
+                        right: '20px',
+                        color: '#FFF',
+                        border: 'none',
+                        borderRadius: '5px',
+                        cursor: 'pointer'
+                    }}>
+                    <FaArrowUp className='w-10 h-10 p-2 bg-[#D800B9] rounded-full' />
+                </button>
+            )}
         </div>
     );
 };

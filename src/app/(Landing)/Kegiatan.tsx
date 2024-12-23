@@ -58,6 +58,7 @@ const Kegiatan = () => {
 
     return (
         <div
+            id="Kegiatan"
             className="relative min-h-screen flex py-[70px] max-[450px]:px-4 flex-col items-center justify-center"
             style={{
                 background: "linear-gradient(180deg, #4479BC 0%, #4E89D4 100%)",
@@ -127,7 +128,7 @@ const Kegiatan = () => {
                                             {activity.description}
                                         </p>
                                     </div>
-                                    <button className="text-white max-[450px]:mt-4 flex gap-2 text-[10px] md:text-[12px] items-center bg-[#6DA1EF] w-fit rounded-lg py-2 px-6 text-start">
+                                    <button className="text-white max-[450px]:mt-4 flex gap-2 text-[10px] md:text-[12px] items-center bg-[#6DA1EF] w-fit rounded-md py-2 px-6 text-start">
                                         <span>Read More</span>
                                         <FaArrowRight />
                                     </button>
@@ -139,7 +140,7 @@ const Kegiatan = () => {
             </div>
             <Link
                 href={"/kegiatan"}
-                className="text-white mt-10 border border-white py-3 px-12 rounded text-[12px]"
+                className="text-white mt-10 border border-white py-3 px-12 rounded-md text-[12px]"
             >
                 Lihat Semua
             </Link>

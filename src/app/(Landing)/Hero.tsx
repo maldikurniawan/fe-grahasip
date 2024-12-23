@@ -2,7 +2,7 @@ import React from 'react';
 
 const Hero = () => {
     return (
-        <div className="min-h-screen bg-[#FAFAFA] pt-[120px] sm:pb-[60px] px-4 sm:px-[20px] md:px-[36px] lg:px-[120px] xl:px-[220px] relative">
+        <div id='Home' className="min-h-screen bg-[#FAFAFA] pt-[120px] sm:pb-[60px] px-4 sm:px-[20px] md:px-[36px] lg:px-[120px] xl:px-[220px] relative">
             {/* Flex Container */}
             <div className="flex flex-col xl:flex-row justify-between items-start xl:items-center mb-[40px] md:mb-[60px] xl:mb-[80px]">
                 {/* Left Section */}

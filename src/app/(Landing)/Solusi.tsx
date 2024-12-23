@@ -20,7 +20,7 @@ const Solusi = () => {
     ]);
 
     return (
-        <div className="relative min-h-screen bg-white py-[60px] px-4 md:px-[60px] xl:pr-0 lg:px-[220px]">
+        <div id="Aplikasi" className="relative min-h-screen bg-white py-[60px] px-4 md:px-[60px] xl:pr-0 lg:px-[220px]">
             <div className="grid grid-cols-1 xl:grid-cols-2 gap-10">
                 {/* Text Section */}
                 <div className="flex-1">
@@ -82,7 +82,7 @@ const Solusi = () => {
             <img
                 src="assets/images/frame14.png"
                 alt="Frame 14"
-                className="absolute top-[740px] w-20 h-22 xl:right-[320px] xl:block xl:top-[440px] sm:hidden max-[450px]:left-[100px]"
+                className="absolute top-[740px] w-20 h-22 xl:right-[320px] xl:block xl:top-[440px] sm:hidden max-[640px]:left-[100px]"
             />
         </div>
     );
