@@ -2,7 +2,7 @@
 import React, { Fragment, useEffect, useState } from "react";
 import { DashboardHeader, Sidebar } from "@/components";
 import { useRouter } from "next/navigation";
-import { TbLoader2 } from "react-icons/tb";
+// import { TbLoader2 } from "react-icons/tb";
 
 interface LayoutDashboardProps {
     children: React.ReactNode;
