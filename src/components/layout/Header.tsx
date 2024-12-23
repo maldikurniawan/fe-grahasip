@@ -104,7 +104,6 @@ const Header: React.FC = () => {
             <Link
               key={index}
               href={item.link}
-              scroll={false}
               className="block px-6 py-2 text-white hover:bg-white/20 font-medium rounded-lg"
               onClick={() => setNavOpen(false)}
             >
