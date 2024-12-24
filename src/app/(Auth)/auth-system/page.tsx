@@ -1,15 +1,33 @@
 "use client";
 
-import React, { useState, useCallback } from "react";
-import { TbEye, TbEyeOff } from "react-icons/tb";
+import React, { useCallback, useEffect, useState } from "react";
+import { TbEye, TbEyeOff, TbLoader2 } from "react-icons/tb";
 import Particles from "react-particles";
 import { loadSlim } from "tsparticles-slim";
 import { Engine, IOptions, RecursivePartial } from "tsparticles-engine";
+import { API_URL_login } from "@/constants";
+import { useRouter } from "next/navigation";
+import Swal, { SweetAlertOptions } from "sweetalert2";
+import { useFormik } from "formik";
+import axios from "axios";
+import * as Yup from "yup";
+
+const Toast = Swal.mixin({
+    toast: true,
+    position: "top-end",
+    showConfirmButton: false,
+    timer: 2000,
+    timerProgressBar: true,
+    didOpen: (toast: HTMLElement) => {
+        toast.onmouseenter = Swal.stopTimer;
+        toast.onmouseleave = Swal.resumeTimer;
+    }
+} as SweetAlertOptions);
 
 const LoginPage: React.FC = () => {
-    const [username, setUsername] = useState<string>("");
-    const [password, setPassword] = useState<string>("");
     const [isShow, setIsShow] = useState<boolean>(false);
+    const [loading, setLoading] = useState<boolean>(false);
+    const router = useRouter();
 
     const themeColor = "#4479BC";
     const colorMode: "dark" | "light" = "light";
@@ -79,6 +97,50 @@ const LoginPage: React.FC = () => {
         },
     };
 
+    const formik = useFormik({
+        initialValues: {
+            username: "",
+            password: "",
+        },
+        validationSchema: Yup.object({
+            username: Yup.string().required("Username is required"),
+            password: Yup.string().required("Password is required"),
+        }),
+        onSubmit: async (values, { setSubmitting }) => {
+            setLoading(true);
+            try {
+                setLoading(false);
+                const response = await axios.post(API_URL_login, values);
+                const { access, refresh } = response.data;
+                localStorage.setItem("access", access);
+                localStorage.setItem("refresh", refresh);
+                router.push("/dashboard");
+                Toast.fire({
+                    icon: "success",
+                    title: "Signed in successfully!"
+                });
+            } catch (error) {
+                setLoading(false);
+                console.error("Login failed:", error);
+                Swal.fire({
+                    icon: "error",
+                    title: "Username/Password Salah!",
+                    text: "Periksa lagi Username dan Password anda",
+                });
+            } finally {
+                setSubmitting(false);
+            }
+        },
+    });
+
+    useEffect(() => {
+        const access = localStorage.getItem("access");
+        if (access) {
+            router.push("/dashboard");
+        }
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, []);
+
     return (
         <div className="relative overflow-hidden">
             <div className="bg-base-100 absolute inset-0 z-0 transition-colors"></div>
@@ -112,29 +174,38 @@ const LoginPage: React.FC = () => {
                     <div className="w-full md:w-96 h-fit p-10 bg-white/10 backdrop-blur-lg rounded-lg border border-base-100 shadow-lg">
                         <img src="assets/images/logo.png" alt="Logo Grahasip" className="mx-auto mb-4" />
                         <div className="text-xl text-[#4479BC] font-semibold mb-10 text-center">GRAHASIP</div>
-                        <form>
+                        <form onSubmit={formik.handleSubmit}>
                             <div className="mb-4 flex flex-col gap-4">
                                 <div className="flex flex-col">
                                     <label htmlFor="username" className="text-[#42526B] font-normal tracking-wide text-sm">Username</label>
                                     <input
                                         id="username"
+                                        name="username"
                                         type="text"
                                         placeholder="Username"
-                                        value={username}
-                                        onChange={(e) => setUsername(e.target.value)}
-                                        className="p-2 px-4 border border-gray-300 rounded-md text-sm bg-transparent text-[#42526B] focus:outline-none focus:ring-2 focus:ring-blue-500 transition-colors"
+                                        value={formik.values.username}
+                                        onChange={formik.handleChange}
+                                        onBlur={formik.handleBlur}
+                                        className={`p-2 px-4 border ${formik.touched.username && formik.errors.username ? "border-red-500" : "border-gray-300"
+                                            } rounded-md text-sm bg-transparent text-[#42526B] focus:outline-none focus:ring-2 focus:ring-blue-500 transition-colors`}
                                     />
+                                    {formik.touched.username && formik.errors.username && (
+                                        <div className="text-red-500 text-sm">{formik.errors.username}</div>
+                                    )}
                                 </div>
 
                                 <div className="flex flex-col relative">
                                     <label htmlFor="password" className="text-[#42526B] font-normal tracking-wide text-sm">Password</label>
                                     <input
                                         id="password"
+                                        name="password"
                                         type={isShow ? "text" : "password"}
                                         placeholder="Password"
-                                        value={password}
-                                        onChange={(e) => setPassword(e.target.value)}
-                                        className="p-2 px-4 border border-gray-300 rounded-md text-sm bg-transparent text-[#42526B] focus:outline-none focus:ring-2 focus:ring-blue-500 transition-colors w-full"
+                                        value={formik.values.password}
+                                        onChange={formik.handleChange}
+                                        onBlur={formik.handleBlur}
+                                        className={`p-2 px-4 border ${formik.touched.password && formik.errors.password ? "border-red-500" : "border-gray-300"
+                                            } rounded-md text-sm bg-transparent text-[#42526B] focus:outline-none focus:ring-2 focus:ring-blue-500 transition-colors w-full`}
                                     />
                                     <div
                                         className="absolute top-7 text-[#42526B] right-3 cursor-pointer"
@@ -142,13 +213,23 @@ const LoginPage: React.FC = () => {
                                     >
                                         {isShow ? <TbEyeOff size={24} /> : <TbEye size={24} />}
                                     </div>
+                                    {formik.touched.password && formik.errors.password && (
+                                        <div className="text-red-500 text-sm">{formik.errors.password}</div>
+                                    )}
                                 </div>
                             </div>
                             <button
                                 type="submit"
+                                disabled={loading ? true : false}
                                 className="w-full bg-[#4479BC] font-bold text-white p-2 rounded-md mt-4 hover:bg-[#6DA1EF] transition-colors"
                             >
-                                Login
+                                {loading ? (
+                                    <TbLoader2 size={20} className="animate-spin" />
+                                ) : (
+                                    <div className="text-center">
+                                        Login
+                                    </div>
+                                )}
                             </button>
                         </form>
                     </div>
