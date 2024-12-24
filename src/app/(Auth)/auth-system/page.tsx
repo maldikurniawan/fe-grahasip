@@ -186,28 +186,28 @@ const LoginPage: React.FC = () => {
                                 value={formik.values.username}
                                 onChange={formik.handleChange}
                                 onBlur={formik.handleBlur}
-                                touched={formik.touched.username}
                                 error={formik.errors.username}
                                 required={true}
                             />
-                            <InputField
-                                label="Password"
-                                id="password"
-                                name="password"
-                                type={isShow ? "text" : "password"}
-                                placeholder="Password"
-                                value={formik.values.password}
-                                onChange={formik.handleChange}
-                                onBlur={formik.handleBlur}
-                                touched={formik.touched.password}
-                                error={formik.errors.password}
-                                required={true}
-                            />
-                            <div
-                                className="absolute top-[234px] text-[#42526B] right-12 cursor-pointer"
-                                onClick={() => setIsShow(!isShow)}
-                            >
-                                {isShow ? <TbEyeOff size={24} /> : <TbEye size={24} />}
+                            <div className="relative">
+                                <InputField
+                                    label="Password"
+                                    id="password"
+                                    name="password"
+                                    type={isShow ? "text" : "password"}
+                                    placeholder="Password"
+                                    value={formik.values.password}
+                                    onChange={formik.handleChange}
+                                    onBlur={formik.handleBlur}
+                                    error={formik.errors.password}
+                                    required={true}
+                                />
+                                <div
+                                    className="absolute top-7 text-[#42526B] right-2 cursor-pointer"
+                                    onClick={() => setIsShow(!isShow)}
+                                >
+                                    {isShow ? <TbEyeOff size={24} /> : <TbEye size={24} />}
+                                </div>
                             </div>
                             <div></div>
                             <button

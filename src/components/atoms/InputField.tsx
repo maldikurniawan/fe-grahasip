@@ -9,7 +9,6 @@ interface InputFieldProps {
     value: string;
     onChange: React.ChangeEventHandler<HTMLInputElement>;
     onBlur: React.FocusEventHandler<HTMLInputElement>;
-    touched: any;
     error: string | undefined;
     required?: boolean;
 }
@@ -23,7 +22,6 @@ const InputField: React.FC<InputFieldProps> = ({
     value,
     onChange,
     onBlur,
-    touched,
     error,
     required = false,
 }) => {
@@ -41,10 +39,10 @@ const InputField: React.FC<InputFieldProps> = ({
                 value={value}
                 onChange={onChange}
                 onBlur={onBlur}
-                className={`p-2 px-4 border ${touched && error ? "border-red-500" : "border-gray-300"
+                className={`p-2 px-4 border ${error ? "border-red-500" : "border-gray-300"
                     } rounded-md text-sm bg-transparent text-[#42526B] focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-none transition-colors`}
             />
-            {touched && error && <div className="text-red-500 text-sm">{error}</div>}
+            {error && <div className="text-red-500 text-sm">{error}</div>}
         </div>
     );
 };
