@@ -12,8 +12,13 @@ export default {
         inter: ['Inter', 'sans-serif'],
       },
       colors: {
-        background: "var(--background)",
-        foreground: "var(--foreground)",
+        primary: {
+          base: "#378ecc",
+          baseHover: "#2e74a6",
+          baseActive: "#235c84",
+          dark: "#3c73bc",
+          light: "#34b1e7",
+        },
       },
     },
   },

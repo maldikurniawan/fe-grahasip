@@ -122,6 +122,7 @@ export const useDeleteData = (endpoint, withToken = false) => {
     });
 };
 
+// Request Get
 export const getData = (url, params, reducers, type) => {
     const { dispatch, redux } = reducers;
     dispatch(

@@ -11,3 +11,9 @@ export const API_URL_permissionlist = `${host_cms}/auth/permissionlist/`;
 export const API_URL_user = `${host_cms}/auth/user/`;
 export const API_URL_getuser = `${host_cms}/auth/getuser/`;
 export const API_URL_contentType = `${host_cms}/auth/contenttype/`;
+
+export const API_URL_dashboard = `${host_cms}/cms/dashboard`;
+export const API_URL_artikel = `${host_cms}/cms/artikel`;
+export const API_URL_visitor = `${host_cms}/cms/visitor`;
+export const API_URL_masterfile = `${host_cms}/cms/masterfile`;
+
