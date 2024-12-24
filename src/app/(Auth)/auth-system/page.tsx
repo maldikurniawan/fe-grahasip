@@ -121,12 +121,22 @@ const LoginPage: React.FC = () => {
                         title: "Signed in successfully!",
                     });
                 }, 500);
-            } catch (error) {
-                Swal.fire({
-                    icon: "error",
-                    title: "Login Gagal!",
-                    text: "Periksa kembali Username dan Password Anda!",
-                });
+            } catch (error: unknown) {
+                if (error instanceof Error) {
+                    // Now 'error' is typed as 'Error'
+                    Swal.fire({
+                        icon: "error",
+                        title: "Login Gagal!",
+                        text: "Periksa kembali Username dan Password Anda!",
+                    });
+                } else {
+                    // Handle unexpected error types
+                    Swal.fire({
+                        icon: "error",
+                        title: "Login Gagal!",
+                        text: "Terjadi kesalahan yang tidak diketahui!",
+                    });
+                }
             } finally {
                 setLoading(false);
                 setSubmitting(false);
