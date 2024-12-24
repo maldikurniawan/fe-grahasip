@@ -2,7 +2,7 @@
 import React, { Fragment, useEffect, useState } from "react";
 import { DashboardHeader, Sidebar } from "@/components";
 import { useRouter } from "next/navigation";
-// import { TbLoader2 } from "react-icons/tb";
+import { TbLoader2 } from "react-icons/tb";
 
 interface LayoutDashboardProps {
     children: React.ReactNode;
@@ -11,16 +11,16 @@ interface LayoutDashboardProps {
 const LayoutDashboard: React.FC<LayoutDashboardProps> = ({ children }) => {
     const [sideOpen, setSideOpen] = useState<boolean>(false);
     const router = useRouter();
-    // const [view, setView] = useState<boolean>(false);
+    const [view, setView] = useState<boolean>(false);
 
     useEffect(() => {
         if (typeof window !== "undefined") {
-            // const token = localStorage.getItem("access");
-            // if (!token) {
-            //     router.replace("/auth-system");
-            //     return;
-            // }
-            // setView(true);
+            const token = localStorage.getItem("access");
+            if (!token) {
+                router.replace("/auth-system");
+                return;
+            }
+            setView(true);
 
             const handleResize = () => {
                 setSideOpen(window.innerWidth >= 767);
@@ -39,12 +39,12 @@ const LayoutDashboard: React.FC<LayoutDashboardProps> = ({ children }) => {
         setSideOpen(window.innerWidth >= 767);
     }, []);
 
-    // if (!view)
-    //     return (
-    //         <div className="flex justify-center items-center h-screen">
-    //             <TbLoader2 size={80} className="text-fuchsia-600 animate-spin" />
-    //         </div>
-    //     );
+    if (!view)
+        return (
+            <div className="flex justify-center items-center h-screen">
+                <TbLoader2 size={80} className="text-[#4479BC] animate-spin" />
+            </div>
+        );
 
     return (
         <Fragment>

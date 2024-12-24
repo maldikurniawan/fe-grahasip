@@ -6,6 +6,7 @@ import Particles from "react-particles";
 import { loadSlim } from "tsparticles-slim";
 import { Engine, IOptions, RecursivePartial } from "tsparticles-engine";
 import { API_URL_login } from "@/constants";
+import { InputField } from "@/components";
 import { useRouter } from "next/navigation";
 import Swal, { SweetAlertOptions } from "sweetalert2";
 import { useFormik } from "formik";
@@ -21,7 +22,7 @@ const Toast = Swal.mixin({
     didOpen: (toast: HTMLElement) => {
         toast.onmouseenter = Swal.stopTimer;
         toast.onmouseleave = Swal.resumeTimer;
-    }
+    },
 } as SweetAlertOptions);
 
 const LoginPage: React.FC = () => {
@@ -109,25 +110,25 @@ const LoginPage: React.FC = () => {
         onSubmit: async (values, { setSubmitting }) => {
             setLoading(true);
             try {
-                setLoading(false);
                 const response = await axios.post(API_URL_login, values);
                 const { access, refresh } = response.data;
                 localStorage.setItem("access", access);
                 localStorage.setItem("refresh", refresh);
                 router.push("/dashboard");
-                Toast.fire({
-                    icon: "success",
-                    title: "Signed in successfully!"
-                });
+                setTimeout(() => {
+                    Toast.fire({
+                        icon: "success",
+                        title: "Signed in successfully!",
+                    });
+                }, 500);
             } catch (error) {
-                setLoading(false);
-                console.error("Login failed:", error);
                 Swal.fire({
                     icon: "error",
-                    title: "Username/Password Salah!",
-                    text: "Periksa lagi Username dan Password anda",
+                    title: "Login Gagal!",
+                    text: "Periksa kembali Username dan Password Anda!",
                 });
             } finally {
+                setLoading(false);
                 setSubmitting(false);
             }
         },
@@ -138,22 +139,17 @@ const LoginPage: React.FC = () => {
         if (access) {
             router.push("/dashboard");
         }
-        // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, []);
+    }, [router]);
 
     return (
         <div className="relative overflow-hidden">
             <div className="bg-base-100 absolute inset-0 z-0 transition-colors"></div>
             <div
-                style={{
-                    backgroundColor: themeColor,
-                }}
+                style={{ backgroundColor: themeColor }}
                 className="w-24 h-24 absolute rounded-full blur-3xl top-40 left-1/2 -ml-72"
             ></div>
             <div
-                style={{
-                    backgroundColor: themeColor,
-                }}
+                style={{ backgroundColor: themeColor }}
                 className="w-20 h-20 absolute rounded-full blur-3xl bottom-40 left-1/2"
             ></div>
             <Particles
@@ -172,63 +168,57 @@ const LoginPage: React.FC = () => {
             <div className="relative w-screen h-screen z-20 overflow-hidden flex bg-white/10 text-base-300 font-light">
                 <div className="flex w-full items-center justify-center p-10">
                     <div className="w-full md:w-96 h-fit p-10 bg-white/10 backdrop-blur-lg rounded-lg border border-base-100 shadow-lg">
-                        <img src="assets/images/logo.png" alt="Logo Grahasip" className="mx-auto mb-4" />
-                        <div className="text-xl text-[#4479BC] font-semibold mb-10 text-center">GRAHASIP</div>
-                        <form onSubmit={formik.handleSubmit}>
-                            <div className="mb-4 flex flex-col gap-4">
-                                <div className="flex flex-col">
-                                    <label htmlFor="username" className="text-[#42526B] font-normal tracking-wide text-sm">Username</label>
-                                    <input
-                                        id="username"
-                                        name="username"
-                                        type="text"
-                                        placeholder="Username"
-                                        value={formik.values.username}
-                                        onChange={formik.handleChange}
-                                        onBlur={formik.handleBlur}
-                                        className={`p-2 px-4 border ${formik.touched.username && formik.errors.username ? "border-red-500" : "border-gray-300"
-                                            } rounded-md text-sm bg-transparent text-[#42526B] focus:outline-none focus:ring-2 focus:ring-blue-500 transition-colors`}
-                                    />
-                                    {formik.touched.username && formik.errors.username && (
-                                        <div className="text-red-500 text-sm">{formik.errors.username}</div>
-                                    )}
-                                </div>
-
-                                <div className="flex flex-col relative">
-                                    <label htmlFor="password" className="text-[#42526B] font-normal tracking-wide text-sm">Password</label>
-                                    <input
-                                        id="password"
-                                        name="password"
-                                        type={isShow ? "text" : "password"}
-                                        placeholder="Password"
-                                        value={formik.values.password}
-                                        onChange={formik.handleChange}
-                                        onBlur={formik.handleBlur}
-                                        className={`p-2 px-4 border ${formik.touched.password && formik.errors.password ? "border-red-500" : "border-gray-300"
-                                            } rounded-md text-sm bg-transparent text-[#42526B] focus:outline-none focus:ring-2 focus:ring-blue-500 transition-colors w-full`}
-                                    />
-                                    <div
-                                        className="absolute top-7 text-[#42526B] right-3 cursor-pointer"
-                                        onClick={() => setIsShow(!isShow)}
-                                    >
-                                        {isShow ? <TbEyeOff size={24} /> : <TbEye size={24} />}
-                                    </div>
-                                    {formik.touched.password && formik.errors.password && (
-                                        <div className="text-red-500 text-sm">{formik.errors.password}</div>
-                                    )}
-                                </div>
+                        <img
+                            src="assets/images/logo.png"
+                            alt="Logo Grahasip"
+                            className="mx-auto mb-4"
+                        />
+                        <div className="text-xl text-[#4479BC] font-semibold mb-10 text-center">
+                            GRAHASIP
+                        </div>
+                        <form onSubmit={formik.handleSubmit} className="space-y-4">
+                            <InputField
+                                label="Username"
+                                id="username"
+                                name="username"
+                                type="text"
+                                placeholder="Username"
+                                value={formik.values.username}
+                                onChange={formik.handleChange}
+                                onBlur={formik.handleBlur}
+                                touched={formik.touched.username}
+                                error={formik.errors.username}
+                                required={true}
+                            />
+                            <InputField
+                                label="Password"
+                                id="password"
+                                name="password"
+                                type={isShow ? "text" : "password"}
+                                placeholder="Password"
+                                value={formik.values.password}
+                                onChange={formik.handleChange}
+                                onBlur={formik.handleBlur}
+                                touched={formik.touched.password}
+                                error={formik.errors.password}
+                                required={true}
+                            />
+                            <div
+                                className="absolute top-[234px] text-[#42526B] right-12 cursor-pointer"
+                                onClick={() => setIsShow(!isShow)}
+                            >
+                                {isShow ? <TbEyeOff size={24} /> : <TbEye size={24} />}
                             </div>
+                            <div></div>
                             <button
                                 type="submit"
-                                disabled={loading ? true : false}
-                                className="w-full bg-[#4479BC] font-bold text-white p-2 rounded-md mt-4 hover:bg-[#6DA1EF] transition-colors"
+                                disabled={loading}
+                                className="w-full bg-[#4479BC] font-bold text-white p-2 rounded-md hover:bg-[#6DA1EF] transition-colors"
                             >
                                 {loading ? (
-                                    <TbLoader2 size={20} className="animate-spin" />
+                                    <TbLoader2 size={20} className="animate-spin mx-auto" />
                                 ) : (
-                                    <div className="text-center">
-                                        Login
-                                    </div>
+                                    "Login"
                                 )}
                             </button>
                         </form>

@@ -2,8 +2,6 @@ import axios from "axios";
 import Swal from "sweetalert2";
 import { useQuery, useMutation } from "@tanstack/react-query";
 
-const withCredentials = false; // Konsisten jika ingin mengirimkan cookie di seluruh request
-
 export const logout = () => {
     if (typeof window !== "undefined") {
         window.localStorage.removeItem("access");
