@@ -1,5 +1,6 @@
 import AutoPlayVideo from "./atoms/AutoPlayVideo"
 import InputField from "./atoms/InputField"
+import SelectInput from "./atoms/SelectInput"
 import Button from "./atoms/Button"
 import Footer from "./layout/Footer"
 import Header from "./layout/Header"
@@ -11,6 +12,7 @@ import Pagination from "./dashboard/Pagination"
 export {
     AutoPlayVideo,
     InputField,
+    SelectInput,
     Button,
     Footer,
     Header,

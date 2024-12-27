@@ -1,27 +1,25 @@
-import React from "react";
+import React from 'react';
 
-interface InputFieldProps {
+interface SelectInputProps {
     label: string;
     id: string;
     name: string;
-    type: string;
-    placeholder: string;
     value: string;
-    onChange: React.ChangeEventHandler<HTMLInputElement>;
-    onBlur: React.FocusEventHandler<HTMLInputElement>;
+    onChange: React.ChangeEventHandler<HTMLSelectElement>;
+    onBlur: React.FocusEventHandler<HTMLSelectElement>;
+    options: { label: string; value: string }[];
     error: string | undefined;
     required?: boolean;
 }
 
-const InputField: React.FC<InputFieldProps> = ({
+const SelectInput: React.FC<SelectInputProps> = ({
     label,
     id,
     name,
-    type,
-    placeholder,
     value,
     onChange,
     onBlur,
+    options,
     error,
     required = false,
 }) => {
@@ -31,20 +29,24 @@ const InputField: React.FC<InputFieldProps> = ({
                 {label}
                 {required && <span className="text-red-500">*</span>}
             </label>
-            <input
+            <select
                 id={id}
                 name={name}
-                type={type}
-                placeholder={placeholder}
                 value={value}
                 onChange={onChange}
                 onBlur={onBlur}
                 className={`p-2 px-2 border ${error ? "border-red-500" : "border-gray-300"
                     } rounded-md text-sm bg-transparent text-[#42526B] focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-none transition-colors`}
-            />
+            >
+                {options.map((option) => (
+                    <option key={option.value} value={option.value}>
+                        {option.label}
+                    </option>
+                ))}
+            </select>
             {error && <div className="text-red-500 text-sm">{error}</div>}
         </div>
     );
 };
 
-export default InputField;
+export default SelectInput;

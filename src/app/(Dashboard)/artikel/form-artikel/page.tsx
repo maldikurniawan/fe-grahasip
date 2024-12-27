@@ -13,6 +13,7 @@ import { errorResponse } from "@/utils/errorResponse";
 import { decrypted } from "@/utils/crypto";
 import { CKEditor } from "ckeditor4-react";
 import { TbLoader } from "react-icons/tb";
+import { InputField, SelectInput } from "@/components";
 
 const FormArtikel: React.FC = () => {
   const router = useRouter();
@@ -24,9 +25,15 @@ const FormArtikel: React.FC = () => {
   const [imagePreview, setImagePreview] = useState<string | null>(null);
 
   // API actions
-  const createArtikelApi = usePostData(API_URL_artikel, true);
-  const updateArtikelApi = usePutData(API_URL_artikel + plainId + "/", true);
-  const getArtikelApi = useGetData(`${API_URL_artikel + plainId + "/"}`, [plainId], true, {}, { enabled: !!plainId });
+  const createArtikelApi = usePostData(API_URL_artikel
+    , true);
+  const updateArtikelApi = usePutData(API_URL_artikel + plainId + "/"
+    , true);
+  const getArtikelApi = useGetData(`${API_URL_artikel + plainId + "/"}`
+    , [plainId]
+    , true
+    , {}
+    , { enabled: !!plainId });
 
   // Formik setup
   const formik = useFormik({
@@ -37,10 +44,10 @@ const FormArtikel: React.FC = () => {
       status: "published",
     },
     validationSchema: Yup.object({
-      title: Yup.string().required("Title is required"),
+      title: Yup.string().required("Judul harus diisi"),
       image: Yup.string().nullable(),
-      content: Yup.string().required("Content is required"),
-      status: Yup.string().oneOf(["published", "draft"], "Invalid status").required("Status is required"),
+      content: Yup.string().required("Konten harus diisi"),
+      status: Yup.string().oneOf(["published", "draft"], "Invalid status").required("Status harus diisi"),
     }),
     onSubmit: (values) => {
       const form = new FormData();
@@ -107,7 +114,7 @@ const FormArtikel: React.FC = () => {
       formik.setFieldValue("title", getArtikelApi.data?.title);
       formik.setFieldValue("content", getArtikelApi.data?.content);
       formik.setFieldValue("image", getArtikelApi.data?.image);
-      setImagePreview(getArtikelApi.data?.image || null); // Set the image preview
+      setImagePreview(getArtikelApi.data?.image || null);
       formik.setFieldValue("status", getArtikelApi.data?.status);
     }
   }, [getArtikelApi.isSuccess]);
@@ -124,7 +131,7 @@ const FormArtikel: React.FC = () => {
     if (file) {
       const reader = new FileReader();
       reader.onloadend = () => {
-        setImagePreview(reader.result as string); // Set the image preview
+        setImagePreview(reader.result as string);
       };
       reader.readAsDataURL(file);
       formik.setFieldValue("image", file);
@@ -147,63 +154,56 @@ const FormArtikel: React.FC = () => {
       <br />
 
       {/* Form Content */}
-      <form onSubmit={formik.handleSubmit} className="bg-white p-3 rounded-lg">
-        <div className="m-2 flex flex-col-reverse lg:flex-row gap-4">
-          <div className="space-y-4 w-full lg:w-[70%]">
-            {/* Title */}
-            <div>
-              <label className="block text-sm font-medium text-gray-700 mb-1">Title</label>
-              <input
-                type="text"
-                name="title"
-                value={formik.values.title}
-                onChange={formik.handleChange}
-                onBlur={formik.handleBlur}
-                className="w-full p-1.5 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
-                placeholder="Masukkan Title"
-              />
-              {formik.touched.title && formik.errors.title && (
-                <div className="text-red-500 text-sm mt-1">{formik.errors.title}</div>
-              )}
-            </div>
+      <form onSubmit={formik.handleSubmit} className="bg-white p-6 rounded-lg shadow-lg">
+        <div className="flex flex-col-reverse lg:flex-row gap-6">
+          <div className="space-y-6 w-full lg:w-7/10">
+            <InputField
+              label="Judul Artikel"
+              id="title"
+              name="title"
+              type="text"
+              placeholder="Masukan Judul"
+              value={formik.values.title}
+              onChange={formik.handleChange}
+              onBlur={formik.handleBlur}
+              error={formik.errors.title}
+              required={true}
+            />
           </div>
-
-          {/* Status Section */}
-          <div className="w-full lg:w-[30%] h-fit">
-            <div>
-              <label className="block text-sm font-medium text-gray-700 mb-1">Status</label>
-              <select
-                name="status"
-                value={formik.values.status}
-                onChange={formik.handleChange}
-                onBlur={formik.handleBlur}
-                className="w-full p-1.5 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 bg-white"
-              >
-                <option value="published">Published</option>
-                <option value="draft">Draft</option>
-              </select>
-              {formik.touched.status && formik.errors.status && (
-                <div className="text-red-500 text-sm mt-1">{formik.errors.status}</div>
-              )}
-            </div>
+          <div className="w-full lg:w-3/10">
+            <SelectInput
+              label="Status"
+              id="status"
+              name="status"
+              value={formik.values.status}
+              onChange={formik.handleChange}
+              onBlur={formik.handleBlur}
+              options={[
+                { label: 'Published', value: 'published' },
+                { label: 'Draft', value: 'draft' },
+              ]}
+              error={formik.errors.status}
+              required={true}
+            />
           </div>
         </div>
 
-        <div className="space-y-4 w-full m-2">
+        <div className="space-y-6 w-full">
           {/* Image Upload */}
           <div>
-            <label className="block text-sm font-medium text-gray-700 mb-1">Image</label>
+            <label className="block text-sm font-medium text-gray-700 mb-2">Image</label>
             <input
               type="file"
               name="image"
               onChange={handleImageChange}
               onBlur={formik.handleBlur}
               accept="image/*"
-              className="w-full p-1.5 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+              className="w-full p-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
             />
             {formik.touched.image && formik.errors.image && (
               <div className="text-red-500 text-sm mt-1">{formik.errors.image}</div>
             )}
+
             {/* Image Preview */}
             {imagePreview && (
               <div className="mt-2">
@@ -215,11 +215,11 @@ const FormArtikel: React.FC = () => {
           {/* Content */}
           <div>
             {isLoadingCkeditor && (
-              <div className="bg-black bg-opacity-10 flex justify-center items-center ">
+              <div className="bg-black bg-opacity-10 flex justify-center items-center">
                 <TbLoader className="text-fuchsia-600 animate-spin" size={100} />
               </div>
             )}
-            <label className="block text-sm font-medium text-gray-700 mb-1">Content</label>
+            <label className="block text-sm font-medium text-gray-700 mb-2">Content</label>
             <CKEditor
               scriptUrl="https://cdn.ckeditor.com/4.20.0/full/ckeditor.js"
               key={refreshCkeditor}
@@ -233,14 +233,14 @@ const FormArtikel: React.FC = () => {
               onChange={(e: any) => formik.setFieldValue("content", e.editor.getData())}
             />
             {formik.touched.content && formik.errors.content && (
-              <div className="text-red-500 dark:text-red-300 text-xs">{formik.errors.content}</div>
+              <div className="text-red-500 text-sm mt-1">{formik.errors.content}</div>
             )}
           </div>
 
           {/* Submit Button */}
           <button
             type="submit"
-            className="text-xs md:col-span-2 w-full px-3 py-2 bg-blue-600 text-white font-semibold rounded-lg hover:bg-blue-700 transition-colors"
+            className="w-full px-4 py-2 bg-blue-600 text-white font-semibold rounded-lg hover:bg-blue-700 transition-colors"
           >
             Submit
           </button>
