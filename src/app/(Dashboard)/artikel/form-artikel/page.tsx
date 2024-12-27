@@ -25,15 +25,13 @@ const FormArtikel: React.FC = () => {
   const [imagePreview, setImagePreview] = useState<string | null>(null);
 
   // API actions
-  const createArtikelApi = usePostData(API_URL_artikel
-    , true);
-  const updateArtikelApi = usePutData(API_URL_artikel + plainId + "/"
-    , true);
-  const getArtikelApi = useGetData(`${API_URL_artikel + plainId + "/"}`
-    , [plainId]
-    , true
-    , {}
-    , { enabled: !!plainId });
+  const createArtikelApi = usePostData(API_URL_artikel, true);
+  const updateArtikelApi = usePutData(API_URL_artikel + plainId + "/", true);
+  const getArtikelApi = useGetData(`${API_URL_artikel + plainId + "/"}`, 
+    [plainId], 
+    true, 
+    {}, 
+    { enabled: !!plainId });
 
   // Formik setup
   const formik = useFormik({
@@ -145,7 +143,7 @@ const FormArtikel: React.FC = () => {
           <span>{param.get("id") ? "Edit" : "Tambah"}</span> Artikel
         </h1>
         <button
-          className="text-xs whitespace-nowrap font-medium px-3 py-2 bg-gray-500 hover:bg-gray-600 active:bg-gray-600 text-white rounded-lg shadow hover:shadow-lg transition-all"
+          className="text-xs whitespace-nowrap font-medium px-3 py-2 bg-[#1e293b] hover:bg-[#0f172a] text-white rounded-lg shadow hover:shadow-lg transition-all"
           onClick={() => router.push("/artikel")}
         >
           Kembali
@@ -155,8 +153,8 @@ const FormArtikel: React.FC = () => {
 
       {/* Form Content */}
       <form onSubmit={formik.handleSubmit} className="bg-white p-6 rounded-lg shadow-lg">
-        <div className="flex flex-col-reverse lg:flex-row gap-6">
-          <div className="space-y-6 w-full lg:w-7/10">
+        <div className="flex flex-col-reverse lg:flex-row gap-6 mb-4">
+          <div className="w-full lg:w-7/10">
             <InputField
               label="Judul Artikel"
               id="title"
@@ -188,20 +186,20 @@ const FormArtikel: React.FC = () => {
           </div>
         </div>
 
-        <div className="space-y-6 w-full">
+        <div className="space-y-4 w-full">
           {/* Image Upload */}
           <div>
-            <label className="block text-sm font-medium text-gray-700 mb-2">Image</label>
+            <label className="text-[#42526B] font-normal tracking-wide text-sm">Image</label>
             <input
               type="file"
               name="image"
               onChange={handleImageChange}
               onBlur={formik.handleBlur}
               accept="image/*"
-              className="w-full p-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+              className="w-full p-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
             />
             {formik.touched.image && formik.errors.image && (
-              <div className="text-red-500 text-sm mt-1">{formik.errors.image}</div>
+              <div className="text-red-500 text-sm">{formik.errors.image}</div>
             )}
 
             {/* Image Preview */}
@@ -216,10 +214,12 @@ const FormArtikel: React.FC = () => {
           <div>
             {isLoadingCkeditor && (
               <div className="bg-black bg-opacity-10 flex justify-center items-center">
-                <TbLoader className="text-fuchsia-600 animate-spin" size={100} />
+                <TbLoader className="text-[#42526B] animate-spin" size={100} />
               </div>
             )}
-            <label className="block text-sm font-medium text-gray-700 mb-2">Content</label>
+            <label className="text-[#42526B] font-normal tracking-wide text-sm">
+              Konten<span className="text-red-500">*</span>
+            </label>
             <CKEditor
               scriptUrl="https://cdn.ckeditor.com/4.20.0/full/ckeditor.js"
               key={refreshCkeditor}
@@ -233,14 +233,14 @@ const FormArtikel: React.FC = () => {
               onChange={(e: any) => formik.setFieldValue("content", e.editor.getData())}
             />
             {formik.touched.content && formik.errors.content && (
-              <div className="text-red-500 text-sm mt-1">{formik.errors.content}</div>
+              <div className="text-red-500 text-sm">{formik.errors.content}</div>
             )}
           </div>
 
           {/* Submit Button */}
           <button
             type="submit"
-            className="w-full px-4 py-2 bg-blue-600 text-white font-semibold rounded-lg hover:bg-blue-700 transition-colors"
+            className="w-full px-4 py-2 bg-[#1e293b] hover:bg-[#0f172a] text-white font-semibold rounded-lg transition-colors"
           >
             Submit
           </button>
