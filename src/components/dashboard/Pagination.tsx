@@ -1,6 +1,6 @@
-import React, { Fragment } from "react";
+"use client";
 
-// components
+import React, { Fragment } from "react";
 import ReactPaginate from "react-paginate";
 import { MdKeyboardArrowLeft, MdKeyboardArrowRight } from "react-icons/md";
 import { HiOutlineDotsHorizontal } from "react-icons/hi";

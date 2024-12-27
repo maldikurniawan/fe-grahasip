@@ -1,27 +1,23 @@
 /* eslint-disable @next/next/no-img-element */
 "use client";
 
-import React, { useState, Fragment, useEffect, useActionState } from "react";
+import React, { useState, Fragment } from "react";
 import { SyncLoader } from "react-spinners";
 import {
   BiDetail,
   BiEdit,
+  BiPlus,
   BiSearch,
-  BiSend,
   BiSortDown,
   BiSortUp,
   BiTrash,
 } from "react-icons/bi";
 import { useRouter } from "next/navigation";
 import { API_URL_artikel } from "@/constants";
-import { useDeleteData, useGetData, usePostData, usePutData } from "@/actions";
+import { useGetData } from "@/actions";
 import { Pagination } from "@/components";
 import { debounce } from "lodash";
-import { showSweetAlert } from "@/utils/showSweetAlert";
-import { showToast } from "@/utils/showToast";
-import { useFormik } from "formik";
-import * as Yup from "yup";
-import { TbLoader } from "react-icons/tb";
+import { encrypted } from "@/utils/crypto";
 
 interface Artikel {
   id: string;
@@ -36,6 +32,7 @@ interface Artikel {
 }
 
 const Artikel = () => {
+  const [viewData, setViewData] = useState<boolean>(false);
   const [queryParams, setQueryParams] = useState({
     limit: 10,
     offset: 0,
@@ -49,7 +46,7 @@ const Artikel = () => {
   const tableHead = [
     { title: "No", field: "id" },
     { title: "Title", field: "title" },
-    { title: "Author", field: "author" },
+    { title: "Release Date", field: "created_at" },
     { title: "Status", field: "status" },
     { title: "Action", field: "" },
   ];
@@ -69,8 +66,17 @@ const Artikel = () => {
     }
   );
 
+  const onDetail = (item: any) => {
+    setViewData(item);
+  };
+
+  const onEdit = (item: any) => {
+    const key = encrypted(item.id);
+    router.push(`/artikel/form-artikel?id=${key}`);
+  };
+
   const onDelete = (item: any) => {
-    alert(`Delete item: ${item.name}`); // Example if item has a name property
+    alert(`Delete item: ${item.name}`);
   };
 
   const onSearch = debounce((value) => {
@@ -112,6 +118,18 @@ const Artikel = () => {
 
   const action = [
     {
+      name: "detail",
+      icon: <BiDetail />,
+      color: "text-blue-500",
+      func: onDetail,
+    },
+    {
+      name: "edit",
+      icon: <BiEdit />,
+      color: "text-yellow-500",
+      func: onEdit,
+    },
+    {
       name: "hapus",
       icon: <BiTrash />,
       color: "text-red-500",
@@ -119,14 +137,20 @@ const Artikel = () => {
     },
   ];
 
+  console.log("Artikel Data:", getArtikel.data);
+
   return (
     <Fragment>
       <div className="flex justify-between items-center">
         <h1 className="text-lg md:text-3xl font-bold">Data Artikel</h1>
         <button
-          className="text-xs whitespace-nowrap font-medium px-3 py-2 bg-[#1e293b] hover:bg-[#0f172a] text-white rounded-lg shadow hover:shadow-lg transition-all"
+          className="text-xs whitespace-nowrap font-medium flex items-center gap-1 px-3 py-2 bg-[#1e293b] hover:bg-[#0f172a] text-white rounded-lg shadow hover:shadow-lg transition-all"
+          onClick={() =>
+            router.push("/artikel/form-artikel")
+          }
         >
-          Tambah Artikel
+          <BiPlus size={20}/>
+          <span>Tambah Artikel</span>
         </button>
       </div>
       <br />
@@ -212,17 +236,9 @@ const Artikel = () => {
                       <td className="p-2 text-center whitespace-nowrap">
                         {itemIdx + queryParams.offset + 1}
                       </td>
-                      <td className="p-2 text-center">{item.name}</td>
-                      <td className="p-2 text-center whitespace-nowrap">
-                        {item.jabatan}
-                      </td>
-                      <td className="p-2 flex justify-center">
-                        <img
-                          src={item.image ? item.image : "/assets/nophoto.png"}
-                          alt="foto"
-                          className="w-8 h-8 rounded-full"
-                        />
-                      </td>
+                      <td className="p-2 text-center">{item.title}</td>
+                      <td className="p-2 text-center">{item.created_at}</td>
+                      <td className="p-2 text-center">{item.status}</td>
                       <td className="p-2 text-center whitespace-nowrap">
                         <div className="flex justify-end">
                           {action.map((action, actionIdx) => (

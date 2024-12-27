@@ -213,7 +213,7 @@ const LoginPage: React.FC = () => {
                                     required={true}
                                 />
                                 <div
-                                    className="absolute top-7 text-[#42526B] right-2 cursor-pointer"
+                                    className="absolute top-6.5 text-[#42526B] right-2 cursor-pointer"
                                     onClick={() => setIsShow(!isShow)}
                                 >
                                     {isShow ? <TbEyeOff size={24} /> : <TbEye size={24} />}
