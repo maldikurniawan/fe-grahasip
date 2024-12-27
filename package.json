@@ -14,7 +14,7 @@
     "@tanstack/react-query": "^5.62.8",
     "@tinymce/tinymce-react": "^5.1.1",
     "axios": "^1.7.9",
-    "ckeditor4-react": "^5.2.0",
+    "ckeditor4-react": "^4.3.0",
     "crypto-js": "^4.2.0",
     "dayjs": "^1.11.13",
     "formik": "^2.4.6",
