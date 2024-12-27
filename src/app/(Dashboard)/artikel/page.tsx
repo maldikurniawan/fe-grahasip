@@ -18,6 +18,7 @@ import { useGetData } from "@/actions";
 import { Pagination } from "@/components";
 import { debounce } from "lodash";
 import { encrypted } from "@/utils/crypto";
+import moment from "moment";
 
 interface Artikel {
   id: string;
@@ -237,10 +238,10 @@ const Artikel = () => {
                         {itemIdx + queryParams.offset + 1}
                       </td>
                       <td className="p-2 text-center">{item.title}</td>
-                      <td className="p-2 text-center">{item.created_at}</td>
-                      <td className="p-2 text-center">{item.status}</td>
+                      <td className="p-2 text-center">{moment(item.created_at).format("D MMMM YYYY")}</td>
+                      <td className="p-2 text-center capitalize">{item.status}</td>
                       <td className="p-2 text-center whitespace-nowrap">
-                        <div className="flex justify-end">
+                        <div className="flex justify-center">
                           {action.map((action, actionIdx) => (
                             <button
                               key={actionIdx}

@@ -7,6 +7,7 @@ import * as Yup from "yup";
 import { useRouter, useSearchParams } from "next/navigation";
 import { API_URL_artikel } from "@/constants";
 import { useGetData, usePostData, usePutData } from "@/actions";
+import slugify from "slugify";
 import { showToast } from "@/utils/showToast";
 import { errorResponse } from "@/utils/errorResponse";
 import { decrypted } from "@/utils/crypto";
@@ -20,6 +21,8 @@ const FormArtikel: React.FC = () => {
   const [isLoadingCkeditor, setLoadingCkeditor] = useState(true);
   const [refreshCkeditor, setRefreshCkeditor] = useState(false);
 
+  const [imagePreview, setImagePreview] = useState<string | null>(null);
+
   // API actions
   const createArtikelApi = usePostData(API_URL_artikel, true);
   const updateArtikelApi = usePutData(API_URL_artikel + plainId + "/", true);
@@ -31,20 +34,21 @@ const FormArtikel: React.FC = () => {
       title: "",
       image: "",
       content: "",
-      status: "publish",
+      status: "published",
     },
     validationSchema: Yup.object({
       title: Yup.string().required("Title is required"),
+      image: Yup.string().nullable(),
       content: Yup.string().required("Content is required"),
-      image: Yup.string().required("Image is required"),
-      status: Yup.string().oneOf(["publish", "draft"], "Invalid status").required("Status is required"),
+      status: Yup.string().oneOf(["published", "draft"], "Invalid status").required("Status is required"),
     }),
     onSubmit: (values) => {
       const form = new FormData();
       form.append("title", values.title);
-      form.append("content", values.content);
       form.append("image", values.image);
+      form.append("content", values.content);
       form.append("status", values.status);
+      form.append("slug", slugify(values.title, { lower: true, strict: true }));
 
       if (plainId) {
         // Update existing article
@@ -103,6 +107,7 @@ const FormArtikel: React.FC = () => {
       formik.setFieldValue("title", getArtikelApi.data?.title);
       formik.setFieldValue("content", getArtikelApi.data?.content);
       formik.setFieldValue("image", getArtikelApi.data?.image);
+      setImagePreview(getArtikelApi.data?.image || null); // Set the image preview
       formik.setFieldValue("status", getArtikelApi.data?.status);
     }
   }, [getArtikelApi.isSuccess]);
@@ -112,6 +117,19 @@ const FormArtikel: React.FC = () => {
       setRefreshCkeditor(true);
     }
   }, [formik.values.content, plainId]);
+
+  // Handle image change
+  const handleImageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files ? e.target.files[0] : null;
+    if (file) {
+      const reader = new FileReader();
+      reader.onloadend = () => {
+        setImagePreview(reader.result as string); // Set the image preview
+      };
+      reader.readAsDataURL(file);
+      formik.setFieldValue("image", file);
+    }
+  };
 
   return (
     <Fragment>
@@ -129,22 +147,68 @@ const FormArtikel: React.FC = () => {
       <br />
 
       {/* Form Content */}
-      <form onSubmit={formik.handleSubmit} className="m-2 flex flex-col-reverse lg:flex-row gap-4">
-        <div className="bg-white p-3 rounded-lg space-y-4 w-full lg:w-[70%]">
-          {/* Title */}
+      <form onSubmit={formik.handleSubmit} className="bg-white p-3 rounded-lg">
+        <div className="m-2 flex flex-col-reverse lg:flex-row gap-4">
+          <div className="space-y-4 w-full lg:w-[70%]">
+            {/* Title */}
+            <div>
+              <label className="block text-sm font-medium text-gray-700 mb-1">Title</label>
+              <input
+                type="text"
+                name="title"
+                value={formik.values.title}
+                onChange={formik.handleChange}
+                onBlur={formik.handleBlur}
+                className="w-full p-1.5 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+                placeholder="Masukkan Title"
+              />
+              {formik.touched.title && formik.errors.title && (
+                <div className="text-red-500 text-sm mt-1">{formik.errors.title}</div>
+              )}
+            </div>
+          </div>
+
+          {/* Status Section */}
+          <div className="w-full lg:w-[30%] h-fit">
+            <div>
+              <label className="block text-sm font-medium text-gray-700 mb-1">Status</label>
+              <select
+                name="status"
+                value={formik.values.status}
+                onChange={formik.handleChange}
+                onBlur={formik.handleBlur}
+                className="w-full p-1.5 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 bg-white"
+              >
+                <option value="published">Published</option>
+                <option value="draft">Draft</option>
+              </select>
+              {formik.touched.status && formik.errors.status && (
+                <div className="text-red-500 text-sm mt-1">{formik.errors.status}</div>
+              )}
+            </div>
+          </div>
+        </div>
+
+        <div className="space-y-4 w-full m-2">
+          {/* Image Upload */}
           <div>
-            <label className="block text-sm font-medium text-gray-700 mb-1">Title</label>
+            <label className="block text-sm font-medium text-gray-700 mb-1">Image</label>
             <input
-              type="text"
-              name="title"
-              value={formik.values.title}
-              onChange={formik.handleChange}
+              type="file"
+              name="image"
+              onChange={handleImageChange}
               onBlur={formik.handleBlur}
+              accept="image/*"
               className="w-full p-1.5 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
-              placeholder="Masukkan Title"
             />
-            {formik.touched.title && formik.errors.title && (
-              <div className="text-red-500 text-sm mt-1">{formik.errors.title}</div>
+            {formik.touched.image && formik.errors.image && (
+              <div className="text-red-500 text-sm mt-1">{formik.errors.image}</div>
+            )}
+            {/* Image Preview */}
+            {imagePreview && (
+              <div className="mt-2">
+                <img src={imagePreview} alt="Image Preview" className="w-full h-auto rounded-lg" />
+              </div>
             )}
           </div>
 
@@ -176,30 +240,10 @@ const FormArtikel: React.FC = () => {
           {/* Submit Button */}
           <button
             type="submit"
-            className="text-xs md:col-span-2 w-fit px-3 py-2 bg-blue-600 text-white font-semibold rounded-lg hover:bg-blue-700 transition-colors"
+            className="text-xs md:col-span-2 w-full px-3 py-2 bg-blue-600 text-white font-semibold rounded-lg hover:bg-blue-700 transition-colors"
           >
             Submit
           </button>
-        </div>
-
-        {/* Status Section */}
-        <div className="bg-white p-3 rounded-lg space-y-4 w-full lg:w-[30%] h-fit">
-          <div>
-            <label className="block text-sm font-medium text-gray-700 mb-1">Status</label>
-            <select
-              name="status"
-              value={formik.values.status}
-              onChange={formik.handleChange}
-              onBlur={formik.handleBlur}
-              className="w-full p-1.5 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 bg-white"
-            >
-              <option value="publish">Publish</option>
-              <option value="draft">Draft</option>
-            </select>
-            {formik.touched.status && formik.errors.status && (
-              <div className="text-red-500 text-sm mt-1">{formik.errors.status}</div>
-            )}
-          </div>
         </div>
       </form>
     </Fragment>
