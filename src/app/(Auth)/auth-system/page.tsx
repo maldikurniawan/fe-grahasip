@@ -120,7 +120,7 @@ const LoginPage: React.FC = () => {
                         icon: "success",
                         title: "Signed in successfully!",
                     });
-                }, 500);
+                }, 1000);
             } catch (error: unknown) {
                 if (error instanceof Error) {
                     // Now 'error' is typed as 'Error'
@@ -196,7 +196,7 @@ const LoginPage: React.FC = () => {
                                 value={formik.values.username}
                                 onChange={formik.handleChange}
                                 onBlur={formik.handleBlur}
-                                error={formik.errors.username}
+                                error={formik.touched.username && formik.errors.username}
                                 required={true}
                             />
                             <div className="relative">
@@ -209,11 +209,11 @@ const LoginPage: React.FC = () => {
                                     value={formik.values.password}
                                     onChange={formik.handleChange}
                                     onBlur={formik.handleBlur}
-                                    error={formik.errors.password}
+                                    error={formik.touched.password && formik.errors.password}
                                     required={true}
                                 />
                                 <div
-                                    className="absolute top-6.5 text-[#42526B] right-2 cursor-pointer"
+                                    className="absolute top-7 text-[#42526B] right-2 cursor-pointer"
                                     onClick={() => setIsShow(!isShow)}
                                 >
                                     {isShow ? <TbEyeOff size={24} /> : <TbEye size={24} />}

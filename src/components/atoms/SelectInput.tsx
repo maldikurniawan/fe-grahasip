@@ -8,7 +8,7 @@ interface SelectInputProps {
     onChange: React.ChangeEventHandler<HTMLSelectElement>;
     onBlur: React.FocusEventHandler<HTMLSelectElement>;
     options: { label: string; value: string }[];
-    error: string | undefined;
+    error: string | boolean | undefined;
     required?: boolean;
 }
 

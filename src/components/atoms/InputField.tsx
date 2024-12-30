@@ -9,7 +9,7 @@ interface InputFieldProps {
     value: string;
     onChange: React.ChangeEventHandler<HTMLInputElement>;
     onBlur: React.FocusEventHandler<HTMLInputElement>;
-    error: string | undefined;
+    error: string | boolean | undefined;
     required?: boolean;
 }
 

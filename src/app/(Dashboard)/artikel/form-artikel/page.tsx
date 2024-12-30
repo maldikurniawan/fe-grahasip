@@ -27,10 +27,10 @@ const FormArtikel: React.FC = () => {
   // API actions
   const createArtikelApi = usePostData(API_URL_artikel, true);
   const updateArtikelApi = usePutData(API_URL_artikel + plainId + "/", true);
-  const getArtikelApi = useGetData(`${API_URL_artikel + plainId + "/"}`, 
-    [plainId], 
-    true, 
-    {}, 
+  const getArtikelApi = useGetData(`${API_URL_artikel + plainId + "/"}`,
+    [plainId],
+    true,
+    {},
     { enabled: !!plainId });
 
   // Formik setup
@@ -50,10 +50,13 @@ const FormArtikel: React.FC = () => {
     onSubmit: (values) => {
       const form = new FormData();
       form.append("title", values.title);
-      form.append("image", values.image);
       form.append("content", values.content);
       form.append("status", values.status);
       form.append("slug", slugify(values.title, { lower: true, strict: true }));
+
+      if (values.image) {
+        form.append("image", values.image); // Only append if an image is provided
+      }
 
       if (plainId) {
         // Update existing article
@@ -111,7 +114,7 @@ const FormArtikel: React.FC = () => {
     if (getArtikelApi.isSuccess && getArtikelApi.data) {
       formik.setFieldValue("title", getArtikelApi.data?.title);
       formik.setFieldValue("content", getArtikelApi.data?.content);
-      formik.setFieldValue("image", getArtikelApi.data?.image);
+      formik.setFieldValue("image", null); // Reset menjadi null untuk menghindari kesalahan
       setImagePreview(getArtikelApi.data?.image || null);
       formik.setFieldValue("status", getArtikelApi.data?.status);
     }
@@ -132,7 +135,9 @@ const FormArtikel: React.FC = () => {
         setImagePreview(reader.result as string);
       };
       reader.readAsDataURL(file);
-      formik.setFieldValue("image", file);
+      formik.setFieldValue("image", file); // Simpan file
+    } else {
+      formik.setFieldValue("image", null); // Reset jika tidak ada file
     }
   };
 
@@ -164,7 +169,7 @@ const FormArtikel: React.FC = () => {
               value={formik.values.title}
               onChange={formik.handleChange}
               onBlur={formik.handleBlur}
-              error={formik.errors.title}
+              error={formik.touched.title && formik.errors.title}
               required={true}
             />
           </div>
@@ -180,7 +185,7 @@ const FormArtikel: React.FC = () => {
                 { label: 'Published', value: 'published' },
                 { label: 'Draft', value: 'draft' },
               ]}
-              error={formik.errors.status}
+              error={formik.touched.status && formik.errors.status}
               required={true}
             />
           </div>

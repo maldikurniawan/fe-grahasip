@@ -34,3 +34,99 @@ body {
   transform: scale(1.1);
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 }
+
+.scroll-hidden::-webkit-scrollbar {
+  display: none;
+}
+
+/* hidden notification ckeditor  */
+.cke_notifications_area {
+  display: none;
+}
+
+/* Gaya Tautan */
+.ck-editor-content a {
+  color: blue;
+  text-decoration: underline;
+}
+
+/* Gaya Paragraf */
+.ck-editor-content p {
+  margin-bottom: 16px;
+  line-height: 1.5;
+}
+
+/* Gaya Judul */
+.ck-editor-content h1 {
+  font-size: 24px;
+  font-weight: bold;
+  margin-top: 24px;
+  margin-bottom: 16px;
+}
+
+.ck-editor-content h2 {
+  font-size: 22px;
+  font-weight: bold;
+  margin-top: 20px;
+  margin-bottom: 14px;
+}
+
+.ck-editor-content h3 {
+  font-size: 20px;
+  font-weight: bold;
+  margin-top: 18px;
+  margin-bottom: 12px;
+}
+
+/* Gaya Daftar */
+.ck-editor-content ul {
+  list-style-type: disc;
+  margin-left: 30px;
+  margin-top: 8px;
+  margin-bottom: 8px;
+}
+
+.ck-editor-content ol {
+  list-style-type: decimal;
+  margin-left: 30px;
+  margin-top: 8px;
+  margin-bottom: 8px;
+}
+
+.ck-editor-content li {
+  margin-bottom: 6px;
+}
+
+/* Gaya Blok Kutipan */
+.ck-editor-content blockquote {
+  margin: 0 0 16px;
+  border-left: 4px solid #ccc;
+  padding-left: 16px;
+  font-style: italic;
+}
+
+/* Gaya Gambar */
+.ck-editor-content img {
+  max-width: 100%;
+  height: auto;
+}
+
+/* Gaya Tabel */
+.ck-editor-content table {
+  border-collapse: collapse;
+  width: 100%;
+  margin-bottom: 16px;
+  border: 1px solid #ddd;
+}
+
+.ck-editor-content th,
+.ck-editor-content td {
+  padding: 8px;
+  border: 1px solid #ddd;
+}
+
+/* Gaya Video */
+.ck-editor-content iframe {
+  max-width: 100%;
+  height: auto;
+}

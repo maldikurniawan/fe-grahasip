@@ -14,11 +14,14 @@ import {
 } from "react-icons/bi";
 import { useRouter } from "next/navigation";
 import { API_URL_artikel } from "@/constants";
-import { useGetData } from "@/actions";
+import { useDeleteData, useGetData } from "@/actions";
 import { Pagination } from "@/components";
 import { debounce } from "lodash";
 import { encrypted } from "@/utils/crypto";
+import { showSweetAlert } from "@/utils/showSweetAlert";
+import { showToast } from "@/utils/showToast";
 import moment from "moment";
+import { FaTimes } from "react-icons/fa";
 
 interface Artikel {
   id: string;
@@ -32,8 +35,15 @@ interface Artikel {
   updated_at: string;
 }
 
+interface ViewData {
+  title?: string;
+  image?: string;
+  content?: string;
+  created_at?: string;
+}
+
 const Artikel = () => {
-  const [viewData, setViewData] = useState<boolean>(false);
+  const [viewData, setViewData] = useState<ViewData>({});
   const [queryParams, setQueryParams] = useState({
     limit: 10,
     offset: 0,
@@ -67,8 +77,11 @@ const Artikel = () => {
     }
   );
 
+  const deleteGetArtikel = useDeleteData(API_URL_artikel, true);
+
   const onDetail = (item: any) => {
     setViewData(item);
+    (document.getElementById("modal_artikel") as HTMLDialogElement)?.showModal();
   };
 
   const onEdit = (item: any) => {
@@ -77,8 +90,20 @@ const Artikel = () => {
   };
 
   const onDelete = (item: any) => {
-    alert(`Delete item: ${item.name}`);
+    showSweetAlert(`Apakah Anda yakin menghapus tutorial ${item.title}`, () => {
+      deleteGetArtikel.mutate(item.id, {
+        onSuccess: (res: any) => {
+          showToast(res.message, "success", 3000);
+          getArtikel.refetch();
+        },
+        onError: (error) => {
+          console.log(error);
+          showToast(error.message, "warning", 3000);
+        },
+      });
+    });
   };
+
 
   const onSearch = debounce((value) => {
     setQueryParams((prev) => ({ ...prev, search: value, offset: 0 }));
@@ -150,7 +175,7 @@ const Artikel = () => {
             router.push("/artikel/form-artikel")
           }
         >
-          <BiPlus size={20}/>
+          <BiPlus size={20} />
           <span>Tambah Artikel</span>
         </button>
       </div>
@@ -237,7 +262,7 @@ const Artikel = () => {
                       <td className="p-2 text-center whitespace-nowrap">
                         {itemIdx + queryParams.offset + 1}
                       </td>
-                      <td className="p-2 text-center">{item.title}</td>
+                      <td className="p-2">{item.title}</td>
                       <td className="p-2 text-center">{moment(item.created_at).format("D MMMM YYYY")}</td>
                       <td className="p-2 text-center capitalize">{item.status}</td>
                       <td className="p-2 text-center whitespace-nowrap">
@@ -268,6 +293,45 @@ const Artikel = () => {
           />
         </div>
       </div>
+      <dialog
+        id="modal_artikel"
+        className="fixed inset-0 z-10 overflow-auto bg-transparent scroll-hidden"
+      >
+        <div className="w-full lg:w-[960px] h-fit max-w-5xl bg-white rounded-xl border border-black">
+          <form method="dialog">
+
+            <div className="flex items-center justify-between bg-gray-100 rounded-t-xl gap-2">
+              <div className="text-center text-xl font-bold py-4 px-6 text-black">
+                {viewData?.title}
+              </div>
+              <div>
+                <button
+                  id="button-close"
+                  className="text-lg font-bold text-gray-800 py-4 px-6 hover:text-gray-900 focus:outline-none"
+                >
+                  <FaTimes />
+                </button>
+              </div>
+            </div>
+            <div>
+              <img src={viewData?.image} alt="Artikel Pic" />
+            </div>
+            <div>{moment(viewData?.created_at).format("D MMMM YYYY")}</div>
+
+            <div className="px-6 pt-6">
+              <div
+                className="ck-editor-content text-sm text-gray-600"
+                dangerouslySetInnerHTML={{ __html: String(viewData?.content) }}
+              >
+              </div>
+            </div>
+
+            <button id="button-cancel" className="bg-[#1e293b] text-white p-1 px-4 rounded-md m-6">
+              Tutup
+            </button>
+          </form>
+        </div>
+      </dialog>
     </Fragment>
 
   );
