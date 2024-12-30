@@ -23,6 +23,5 @@
     }
   },
   "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts", "src/actions/index.js", "src/app/(Dashboard)/artikel/page.jsx"],
-  "exclude": ["node_modules"],
-  "rules": { "@typescript-eslint/no-explicit-any": "off" }
+  "exclude": ["node_modules"]
 }
