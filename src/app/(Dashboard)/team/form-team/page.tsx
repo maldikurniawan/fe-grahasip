@@ -1,4 +1,3 @@
-/* eslint-disable @next/next/no-img-element */
 "use client";
 
 import React, { useState, Fragment, useEffect } from "react";
@@ -11,6 +10,7 @@ import { showToast } from "@/utils/showToast";
 import { errorResponse } from "@/utils/errorResponse";
 import { decrypted } from "@/utils/crypto";
 import { InputField } from "@/components";
+import { FaTrash } from "react-icons/fa";
 
 const FormTeam: React.FC = () => {
   const router = useRouter();
@@ -21,11 +21,7 @@ const FormTeam: React.FC = () => {
   // API actions
   const createTeamApi = usePostData(API_URL_team, true);
   const updateTeamApi = usePutData(API_URL_team + plainId + "/", true);
-  const getTeamApi = useGetData(`${API_URL_team + plainId + "/"}`,
-    [plainId],
-    true,
-    {},
-    { enabled: !!plainId });
+  const getTeamApi = useGetData(`${API_URL_team + plainId + "/"}`, [plainId], true, {}, { enabled: !!plainId });
 
   // Formik setup
   const formik = useFormik({
@@ -49,7 +45,7 @@ const FormTeam: React.FC = () => {
       }
 
       if (plainId) {
-        // Update existing article
+        // Update existing team
         updateTeamApi.mutate(form as any, {
           onSuccess: (res: any) => {
             showToast(res.message, "success", 3000);
@@ -62,7 +58,7 @@ const FormTeam: React.FC = () => {
           },
         });
       } else {
-        // Create new article
+        // Create new team
         createTeamApi.mutate(form as any, {
           onSuccess: (res: any) => {
             showToast(res.message, "success", 3000);
@@ -105,10 +101,16 @@ const FormTeam: React.FC = () => {
         setImagePreview(reader.result as string);
       };
       reader.readAsDataURL(file);
-      formik.setFieldValue("image", file); // Simpan file
+      formik.setFieldValue("image", file); // Save the file
     } else {
-      formik.setFieldValue("image", null); // Reset jika tidak ada file
+      formik.setFieldValue("image", null); // Reset if no file is selected
     }
+  };
+
+  // Handle image delete
+  const handleImageDelete = () => {
+    setImagePreview(null); // Clear preview
+    formik.setFieldValue("image", null); // Reset the image field in Formik
   };
 
   return (
@@ -128,7 +130,7 @@ const FormTeam: React.FC = () => {
 
       {/* Form Content */}
       <form onSubmit={formik.handleSubmit} className="bg-white p-6 rounded-lg shadow-lg">
-        <div className="flex flex-col-reverse lg:flex-row gap-6 mb-4">
+        <div className="flex flex-col lg:flex-row gap-6 mb-4">
           <div className="w-full">
             <InputField
               label="Nama"
@@ -178,7 +180,16 @@ const FormTeam: React.FC = () => {
             {/* Image Preview */}
             {imagePreview && (
               <div className="mt-2">
-                <img src={imagePreview} alt="Image Preview" className="w-full h-auto rounded-lg" />
+                <button
+                  type="button"
+                  onClick={handleImageDelete}
+                  className="text-white flex items-center gap-2 rounded-md mb-2 bg-red-600 p-2 px-4 text-sm"
+                >
+                  <FaTrash />
+                  <span>Hapus Gambar</span>
+                </button>
+                <img src={imagePreview} alt="Image Preview" className="w-40 h-40 object-cover mx-auto rounded-full bg-black" />
+                {/* Delete button for image */}
               </div>
             )}
           </div>

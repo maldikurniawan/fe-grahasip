@@ -12,6 +12,7 @@ import Swal, { SweetAlertOptions } from "sweetalert2";
 import { useFormik } from "formik";
 import axios from "axios";
 import * as Yup from "yup";
+import Link from "next/link";
 
 const Toast = Swal.mixin({
     toast: true,
@@ -178,14 +179,16 @@ const LoginPage: React.FC = () => {
             <div className="relative w-screen h-screen z-20 overflow-hidden flex bg-white/10 text-base-300 font-light">
                 <div className="flex w-full items-center justify-center p-10">
                     <div className="w-full md:w-96 h-fit p-10 bg-white/10 backdrop-blur-lg rounded-lg border border-base-100 shadow-lg">
-                        <img
-                            src="assets/images/logo.png"
-                            alt="Logo Grahasip"
-                            className="mx-auto mb-4"
-                        />
-                        <div className="text-xl text-[#4479BC] font-semibold mb-10 text-center">
-                            GRAHASIP
-                        </div>
+                        <Link href={"/"}>
+                            <img
+                                src="assets/images/logo.png"
+                                alt="Logo Grahasip"
+                                className="mx-auto mb-4"
+                            />
+                            <div className="text-xl text-[#4479BC] font-semibold mb-10 text-center">
+                                GRAHASIP
+                            </div>
+                        </Link>
                         <form onSubmit={formik.handleSubmit} className="space-y-4">
                             <InputField
                                 label="Username"

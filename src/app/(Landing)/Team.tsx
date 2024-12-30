@@ -7,58 +7,11 @@ import "swiper/css";
 import "swiper/css/navigation";
 import { Autoplay, Navigation } from "swiper/modules";
 import { FaArrowLeft, FaArrowRight } from "react-icons/fa";
+import { useGetData } from "@/actions";
+import { API_URL_team } from "@/constants";
 
 const Team = () => {
-    const [teams] = useState([
-        {
-            nama: "Gerri Arisman",
-            jabatan: "Direktur Graha Skrip Infra Prima",
-            image: "assets/images/person.png",
-            background: "#CFEBD1",
-        },
-        {
-            nama: "Arnando Fajar Sidiq",
-            jabatan: "Programmer",
-            image: "assets/images/person.png",
-            background: "#FFE9BD",
-        },
-        {
-            nama: "Ramadhani Asrofa Kemal",
-            jabatan: "Programmer",
-            image: "assets/images/person.png",
-            background: "#CEE0FA",
-        },
-        {
-            nama: "Hashfi Qaedi Yusman",
-            jabatan: "UI/UX Designer",
-            image: "assets/images/person.png",
-            background: "#E3D6FF",
-        },
-        {
-            nama: "Gerri Arisman",
-            jabatan: "Direktur Graha Skrip Infra Prima",
-            image: "assets/images/person.png",
-            background: "#CFEBD1",
-        },
-        {
-            nama: "Arnando Fajar Sidiq",
-            jabatan: "Programmer",
-            image: "assets/images/person.png",
-            background: "#FFE9BD",
-        },
-        {
-            nama: "Ramadhani Asrofa Kemal",
-            jabatan: "Programmer",
-            image: "assets/images/person.png",
-            background: "#CEE0FA",
-        },
-        {
-            nama: "Hashfi Qaedi Yusman",
-            jabatan: "UI/UX Designer",
-            image: "assets/images/person.png",
-            background: "#E3D6FF",
-        },
-    ]);
+    const getTeam = useGetData(API_URL_team, ["team"], true);
 
     return (
         <div className="relative min-h-screen px-4 sm:px-8 md:px-16 lg:px-32 xl:px-[215px] bg-[#FAFAFA] flex flex-col py-[60px] sm:py-[80px] md:py-[90px] items-center">
@@ -103,30 +56,28 @@ const Team = () => {
                     }}
                     modules={[Autoplay, Navigation]}
                 >
-                    {teams.map((team, index) => (
-                        <SwiperSlide key={index}>
-                            <div className="flex flex-col items-center justify-center rounded-md">
-                                {/* Team Image */}
-                                <div
-                                    style={{ backgroundColor: team.background }}
-                                    className="w-full rounded-3xl overflow-hidden mb-4"
-                                >
-                                    <img
-                                        src={team.image}
-                                        alt={team.nama}
-                                        className="h-full w-full object-cover pt-8"
-                                    />
+                    {getTeam.data &&
+                        getTeam.data?.results?.map((team: any, index: any) => (
+                            <SwiperSlide key={index}>
+                                <div className="flex flex-col items-center justify-center rounded-md">
+                                    {/* Team Image */}
+                                    <div className="w-full rounded-3xl overflow-hidden mb-4 bg-[#E3D6FF]">
+                                        <img
+                                            src={team.image || "assets/images/person.png"}
+                                            alt={team.name}
+                                            className="h-full w-full object-cover pt-8"
+                                        />
+                                    </div>
+                                    {/* Team Name and Job Title */}
+                                    <div className="text-start whitespace-nowrap w-full">
+                                        <h3 className="text-[14px] font-bold text-[#2C3E50]">
+                                            {team.name}
+                                        </h3>
+                                        <p className="text-sm text-[#7F8C8D]">{team.position}</p>
+                                    </div>
                                 </div>
-                                {/* Team Name and Job Title */}
-                                <div className="text-start whitespace-nowrap w-full">
-                                    <h3 className="text-[14px] font-bold text-[#2C3E50]">
-                                        {team.nama}
-                                    </h3>
-                                    <p className="text-sm text-[#7F8C8D]">{team.jabatan}</p>
-                                </div>
-                            </div>
-                        </SwiperSlide>
-                    ))}
+                            </SwiperSlide>
+                        ))}
                 </Swiper>
             </div>
         </div>

@@ -1,60 +1,22 @@
 /* eslint-disable @next/next/no-img-element */
 "use client";
 
-import React, { useState } from "react";
+import React from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
 import "swiper/css/navigation";
 import { Autoplay, Navigation } from "swiper/modules";
 import { FaArrowLeft, FaArrowRight } from "react-icons/fa";
 import { LuCalendarDays } from "react-icons/lu";
+import { useGetData } from "@/actions";
+import { API_URL_artikel } from "@/constants";
+import { useRouter } from "next/navigation";
 import Link from "next/link";
+import moment from "moment";
 
 const Kegiatan = () => {
-    const [activities] = useState([
-        {
-            title: "ERPSKRIP ke Batam",
-            description:
-                "Aenean interdum arcu sit amet nulla lacinia suscipit. Vivamus at laoreet mi. Fusce pulvinar commodo ligula, et egestas dolor. Ut hendrerit blandit neque in tempor.",
-            image: "assets/images/kegiatan.jpeg",
-            date: "15 Sep, 2024",
-        },
-        {
-            title: "Workshop ReactJS",
-            description:
-                "Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Curabitur vel eros eu nulla luctus eleifend.",
-            image: "assets/images/kegiatan.jpeg",
-            date: "20 Sep, 2024",
-        },
-        {
-            title: "Company Outing",
-            description:
-                "Praesent in augue non purus tincidunt placerat. Aliquam erat volutpat. Proin nec orci id turpis suscipit vehicula.",
-            image: "assets/images/kegiatan.jpeg",
-            date: "25 Sep, 2024",
-        },
-        {
-            title: "ERPSKRIP ke Batam",
-            description:
-                "Aenean interdum arcu sit amet nulla lacinia suscipit. Vivamus at laoreet mi. Fusce pulvinar commodo ligula, et egestas dolor. Ut hendrerit blandit neque in tempor.",
-            image: "assets/images/kegiatan.jpeg",
-            date: "15 Sep, 2024",
-        },
-        {
-            title: "Workshop ReactJS",
-            description:
-                "Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Curabitur vel eros eu nulla luctus eleifend.",
-            image: "assets/images/kegiatan.jpeg",
-            date: "20 Sep, 2024",
-        },
-        {
-            title: "Company Outing",
-            description:
-                "Praesent in augue non purus tincidunt placerat. Aliquam erat volutpat. Proin nec orci id turpis suscipit vehicula.",
-            image: "assets/images/kegiatan.jpeg",
-            date: "25 Sep, 2024",
-        },
-    ]);
+    const router = useRouter();
+    const getArtikel = useGetData(API_URL_artikel, ["artikel"], true);
 
     return (
         <div
@@ -104,38 +66,47 @@ const Kegiatan = () => {
                     }}
                     modules={[Autoplay, Navigation]}
                 >
-                    {activities.map((activity, index) => (
-                        <SwiperSlide key={index}>
-                            <div className="flex flex-col md:flex-row items-center md:items-start p-0 sm:p-5 bg-white rounded-xl sm:rounded-3xl shadow-lg h-auto md:h-[300px]">
-                                {/* Left Image */}
-                                <img
-                                    src={activity.image}
-                                    alt={activity.title}
-                                    className="h-auto sm:h-[150px] w-full md:h-full md:w-[40%] object-cover rounded-t-xl sm:rounded-3xl mb-4 md:mb-0"
-                                />
+                    {getArtikel.data &&
+                        getArtikel.data?.results?.map((activity: any, index: any) => (
+                            <SwiperSlide key={index}>
+                                <div className="flex flex-col md:flex-row items-center md:items-start p-0 sm:p-5 bg-white rounded-xl sm:rounded-3xl shadow-lg h-auto md:h-[300px]">
+                                    {/* Left Image */}
+                                    <img
+                                        src={activity.image || "assets/images/kegiatan-dummy.jpeg"}
+                                        alt={activity.title}
+                                        className="h-auto sm:h-[150px] w-full md:h-full md:w-[40%] object-cover rounded-t-xl sm:rounded-3xl mb-4 md:mb-0"
+                                    />
 
-                                {/* Right Content */}
-                                <div className="md:px-[60px] px-4 md:py-[30px] flex flex-col p-5 justify-between h-full">
-                                    <div>
-                                        <div className="text-[#4E89D4] flex items-center gap-2 text-sm mb-2">
-                                            <LuCalendarDays />
-                                            <span>{activity.date}</span>
+                                    {/* Right Content */}
+                                    <div className="md:px-[60px] px-4 md:py-[30px] flex flex-col p-5 justify-between h-full">
+                                        <div>
+                                            <div className="text-[#4E89D4] flex items-center gap-2 text-sm mb-2">
+                                                <LuCalendarDays />
+                                                <span>{moment(activity.created_at).format("D MMMM YYYY")}</span>
+                                            </div>
+                                            <div className="text-[#333] text-base md:text-lg font-semibold mb-2">
+                                                {activity.title}
+                                            </div>
+                                            <div
+                                                className="text-[#666] text-xs md:text-sm line-clamp-3"
+                                                dangerouslySetInnerHTML={{ __html: String(activity?.content) }}
+                                            >
+                                            </div>
                                         </div>
-                                        <h3 className="text-[#333] text-base md:text-lg font-semibold mb-2">
-                                            {activity.title}
-                                        </h3>
-                                        <p className="text-[#666] text-xs md:text-sm line-clamp-3">
-                                            {activity.description}
-                                        </p>
+                                        <button
+                                            onClick={() =>
+                                                router.push(`/kegiatan/detail/${activity.slug}`)
+                                            }
+
+                                            className="text-white max-[450px]:mt-4 flex gap-2 text-[10px] md:text-[12px] items-center bg-[#6DA1EF] w-fit rounded-md py-2 px-6 text-start"
+                                        >
+                                            <span>Read More</span>
+                                            <FaArrowRight />
+                                        </button>
                                     </div>
-                                    <button className="text-white max-[450px]:mt-4 flex gap-2 text-[10px] md:text-[12px] items-center bg-[#6DA1EF] w-fit rounded-md py-2 px-6 text-start">
-                                        <span>Read More</span>
-                                        <FaArrowRight />
-                                    </button>
                                 </div>
-                            </div>
-                        </SwiperSlide>
-                    ))}
+                            </SwiperSlide>
+                        ))}
                 </Swiper>
             </div>
             <Link
