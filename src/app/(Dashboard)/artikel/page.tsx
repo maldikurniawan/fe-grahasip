@@ -22,6 +22,7 @@ import { showSweetAlert } from "@/utils/showSweetAlert";
 import { showToast } from "@/utils/showToast";
 import moment from "moment";
 import { FaTimes } from "react-icons/fa";
+import { LuCalendarDays } from "react-icons/lu";
 
 interface Artikel {
   id: string;
@@ -163,7 +164,7 @@ const Artikel = () => {
     },
   ];
 
-  console.log("Artikel Data:", getArtikel.data);
+  // console.log("Artikel Data:", getArtikel.data);
 
   return (
     <Fragment>
@@ -263,7 +264,7 @@ const Artikel = () => {
                         {itemIdx + queryParams.offset + 1}
                       </td>
                       <td className="p-2">{item.title}</td>
-                      <td className="p-2 text-center">{moment(item.created_at).format("D MMMM YYYY")}</td>
+                      <td className="p-2 text-start sm:text-center">{moment(item.created_at).format("D MMMM YYYY")}</td>
                       <td className="p-2 text-center capitalize">{item.status}</td>
                       <td className="p-2 text-center whitespace-nowrap">
                         <div className="flex justify-center">
@@ -313,20 +314,28 @@ const Artikel = () => {
                 </button>
               </div>
             </div>
-            <div>
-              <img src={viewData?.image} alt="Artikel Pic" />
+            <div className="w-full sm:w-[400px] py-2 pt-6 px-6">
+              <img
+                src={viewData?.image || "assets/images/kegiatan-dummy.jpeg"}
+                alt="Artikel Pic"
+                className="rounded-md"
+              />
             </div>
-            <div>{moment(viewData?.created_at).format("D MMMM YYYY")}</div>
-
-            <div className="px-6 pt-6">
+            <div className="px-6 py-2 text-sm flex items-center gap-2 text-gray-600">
+              <LuCalendarDays className='text-[#4479BC]' />
+              <span>
+                {moment(viewData?.created_at).format("D MMMM YYYY")}
+              </span>
+            </div>
+            <div className="px-6">
               <div
-                className="ck-editor-content text-sm text-gray-600"
+                className="ck-editor-content text-sm text-gray-600 text-justify"
                 dangerouslySetInnerHTML={{ __html: String(viewData?.content) }}
               >
               </div>
             </div>
 
-            <button id="button-cancel" className="bg-[#1e293b] text-white p-1 px-4 rounded-md m-6">
+            <button id="button-cancel" className="bg-[#1e293b] text-white font-semibold p-1 px-6 rounded-md m-6">
               Tutup
             </button>
           </form>
