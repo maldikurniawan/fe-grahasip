@@ -91,7 +91,7 @@ const Artikel = () => {
   };
 
   const onDelete = (item: any) => {
-    showSweetAlert(`Apakah Anda yakin menghapus tutorial ${item.title}`, () => {
+    showSweetAlert(`Apakah Anda yakin menghapus artikel ${item.title}`, () => {
       deleteGetArtikel.mutate(item.id, {
         onSuccess: (res: any) => {
           showToast(res.message, "success", 3000);

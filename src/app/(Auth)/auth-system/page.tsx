@@ -104,8 +104,8 @@ const LoginPage: React.FC = () => {
             password: "",
         },
         validationSchema: Yup.object({
-            username: Yup.string().required("Username is required"),
-            password: Yup.string().required("Password is required"),
+            username: Yup.string().required("Username harus diisi"),
+            password: Yup.string().required("Password harus diisi"),
         }),
         onSubmit: async (values, { setSubmitting }) => {
             setLoading(true);

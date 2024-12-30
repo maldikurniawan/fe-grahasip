@@ -14,6 +14,7 @@ export const API_URL_contentType = `${host_cms}/auth/contenttype/`;
 
 export const API_URL_dashboard = `${host_cms}/cms/dashboard/`;
 export const API_URL_artikel = `${host_cms}/cms/article/`;
+export const API_URL_team = `${host_cms}/cms/team/`;
 export const API_URL_visitor = `${host_cms}/cms/visitor/`;
 export const API_URL_masterfile = `${host_cms}/cms/masterfile/`;
 
