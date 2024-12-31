@@ -1,9 +1,5 @@
 {
     "rewrites":  [
-        {"source": "/(.*)", "destination": "/"},
-        {
-            "source": "/kegiatan/detail/:slug",
-            "destination": "/kegiatan/detail/[slug]"
-        }
+        {"source": "/(.*)", "destination": "/"}
     ]
 }
