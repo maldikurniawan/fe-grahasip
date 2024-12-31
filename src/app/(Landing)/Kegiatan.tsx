@@ -103,7 +103,7 @@ const Kegiatan = () => {
                                                 {activity.title}
                                             </div>
                                             <div
-                                                className="text-[#666] text-xs md:text-sm line-clamp-3"
+                                                className="ck-editor-content text-[#666] text-xs md:text-sm line-clamp-3"
                                                 dangerouslySetInnerHTML={{ __html: String(activity?.content) }}
                                             >
                                             </div>

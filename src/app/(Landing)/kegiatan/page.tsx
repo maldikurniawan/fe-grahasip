@@ -112,7 +112,7 @@ const ListKegiatan = () => {
                                             {kegiatanUtama.title}
                                         </div>
                                         <div
-                                            className="text-[#42526B] text-[12px] line-clamp-4"
+                                            className="ck-editor-content text-[#42526B] text-[12px] line-clamp-4"
                                             dangerouslySetInnerHTML={{ __html: String(kegiatanUtama?.content) }}
                                         >
                                         </div>
