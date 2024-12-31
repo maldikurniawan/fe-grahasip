@@ -1,6 +1,7 @@
 import AutoPlayVideo from "./atoms/AutoPlayVideo"
 import InputField from "./atoms/InputField"
 import SelectInput from "./atoms/SelectInput"
+import MapLeaflet from "./atoms/MapLeaflet"
 import Button from "./atoms/Button"
 import Footer from "./layout/Footer"
 import Header from "./layout/Header"
@@ -13,6 +14,7 @@ export {
     AutoPlayVideo,
     InputField,
     SelectInput,
+    MapLeaflet,
     Button,
     Footer,
     Header,

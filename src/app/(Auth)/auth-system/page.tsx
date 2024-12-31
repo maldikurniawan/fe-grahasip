@@ -121,7 +121,7 @@ const LoginPage: React.FC = () => {
                         icon: "success",
                         title: "Signed in successfully!",
                     });
-                }, 1000);
+                }, 2000);
             } catch (error: unknown) {
                 if (error instanceof Error) {
                     // Now 'error' is typed as 'Error'
