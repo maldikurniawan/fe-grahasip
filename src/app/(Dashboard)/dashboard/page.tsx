@@ -7,7 +7,7 @@ import { API_URL_dashboard } from "@/constants";
 import { TbLoader2 } from "react-icons/tb";
 import Link from "next/link";
 import { FaClock } from "react-icons/fa";
-// const ApexChart = dynamic(() => import("react-apexcharts"), { ssr: false });
+const ApexChart = dynamic(() => import("react-apexcharts"), { ssr: false });
 
 const Dashboard = () => {
     const [time, setTime] = useState<Date>(new Date());
@@ -110,12 +110,12 @@ const Dashboard = () => {
                 )}
                 {getDashboardApi.data && (
                     <div className="w-[95%] mx-auto relative -z-[00]">
-                        {/* <ApexChart
+                        <ApexChart
                             options={chartOptions}
                             series={chartSeries}
                             type="bar"
                             height={350}
-                        /> */}
+                        />
                     </div>
                 )}
             </div>
