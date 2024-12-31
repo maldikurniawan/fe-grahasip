@@ -8,7 +8,7 @@ export const AppProvider = ({ children }) => {
     const [datauser, setDatauser] = useState({});
 
     const sendVisitorData = async () => {
-        if (window !== undefined) {
+        if (typeof window !== "undefined") {
             const userAgent = window.navigator.userAgent;
             // Dapatkan IP dari API jika diperlukan
             const ipAddress = await fetch("https://api.ipify.org?format=json")
