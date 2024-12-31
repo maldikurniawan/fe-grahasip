@@ -1,4 +1,4 @@
-export const host_cms = process.env.NEXT_PUBLIC_HOST_CMS;
+export const host_cms = "http://localhost:8000";
 
 export const host_grahasip = process.env.NEXT_PUBLIC_HOST_GRAHASIP;
 
