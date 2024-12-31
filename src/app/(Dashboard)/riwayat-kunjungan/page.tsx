@@ -2,17 +2,44 @@
 import React, { useState, Fragment, useRef, useEffect } from "react";
 import { SyncLoader } from "react-spinners";
 import { BiDetail, BiSearch, BiSortDown, BiSortUp } from "react-icons/bi";
-import { useRouter } from "next/navigation";
 import { API_URL_visitor } from "@/constants";
 import { debounce } from "lodash";
 import { useGetData } from "@/actions";
 import { Pagination, MapLeaflet } from "@/components";
+import { FaTimes } from "react-icons/fa";
 import moment from "moment";
 
-const Page = () => {
-    const [dataLocationIP, setDataLocationIP] = useState({});
-    const dialogRef = useRef();
-    const [queryParams, setQueryParams] = useState({
+interface QueryParams {
+    limit: number;
+    offset: number;
+    search: string;
+    sortColumn: string;
+    sortOrder: "asc" | "desc" | "";
+}
+
+interface TableHeadItem {
+    title: string;
+    field: string;
+}
+
+interface VisitorData {
+    id: number;
+    ip_address: string;
+    ipaddressdetail?: {
+        org?: string;
+        city?: string;
+        asn?: string;
+        latitude?: number;
+        longitude?: number;
+        [key: string]: any;
+    };
+    created_at: string;
+}
+
+const Page: React.FC = () => {
+    const [dataLocationIP, setDataLocationIP] = useState<Record<string, any>>({});
+    const dialogRef = useRef<HTMLDialogElement>(null);
+    const [queryParams, setQueryParams] = useState<QueryParams>({
         limit: 10,
         offset: 0,
         search: "",
@@ -20,8 +47,7 @@ const Page = () => {
         sortOrder: "",
     });
 
-    const router = useRouter();
-    const tableHead = [
+    const tableHead: TableHeadItem[] = [
         { title: "No", field: "id" },
         { title: "Ip Address", field: "ip_address" },
         { title: "ISP", field: "ipaddressdetail__org" },
@@ -31,7 +57,7 @@ const Page = () => {
         { title: "Action", field: "" },
     ];
 
-    // action API
+    // Fetch API
     const getVisitorApi = useGetData(
         API_URL_visitor,
         ["visitor", queryParams],
@@ -47,55 +73,52 @@ const Page = () => {
         }
     );
 
-    const onView = (item) => {
+    const onView = (item: VisitorData) => {
         if (item?.ipaddressdetail) {
             setDataLocationIP(item.ipaddressdetail);
-            document.getElementById("modal_view").showModal();
+            dialogRef.current?.showModal();
         } else {
             fetch(`https://ipapi.co/${item.ip_address}/json/`)
-                .then(function (response) {
-                    response.json().then((jsonData) => {
-                        setDataLocationIP(jsonData);
-                        document.getElementById("modal_view").showModal();
-                    });
+                .then((response) => response.json())
+                .then((jsonData) => {
+                    setDataLocationIP(jsonData);
+                    dialogRef.current?.showModal();
                 })
-                .catch(function (error) {
-                    console.log("ini Error ->>", error);
+                .catch((error) => {
+                    console.error("Error fetching:", error);
                     alert(error);
                 });
         }
     };
 
-    const onSearch = debounce((value) => {
+    const onSearch = debounce((value: string) => {
         setQueryParams((prev) => ({ ...prev, search: value, offset: 0 }));
     }, 500);
 
-    const handleSort = (column: any) => {
+    const handleSort = (column: string) => {
         setQueryParams((prev) => ({
             ...prev,
             sortColumn: column,
-            sortOrder:
-                prev.sortColumn === column && prev.sortOrder === "asc" ? "desc" : "asc",
+            sortOrder: prev.sortColumn === column && prev.sortOrder === "asc" ? "desc" : "asc",
             offset: 0,
         }));
     };
 
-    // Sort icons
-    const renderSortIcon = (field: any) => {
+    const renderSortIcon = (field: string) => {
         if (field === queryParams.sortColumn) {
             return queryParams.sortOrder === "asc" ? <BiSortUp /> : <BiSortDown />;
         }
         return <BiSortUp className="text-gray-300" />;
     };
 
-    const handlePageClick = (e: any) => {
+    const handlePageClick = (e: { selected: number }) => {
         setQueryParams((prev) => ({
             ...prev,
             offset: e.selected * prev.limit,
         }));
     };
 
-    const handleSelect = (limit: any) => {
+    const handleSelect = (limit: number) => {
         setQueryParams((prev) => ({
             ...prev,
             limit,
@@ -112,26 +135,22 @@ const Page = () => {
         },
     ];
 
-    // Fungsi untuk menutup modal
     const closeModal = () => {
         setDataLocationIP({});
-        if (dialogRef.current) {
-            dialogRef.current.close();
-            setDataLocationIP({});
-        }
+        dialogRef.current?.close();
     };
-    // Menangani klik di luar modal
-    const handleClickOutside = (event: any) => {
+
+    const handleClickOutside = (event: MouseEvent) => {
         if (dialogRef.current && event.target === dialogRef.current) {
             closeModal();
         }
     };
+
     useEffect(() => {
         document.addEventListener("mousedown", handleClickOutside);
         return () => {
             document.removeEventListener("mousedown", handleClickOutside);
         };
-        //eslint-disable-next-line
     }, []);
 
     return (
@@ -142,7 +161,7 @@ const Page = () => {
                 </h1>
             </div>
             <br />
-            <div className="w-full md:w-[50%] flex items-center text-gray-600 bg-white p-1 rounded-lg">
+            <div className="w-full flex items-center text-gray-600 bg-white p-1 rounded-lg">
                 <div className="p-1 text-lg mr-3">
                     <BiSearch />
                 </div>
@@ -154,7 +173,6 @@ const Page = () => {
                 />
             </div>
             <br />
-
             {/* Content */}
             <div className="grid grid-cols-12 gap-4">
                 <div className="col-span-full bg-white shadow p-4 rounded-lg">
@@ -273,47 +291,35 @@ const Page = () => {
                 </div>
             </div>
 
-            <dialog ref={dialogRef} id="modal_view" className="modal">
-                <div className="modal-box w-11/12 max-w-6xl">
-                    <form method="dialog">
-                        {/* Jika ada tombol di form, itu akan menutup modal */}
-                        <button
-                            onClick={closeModal}
-                            className="btn btn-sm btn-circle btn-ghost absolute right-2 top-2"
-                        >
-                            ✕
-                        </button>
-                        {/* Menampilkan data JSON secara dinamis */}
-                        <div className="grid grid-cols-1 lg:grid-cols-3 gap-4 mt-4 mb-4">
-                            {dataLocationIP?.latitude && dataLocationIP.longitude && (
-                                <div className="col-span-full">
-                                    <MapLeaflet
-                                        position={[
-                                            dataLocationIP.latitude,
-                                            dataLocationIP.longitude,
-                                        ]}
-                                        org={dataLocationIP?.org}
-                                    />
-                                </div>
-                            )}
-                            {Object.keys(dataLocationIP)?.map((key) => (
-                                <div key={key} className="bg-gray-100 rounded-lg p-2 shadow-md">
-                                    <div className="flex justify-between gap-2 border-b last:border-b-0">
-                                        <strong className="text-gray-700">{key}:</strong>
-                                        <span className="text-gray-900">
-                                            {dataLocationIP[key]?.toString()}
-                                        </span>
-                                    </div>
-                                </div>
-                            ))}
+            <dialog ref={dialogRef} className="w-full max-w-lg rounded-xl bg-white border border-black scroll-hidden">
+                <div className="flex items-center justify-between bg-gray-100 gap-2">
+                    <div className="text-center text-xl font-bold py-4 px-4 text-black">
+                        User Agent
+                    </div>
+                    <button
+                        onClick={closeModal}
+                        className="text-lg font-bold text-gray-800 py-4 px-4 hover:text-gray-900 focus:outline-none"
+                    >
+                        <FaTimes />
+                    </button>
+
+                </div>
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mt-4 mb-4 mx-4">
+                    {Object.keys(dataLocationIP)?.map((key) => (
+                        <div key={key} className="bg-gray-100 rounded-lg p-2 shadow">
+                            <div className="flex justify-between gap-2">
+                                <strong className="text-gray-700 uppercase text-xs">{key}:</strong>
+                                <span className="text-gray-900 text-xs">
+                                    {dataLocationIP[key]?.toString()}
+                                </span>
+                            </div>
                         </div>
-                        <div className="flex justify-between">
-                            <div></div>
-                            <button onClick={closeModal} className="btn btn-sm">
-                                Tutup
-                            </button>
-                        </div>
-                    </form>
+                    ))}
+                </div>
+                <div className="mt-4 flex justify-end">
+                    <button onClick={closeModal} className="bg-[#1e293b] text-white font-semibold p-1 px-6 rounded-md m-4">
+                        Close
+                    </button>
                 </div>
             </dialog>
         </Fragment>

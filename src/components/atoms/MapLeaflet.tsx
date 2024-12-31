@@ -1,12 +1,12 @@
 "use client";
 
-import "leaflet/dist/leaflet.css";
-import "leaflet-defaulticon-compatibility/dist/leaflet-defaulticon-compatibility.webpack.css";
-import "leaflet-defaulticon-compatibility";
 import { MapContainer, TileLayer, Marker, Tooltip } from "react-leaflet";
+import "leaflet/dist/leaflet.css";
+import "leaflet-defaulticon-compatibility";
+import "leaflet-defaulticon-compatibility/dist/leaflet-defaulticon-compatibility.css"
 
 // Data koordinat
-const MapLeaflet = ({ position = [0, 0], org = "" }) => {
+const MapLeaflet = ({ position = [0, 0] as [number, number], org = "" }) => {
     return (
         <div>
             <MapContainer

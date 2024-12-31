@@ -264,7 +264,7 @@ const Artikel = () => {
                         {itemIdx + queryParams.offset + 1}
                       </td>
                       <td className="p-2">{item.title}</td>
-                      <td className="p-2 text-start sm:text-center">{moment(item.created_at).format("D MMMM YYYY")}</td>
+                      <td className="p-2 text-start xl:text-center">{moment(item.created_at).format("D MMMM YYYY")}</td>
                       <td className="p-2 text-center capitalize">{item.status}</td>
                       <td className="p-2 text-center whitespace-nowrap">
                         <div className="flex justify-center">

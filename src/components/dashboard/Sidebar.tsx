@@ -9,6 +9,7 @@ import {
 } from "react-icons/md";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+import { BiSolidFaceMask } from "react-icons/bi";
 
 interface MenuItem {
     title: string;
@@ -47,6 +48,12 @@ const Sidebar: React.FC<SidebarProps> = ({ sideOpen, setSideOpen }) => {
             title: "Team",
             link: "/team",
             icon: <MdPeople />,
+            subMenu: [],
+        },
+        {
+            title: "Pengunjung",
+            link: "/riwayat-kunjungan",
+            icon: <BiSolidFaceMask />,
             subMenu: [],
         },
     ];
