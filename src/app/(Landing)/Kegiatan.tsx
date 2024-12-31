@@ -99,7 +99,7 @@ const Kegiatan = () => {
                                                 <LuCalendarDays />
                                                 <span>{moment(activity.created_at).format("D MMMM YYYY")}</span>
                                             </div>
-                                            <div className="text-[#333] text-base md:text-lg font-semibold mb-2">
+                                            <div className="text-[#333] text-base md:text-lg font-semibold mb-2 line-clamp-2">
                                                 {activity.title}
                                             </div>
                                             <div
