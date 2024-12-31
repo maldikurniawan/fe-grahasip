@@ -63,7 +63,7 @@ const ListKegiatan = () => {
 
     return (
         <main className="overflow-x-hidden">
-            <HeaderV2 />
+            <HeaderV2 title={""} />
             <main className="space-y-[3rem]">
                 <div className="min-h-screen bg-[#FAFAFA] px-4 md:px-[90px] xl:px-[215px] py-[160px]">
                     <section className="mb-10">
