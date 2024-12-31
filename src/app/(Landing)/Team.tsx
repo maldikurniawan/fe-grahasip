@@ -9,6 +9,7 @@ import { Autoplay, Navigation } from "swiper/modules";
 import { FaArrowLeft, FaArrowRight } from "react-icons/fa";
 import { useGetData } from "@/actions";
 import { API_URL_team } from "@/constants";
+import { TbLoader2 } from "react-icons/tb";
 
 const Team = () => {
     const getTeam = useGetData(API_URL_team, ["team"], true);
@@ -35,6 +36,19 @@ const Team = () => {
 
             {/* Swiper Wrapper */}
             <div className="w-full">
+                {getTeam.isError && (
+                    <div className="flex justify-center text-[#4479BC] font-bold tracking-widest">
+                        Tidak terhubung dengan server
+                    </div>
+                )}
+                {getTeam.isLoading && (
+                    <div className="flex justify-center">
+                        <TbLoader2
+                            className="text-[#4479BC] animate-spin"
+                            size={50}
+                        />
+                    </div>
+                )}
                 <Swiper
                     slidesPerView={4} // Default for large screens
                     spaceBetween={20}

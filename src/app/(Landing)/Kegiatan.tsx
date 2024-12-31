@@ -13,6 +13,7 @@ import { API_URL_artikel } from "@/constants";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
 import moment from "moment";
+import { TbLoader2 } from "react-icons/tb";
 
 const Kegiatan = () => {
     const router = useRouter();
@@ -47,6 +48,20 @@ const Kegiatan = () => {
 
             {/* Swiper Wrapper */}
             <div className="w-full md:w-[80%] lg:w-[2200px]">
+                {getArtikel.isError && (
+                    <div className="flex justify-center text-white font-bold tracking-widest">
+                        Tidak terhubung dengan server
+                    </div>
+                )}
+                {getArtikel.isLoading && (
+                    <div className="flex justify-center">
+                        <TbLoader2
+                            className="text-white animate-spin"
+                            size={50}
+                        />
+                    </div>
+                )}
+
                 <Swiper
                     slidesPerView={1}
                     spaceBetween={10}
@@ -93,28 +108,31 @@ const Kegiatan = () => {
                                             >
                                             </div>
                                         </div>
+
                                         <button
                                             onClick={() =>
                                                 router.push(`/kegiatan/detail/${activity.slug}`)
                                             }
-
                                             className="text-white max-[450px]:mt-4 flex gap-2 text-[10px] md:text-[12px] items-center bg-[#6DA1EF] w-fit rounded-md py-2 px-6 text-start"
                                         >
                                             <span>Read More</span>
                                             <FaArrowRight />
                                         </button>
+
                                     </div>
                                 </div>
                             </SwiperSlide>
                         ))}
                 </Swiper>
             </div>
-            <Link
-                href={"/kegiatan"}
-                className="text-white mt-10 border border-white py-3 px-12 rounded-md text-[12px]"
-            >
-                Lihat Semua
-            </Link>
+            {!getArtikel.isError && !getArtikel.isLoading && (
+                <Link
+                    href={"/kegiatan"}
+                    className="text-white mt-10 border border-white py-3 px-12 rounded-md text-[12px]"
+                >
+                    Lihat Semua
+                </Link>
+            )}
             <img src="assets/images/shape.png" alt="Shape" className="absolute top-0 right-0 w-[150px] md:w-auto" />
             <img src="assets/images/vector.png" alt="Vector" className="absolute top-[100px] left-0 opacity-20 w-[150px] md:w-[350px]" />
         </div>
