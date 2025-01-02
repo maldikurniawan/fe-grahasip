@@ -70,10 +70,14 @@ const Header: React.FC = () => {
         </div>
 
         <div className="hidden md:block text-xl md:text-3xl font-bold text-white bg-[#4479BC] px-4 rounded-md">
-          <div className="cursor-pointer flex items-center text-[14px] gap-2 whitespace-nowrap">
+          <Link
+            href={"https://api.whatsapp.com/send?phone=6285966523396&text=Halo,%20saya%20tertarik%20dengan%20produk%20Anda!"}
+            className="cursor-pointer flex items-center text-[14px] gap-2 whitespace-nowrap"
+            target="_blank"
+            >
             <FiPhone className="w-[20px] h-[20px]" />
             Hubungi Kami
-          </div>
+          </Link>
         </div>
 
         <button

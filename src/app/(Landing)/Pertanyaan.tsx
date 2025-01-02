@@ -1,6 +1,7 @@
 /* eslint-disable @next/next/no-img-element */
 "use client";
 
+import Link from 'next/link';
 import React, { useEffect, useState } from 'react';
 import { FaArrowUp } from 'react-icons/fa';
 import { FiPhone } from 'react-icons/fi';
@@ -39,12 +40,14 @@ const Pertanyaan: React.FC = () => {
 
             {/* Button */}
             <div className="mt-6 md:mt-8">
-                <div
+                <Link
+                    href={"https://api.whatsapp.com/send?phone=6285966523396&text=Halo,%20saya%20tertarik%20dengan%20produk%20Anda!"}
                     className="cursor-pointer flex items-center text-[#4479BC] text-[14px] md:text-[16px] gap-2 bg-white px-4 py-2 rounded-md shadow-md w-max"
+                    target="_blank"
                 >
                     <FiPhone className="w-[20px] h-[20px]" />
                     Hubungi Kami
-                </div>
+                </Link>
             </div>
 
             {/* Images */}

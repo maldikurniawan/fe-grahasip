@@ -9,7 +9,7 @@ const Footer = () => {
   const sosialFooter = {
     facebook: "https://www.facebook.com/",
     instagram: "https://www.instagram.com/",
-    linkedin: "https://www.linkedin.com/company/",
+    linkedin: "https://www.linkedin.com/",
     twitter: "https://twitter.com/",
     location: "https://www.google.com/maps",
   };
