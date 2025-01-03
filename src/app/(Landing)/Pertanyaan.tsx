@@ -41,7 +41,7 @@ const Pertanyaan: React.FC = () => {
             {/* Button */}
             <div className="mt-6 md:mt-8">
                 <Link
-                    href={"https://api.whatsapp.com/send?phone=6285966523396&text=Halo,%20saya%20tertarik%20dengan%20produk%20Anda!"}
+                    href={"https://api.whatsapp.com/send?phone=6281932696996&text=Halo,%20saya%20tertarik%20dengan%20produk%20Anda!"}
                     className="cursor-pointer flex items-center text-[#4479BC] text-[14px] md:text-[16px] gap-2 bg-white px-4 py-2 rounded-md shadow-md w-max"
                     target="_blank"
                 >

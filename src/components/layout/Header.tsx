@@ -71,7 +71,7 @@ const Header: React.FC = () => {
 
         <div className="hidden md:block text-xl md:text-3xl font-bold text-white bg-[#4479BC] px-4 rounded-md">
           <Link
-            href={"https://api.whatsapp.com/send?phone=6285966523396&text=Halo,%20saya%20tertarik%20dengan%20produk%20Anda!"}
+            href={"https://api.whatsapp.com/send?phone=6281932696996&text=Halo,%20saya%20tertarik%20dengan%20produk%20Anda!"}
             className="cursor-pointer flex items-center text-[14px] gap-2 whitespace-nowrap"
             target="_blank"
             >
