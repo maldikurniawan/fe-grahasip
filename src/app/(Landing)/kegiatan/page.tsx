@@ -73,25 +73,12 @@ const ListKegiatan = () => {
                             </div>
                         )}
                         {getArtikel.isLoading && (
-                            <div className="shadow rounded-3xl bg-white p-4 w-full mx-auto">
-                                <div className="animate-pulse flex space-x-10">
-                                    <div className="rounded-xl bg-slate-200 h-40 w-40"></div>
-                                    <div className="flex-1 space-y-6 py-1">
-                                        <div className="h-2 bg-slate-200 rounded"></div>
-                                        {[...Array(3)].map((_, index) => (
-                                            <div key={index} className="space-y-3">
-                                                <div className="grid grid-cols-3 gap-4">
-                                                    <div className="h-2 bg-slate-200 rounded col-span-1"></div>
-                                                    <div className="h-2 bg-slate-200 rounded col-span-1"></div>
-                                                    <div className="h-2 bg-slate-200 rounded col-span-1"></div>
-                                                </div>
-                                                <div className="h-2 bg-slate-200 rounded"></div>
-                                            </div>
-                                        ))}
-                                    </div>
-                                </div>
+                            <div className="flex justify-center">
+                                <TbLoader2
+                                    className="text-black animate-spin"
+                                    size={50}
+                                />
                             </div>
-
                         )}
                         {kegiatanUtama && (
                             <div className="bg-white shadow rounded-3xl p-0 md:p-6 md:flex gap-6">
