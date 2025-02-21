@@ -28,7 +28,7 @@ const HeaderV2: React.FC<HeaderV2Props> = ({ title }) => {
         >
             <Link
                 href={title ? "/kegiatan" : "/"}
-                className={`flex items-center gap-1 line-clamp-1 ${title ? "text-[#BCBCBC]" : "text-[#4479BC] font-bold"}`}
+                className={`flex items-center gap-1 line-clamp-1 ${title ? "text-[#BCBCBC]" : "text-[#4479BC] font-semibold"}`}
             >
                 <FaArrowLeft />
                 <span>Kembali</span>
