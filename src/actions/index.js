@@ -39,6 +39,8 @@ export const useGetData = (
                 logout(); // Jika token tidak valid atau kedaluwarsa, logout
             }
         },
+        refetchOnMount: false,
+        refetchOnWindowFocus: false,
         ...options,
     });
 };
