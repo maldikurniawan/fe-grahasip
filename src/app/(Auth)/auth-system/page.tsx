@@ -32,7 +32,6 @@ const LoginPage: React.FC = () => {
     const router = useRouter();
 
     const themeColor = "#4479BC";
-    const colorMode: "dark" | "light" = "light";
 
     const particlesInit = useCallback(async (engine: Engine) => {
         await loadSlim(engine);
@@ -61,10 +60,10 @@ const LoginPage: React.FC = () => {
         },
         particles: {
             color: {
-                value: colorMode === "light" ? "#4479BC" : themeColor,
+                value: "#4479BC",
             },
             links: {
-                color: colorMode === "light" ? "#4479BC" : themeColor,
+                color: "#4479BC",
                 distance: 100,
                 enable: true,
                 opacity: 0.5,

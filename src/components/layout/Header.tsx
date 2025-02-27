@@ -43,51 +43,53 @@ const Header: React.FC = () => {
 
   return (
     <>
-      <header
-        className={`px-4 md:px-[30px] h-20 mt-4 w-full lg:w-[920px] lg:rounded-2xl flex items-center justify-between bg-white fixed top-6 lg:top-10 shadow left-1/2 transform -translate-x-1/2 -translate-y-1/2 z-40 transition-all duration-300 ${scrolled ? "shadow-md bg-opacity-60 backdrop-blur-xl hover:bg-opacity-100" : "shadow"}`}
-      >
-        <div className="font-bold text-sm md:text-3xl text-[#4479BC]">
-          <Link href="#Home" className="cursor-pointer flex items-center text-[14px] gap-2 whitespace-nowrap">
-            <img
-              src="assets/images/logo.png"
-              alt="logo"
-              className="w-[28px] h-[20px]"
-            />
-            Graha Skrip Infra Prima
-          </Link>
-        </div>
-
-        <div className="hidden md:flex items-center">
-          {menu.map((item, index) => (
-            <Link
-              key={index}
-              href={item.link}
-              className="text-[#6A778B] rounded-md px-3 text-sm hover:text-[#4479BC] hover:underline hover:underline-offset-[32px] hover:decoration-2 font-medium whitespace-nowrap cursor-pointer"
-            >
-              {item.title}
-            </Link>
-          ))}
-        </div>
-
-        <div className="hidden md:block text-xl md:text-3xl font-bold text-white bg-[#4479BC] px-4 rounded-md">
-          <Link
-            href={"https://api.whatsapp.com/send?phone=6281932696996&text=Halo,%20saya%20tertarik%20dengan%20produk%20Anda!"}
-            className="cursor-pointer flex items-center text-[14px] gap-2 whitespace-nowrap"
-            target="_blank"
-            >
-            <FiPhone className="w-[20px] h-[20px]" />
-            Hubungi Kami
-          </Link>
-        </div>
-
-        <button
-          onClick={() => setNavOpen(true)}
-          className="block md:hidden text-[#202020] p-2"
-          aria-label="Open navigation menu"
+      <div className="px-4 lg:px-[100px] xl:px-[218px] fixed z-40 w-full pt-4">
+        <div
+          className={`px-4 md:px-[30px] h-20 w-full rounded-2xl flex items-center justify-between bg-white shadow  transition-all duration-300 ${scrolled ? "shadow-md bg-opacity-60 backdrop-blur-xl hover:bg-opacity-100" : "shadow"}`}
         >
-          <FaBars size={22} />
-        </button>
-      </header>
+          <div className="font-bold text-sm md:text-3xl text-[#4479BC]">
+            <Link href="#Home" className="cursor-pointer flex items-center text-[14px] gap-2 whitespace-nowrap">
+              <img
+                src="assets/images/logo.png"
+                alt="logo"
+                className="w-[28px] h-[20px]"
+              />
+              Graha Skrip Infra Prima
+            </Link>
+          </div>
+
+          <div className="hidden md:flex items-center">
+            {menu.map((item, index) => (
+              <Link
+                key={index}
+                href={item.link}
+                className="text-[#6A778B] rounded-md px-3 text-sm hover:text-[#4479BC] hover:underline hover:underline-offset-[32px] hover:decoration-2 font-medium whitespace-nowrap cursor-pointer"
+              >
+                {item.title}
+              </Link>
+            ))}
+          </div>
+
+          <div className="hidden md:block text-xl md:text-3xl font-bold text-white bg-[#4479BC] px-4 rounded-md">
+            <Link
+              href={"https://api.whatsapp.com/send?phone=6281932696996&text=Halo,%20saya%20tertarik%20dengan%20produk%20Anda!"}
+              className="cursor-pointer flex items-center text-[14px] gap-2 whitespace-nowrap"
+              target="_blank"
+            >
+              <FiPhone className="w-[20px] h-[20px]" />
+              Hubungi Kami
+            </Link>
+          </div>
+
+          <button
+            onClick={() => setNavOpen(true)}
+            className="block md:hidden text-[#202020] p-2"
+            aria-label="Open navigation menu"
+          >
+            <FaBars size={22} />
+          </button>
+        </div>
+      </div>
 
       {/* Mobile Navigation */}
       <div

@@ -30,7 +30,7 @@ const Page: React.FC<{ params: Promise<{ slug: string }> }> = ({ params }) => {
     <div className="overflow-x-hidden">
       {/* Pass the title to HeaderV2 */}
       <HeaderV2 title={`/ ${artikelData?.title || "Loading..."}`} />
-      <div className="min-h-screen bg-[#FAFAFA] px-4 md:px-[90px] xl:px-[215px] py-[100px] sm:py-[140px]">
+      <div className="min-h-screen bg-[#FAFAFA] px-4 md:px-[90px] xl:px-[215px] py-[110px] sm:py-[140px]">
         {artikelData && (
           <div className="rounded-3xl flex flex-col gap-2">
             <img

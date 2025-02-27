@@ -65,7 +65,7 @@ const ListKegiatan = () => {
         <main className="overflow-x-hidden">
             <HeaderV2 title={""} />
             <main className="space-y-[3rem]">
-                <div className="min-h-screen bg-[#FAFAFA] px-4 md:px-[90px] xl:px-[215px] py-[100px] sm:py-[140px]">
+                <div className="min-h-screen bg-[#FAFAFA] px-4 md:px-[90px] xl:px-[220px] py-[110px] sm:py-[140px]">
                     <section className="mb-6">
                         {getArtikel.isError && (
                             <div className="flex justify-center text-black font-bold tracking-widest">
