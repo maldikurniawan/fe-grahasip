@@ -13,6 +13,7 @@ import { BiSearch } from 'react-icons/bi';
 import moment from 'moment';
 import { useRouter } from 'next/navigation';
 import { TbLoader2 } from 'react-icons/tb';
+import { encrypted } from '@/utils/crypto';
 
 const ListKegiatan = () => {
     const router = useRouter();
@@ -105,7 +106,7 @@ const ListKegiatan = () => {
                                         </div>
                                     </div>
                                     <Link
-                                        href={`/kegiatan/detail/${kegiatanUtama.slug}`}
+                                        href={`/kegiatan/detail/${encrypted(kegiatanUtama.slug)}`}
                                         className="text-white mt-4 flex gap-2 text-[10px] md:text-[12px] items-center bg-[#6DA1EF] w-fit rounded-md py-2 px-6 text-start"
                                     >
                                         <span>Read More</span>
@@ -158,7 +159,7 @@ const ListKegiatan = () => {
                                             <h3 className="text-base font-semibold mb-6 mt-2 line-clamp-2">{kegiatan.title}</h3>
                                             <button
                                                 onClick={() =>
-                                                    router.push(`/kegiatan/detail/${kegiatan.slug}`)
+                                                    router.push(`/kegiatan/detail/${encrypted(kegiatan.slug)}`)
                                                 }
                                                 className="text-white flex gap-2 text-[10px] md:text-[12px] items-center bg-[#6DA1EF] w-fit rounded-md py-2 px-6 text-start"
                                             >

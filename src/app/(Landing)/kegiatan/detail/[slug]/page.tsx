@@ -7,6 +7,7 @@ import { API_URL_artikelSlug } from '@/constants';
 import moment from 'moment';
 import React from 'react';
 import { LuCalendarDays } from 'react-icons/lu';
+import { decrypted } from "@/utils/crypto";
 
 const Page: React.FC<{ params: Promise<{ slug: string }> }> = ({ params }) => {
   const [artikelData, setArtikelData] = useState<any>(null);
@@ -14,7 +15,8 @@ const Page: React.FC<{ params: Promise<{ slug: string }> }> = ({ params }) => {
   // Fetch the article data when params resolve
   useEffect(() => {
     params.then((resolvedParams) => {
-      const slug = resolvedParams.slug;
+      const encryptedSlug = resolvedParams.slug;
+      const slug = decrypted(encryptedSlug);
       const fetchData = async () => {
         const response = await fetch(API_URL_artikelSlug + slug + "/");
         const data = await response.json();
