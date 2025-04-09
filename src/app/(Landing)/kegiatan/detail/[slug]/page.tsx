@@ -9,8 +9,16 @@ import React from 'react';
 import { LuCalendarDays } from 'react-icons/lu';
 import { decrypted } from "@/utils/crypto";
 
+type Artikel = {
+  id: number;
+  title: string;
+  content: string;
+  image: string;
+  created_at: string;
+};
+
 const Page: React.FC<{ params: Promise<{ slug: string }> }> = ({ params }) => {
-  const [artikelData, setArtikelData] = useState<any>(null);
+  const [artikelData, setArtikelData] = useState<Artikel | null>(null);
 
   // Fetch the article data when params resolve
   useEffect(() => {
