@@ -14,6 +14,7 @@ import { useRouter } from "next/navigation";
 import Link from "next/link";
 import moment from "moment";
 import { TbLoader2 } from "react-icons/tb";
+import { encrypted } from "@/utils/crypto";
 
 const Kegiatan = () => {
     const router = useRouter();
@@ -111,7 +112,7 @@ const Kegiatan = () => {
 
                                         <button
                                             onClick={() =>
-                                                router.push(`/kegiatan/detail/${activity.slug}`)
+                                                router.push(`/kegiatan/detail/${encrypted(activity.slug)}`)
                                             }
                                             className="text-white max-[450px]:mt-4 flex gap-2 text-[10px] md:text-[12px] items-center bg-[#6DA1EF] w-fit rounded-md py-2 px-6 text-start"
                                         >
