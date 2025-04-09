@@ -24,7 +24,7 @@ import moment from "moment";
 import { FaTimes } from "react-icons/fa";
 import { LuCalendarDays } from "react-icons/lu";
 
-interface Artikel {
+interface ArtikelInterface {
   id: string;
   title: string;
   image: string;
@@ -80,12 +80,12 @@ const Artikel = () => {
 
   const deleteGetArtikel = useDeleteData(API_URL_artikel, true);
 
-  const onDetail = (item: any) => {
+  const onDetail = (item: ArtikelInterface) => {
     setViewData(item);
     (document.getElementById("modal_artikel") as HTMLDialogElement)?.showModal();
   };
 
-  const onEdit = (item: any) => {
+  const onEdit = (item: ArtikelInterface) => {
     const key = encrypted(item.id);
     router.push(`/artikel/form-artikel?id=${key}`);
   };
@@ -110,7 +110,7 @@ const Artikel = () => {
     setQueryParams((prev) => ({ ...prev, search: value, offset: 0 }));
   }, 500);
 
-  const handleSort = (column: any) => {
+  const handleSort = (column: string) => {
     setQueryParams((prev) => ({
       ...prev,
       sortColumn: column,
@@ -121,21 +121,21 @@ const Artikel = () => {
   };
 
   // Sort icons
-  const renderSortIcon = (field: any) => {
+  const renderSortIcon = (field: string) => {
     if (field === queryParams.sortColumn) {
       return queryParams.sortOrder === "asc" ? <BiSortUp /> : <BiSortDown />;
     }
     return <BiSortUp className="text-gray-300" />;
   };
 
-  const handlePageClick = (e: any) => {
+  const handlePageClick = (e: { selected: number }) => {
     setQueryParams((prev) => ({
       ...prev,
       offset: e.selected * prev.limit,
     }));
   };
 
-  const handleSelect = (limit: any) => {
+  const handleSelect = (limit: number) => {
     setQueryParams((prev) => ({
       ...prev,
       limit,
