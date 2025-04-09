@@ -15,6 +15,14 @@ import { useRouter } from 'next/navigation';
 import { TbLoader2 } from 'react-icons/tb';
 import { encrypted } from '@/utils/crypto';
 
+type ArtikelItem = {
+    image?: string;
+    title: string;
+    created_at: string;
+    slug: string;
+    content?: string;
+};
+
 const ListKegiatan = () => {
     const router = useRouter();
     const [queryParams, setQueryParams] = useState({
@@ -22,7 +30,7 @@ const ListKegiatan = () => {
         offset: 0,
         search: "",
     });
-    const [kegiatanUtama, setKegiatanUtama] = useState<any>(null);
+    const [kegiatanUtama, setKegiatanUtama] = useState<ArtikelItem | null>(null);
 
     const getArtikel = useGetData(
         API_URL_artikel,
@@ -47,14 +55,14 @@ const ListKegiatan = () => {
         setQueryParams((prev) => ({ ...prev, search: value, offset: 0 }));
     }, 500);
 
-    const handlePageClick = (e: any) => {
+    const handlePageClick = (e: { selected: number }) => {
         setQueryParams((prev) => ({
             ...prev,
             offset: e.selected * prev.limit,
         }));
     };
 
-    const handleSelect = (limit: any) => {
+    const handleSelect = (limit: number) => {
         setQueryParams((prev) => ({
             ...prev,
             limit,
@@ -144,7 +152,7 @@ const ListKegiatan = () => {
                         )}
                         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
                             {getArtikel.data &&
-                                getArtikel.data?.results?.map((kegiatan: any, index: any) => (
+                                getArtikel.data?.results?.map((kegiatan: ArtikelItem, index: number) => (
                                     <div key={index} className="bg-white shadow rounded-xl overflow-hidden">
                                         <img
                                             src={kegiatan.image || "assets/images/kegiatan-dummy.jpeg"}

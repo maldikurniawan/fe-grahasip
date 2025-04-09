@@ -1,7 +1,7 @@
 /* eslint-disable @next/next/no-img-element */
 "use client";
 
-import React, { useState } from "react";
+import React from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
 import "swiper/css/navigation";
@@ -10,6 +10,13 @@ import { FaArrowLeft, FaArrowRight } from "react-icons/fa";
 import { useGetData } from "@/actions";
 import { API_URL_team } from "@/constants";
 import { TbLoader2 } from "react-icons/tb";
+
+type TeamMember = {
+    id?: number;
+    name: string;
+    position: string;
+    image?: string;
+};
 
 const Team = () => {
     const getTeam = useGetData(API_URL_team, ["team"], true);
@@ -71,7 +78,7 @@ const Team = () => {
                     modules={[Autoplay, Navigation]}
                 >
                     {getTeam.data &&
-                        getTeam.data?.results?.map((team: any, index: any) => (
+                        getTeam.data?.results?.map((team: TeamMember, index: number) => (
                             <SwiperSlide key={index}>
                                 <div className="flex flex-col items-center justify-center rounded-md">
                                     {/* Team Image */}

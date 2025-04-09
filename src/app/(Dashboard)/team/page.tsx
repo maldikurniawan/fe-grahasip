@@ -20,7 +20,7 @@ import { encrypted } from "@/utils/crypto";
 import { showSweetAlert } from "@/utils/showSweetAlert";
 import { showToast } from "@/utils/showToast";
 
-interface Team {
+interface TeamInterface {
   id: string;
   name: string;
   image: string;
@@ -65,7 +65,7 @@ const Team = () => {
 
   const deleteGetTeam = useDeleteData(API_URL_team, true);
 
-  const onEdit = (item: any) => {
+  const onEdit = (item: TeamInterface) => {
     const key = encrypted(item.id);
     router.push(`/team/form-team?id=${key}`);
   };
@@ -90,7 +90,7 @@ const Team = () => {
     setQueryParams((prev) => ({ ...prev, search: value, offset: 0 }));
   }, 500);
 
-  const handleSort = (column: any) => {
+  const handleSort = (column: string) => {
     setQueryParams((prev) => ({
       ...prev,
       sortColumn: column,
@@ -101,21 +101,21 @@ const Team = () => {
   };
 
   // Sort icons
-  const renderSortIcon = (field: any) => {
+  const renderSortIcon = (field: string) => {
     if (field === queryParams.sortColumn) {
       return queryParams.sortOrder === "asc" ? <BiSortUp /> : <BiSortDown />;
     }
     return <BiSortUp className="text-gray-300" />;
   };
 
-  const handlePageClick = (e: any) => {
+  const handlePageClick = (e: { selected: number }) => {
     setQueryParams((prev) => ({
       ...prev,
       offset: e.selected * prev.limit,
     }));
   };
 
-  const handleSelect = (limit: any) => {
+  const handleSelect = (limit: number) => {
     setQueryParams((prev) => ({
       ...prev,
       limit,
@@ -229,7 +229,7 @@ const Team = () => {
                   )}
 
                 {getTeam.data &&
-                  getTeam.data?.results?.map((item: any, itemIdx: any) => (
+                  getTeam.data?.results?.map((item: any, itemIdx: number) => (
                     <tr
                       key={itemIdx}
                       className="border-b border-gray-200 text-sm hover:bg-white/60 transition-all"
