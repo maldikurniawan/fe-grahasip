@@ -78,7 +78,7 @@ const ListKegiatan = () => {
                     <section className="mb-6">
                         {getArtikel.isError && (
                             <div className="flex justify-center text-black font-bold tracking-widest">
-                                Tidak terhubung dengan server
+                                Tidak terhubung dengan servers
                             </div>
                         )}
                         {getArtikel.isLoading && (
