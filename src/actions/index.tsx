@@ -21,7 +21,7 @@ export const useGetData = (
         queryFn: async () => {
             const headers: Record<string, string> = {};
 
-            if (withToken) {
+            if (withToken && typeof window !== "undefined") {
                 const token = window.localStorage.getItem("access");
                 if (token) {
                     headers.Authorization = `Bearer ${token}`;
@@ -61,7 +61,7 @@ export const usePostData = <
         mutationFn: async (data) => {
             const headers: Record<string, string> = {};
 
-            if (withToken) {
+            if (withToken && typeof window !== "undefined") {
                 const token = window.localStorage.getItem("access");
                 if (token) {
                     headers.Authorization = `Bearer ${token}`;
@@ -98,7 +98,7 @@ export const usePutData = <
         mutationFn: async (data) => {
             const headers: Record<string, string> = {};
 
-            if (withToken) {
+            if (withToken && typeof window !== "undefined") {
                 const token = window.localStorage.getItem("access");
                 if (token) {
                     headers.Authorization = `Bearer ${token}`;
@@ -127,7 +127,7 @@ export const useDeleteData = (endpoint: string, withToken = false) => {
         mutationFn: async (id) => {
             const headers: Record<string, string> = {};
 
-            if (withToken) {
+            if (withToken && typeof window !== "undefined") {
                 const token = window.localStorage.getItem("access");
                 if (token) {
                     headers.Authorization = `Bearer ${token}`;
