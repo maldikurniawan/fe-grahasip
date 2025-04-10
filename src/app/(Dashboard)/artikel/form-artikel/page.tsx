@@ -60,7 +60,7 @@ const FormArtikel: React.FC = () => {
 
       if (plainId) {
         // Update existing article
-        updateArtikelApi.mutate(form as FormData, {
+        updateArtikelApi.mutate(form, {
           onSuccess: (res) => {
             const data = res as { message: string };
             showToast(data.message, "success", 3000);
@@ -74,7 +74,7 @@ const FormArtikel: React.FC = () => {
         });
       } else {
         // Create new article
-        createArtikelApi.mutate(form as FormData, {
+        createArtikelApi.mutate(form, {
           onSuccess: (res) => {
             const data = res as { message: string };
             showToast(data.message, "success", 3000);

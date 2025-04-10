@@ -1,13 +1,6 @@
 import axios from "axios";
 import { useQuery, useMutation } from "@tanstack/react-query";
-
-// Helper untuk ambil token dari localStorage secara aman
-const getToken = () => {
-    if (typeof window !== "undefined") {
-        return window.localStorage.getItem("access");
-    }
-    return null;
-};
+import { QueryKey } from "@tanstack/react-query";
 
 export const logout = () => {
     if (typeof window !== "undefined") {
@@ -17,19 +10,19 @@ export const logout = () => {
 };
 
 export const useGetData = (
-    endpoint,
-    queryKey,
+    endpoint: string,
+    queryKey: QueryKey,
     withToken = false,
-    params = {},
-    options = {}
+    params: Record<string, any> = {},
+    options: object = {}
 ) => {
     return useQuery({
         queryKey,
         queryFn: async () => {
-            const headers = {};
+            const headers: Record<string, string> = {};
 
             if (withToken) {
-                const token = getToken();
+                const token = window.localStorage.getItem("access");
                 if (token) {
                     headers.Authorization = `Bearer ${token}`;
                 }
@@ -39,13 +32,16 @@ export const useGetData = (
                 params,
                 headers,
             });
-
             return response.data;
         },
-        throwOnError: (error) => {
-            if (error.response && error.response.status === 401) {
+        throwOnError: (error: unknown) => {
+            if (
+                axios.isAxiosError(error) &&
+                error.response?.status === 401
+            ) {
                 logout();
             }
+            return false;
         },
         refetchOnMount: false,
         refetchOnWindowFocus: false,
@@ -53,84 +49,93 @@ export const useGetData = (
     });
 };
 
-export const usePostData = (endpoint, withToken = false) => {
+export const usePostData = (endpoint: string, withToken = false) => {
     return useMutation({
         mutationFn: async (data) => {
-            const headers = {
+            const headers: Record<string, string> = {
                 "Content-Type": "multipart/form-data",
             };
 
             if (withToken) {
-                const token = getToken();
+                const token = window.localStorage.getItem("access");
                 if (token) {
                     headers.Authorization = `Bearer ${token}`;
                 }
             }
 
             const response = await axios.post(endpoint, data, {
-                headers,
+                headers: headers,
             });
-
             return response.data;
         },
-        throwOnError: (error) => {
-            if (error.response && error.response.status === 401) {
+        throwOnError: (error: unknown) => {
+            if (
+                axios.isAxiosError(error) &&
+                error.response?.status === 401
+            ) {
                 logout();
             }
+            return false;
         },
     });
 };
 
-export const usePutData = (endpoint, withToken = false) => {
+export const usePutData = (endpoint: string, withToken = false) => {
     return useMutation({
         mutationFn: async (data) => {
-            const headers = {
+            const headers: Record<string, string> = {
                 "Content-Type": "multipart/form-data",
             };
 
             if (withToken) {
-                const token = getToken();
+                const token = window.localStorage.getItem("access");
                 if (token) {
                     headers.Authorization = `Bearer ${token}`;
                 }
             }
 
             const response = await axios.put(endpoint, data, {
-                headers,
+                headers: headers,
             });
-
             return response.data;
         },
-        throwOnError: (error) => {
-            if (error.response && error.response.status === 401) {
+        throwOnError: (error: unknown) => {
+            if (
+                axios.isAxiosError(error) &&
+                error.response?.status === 401
+            ) {
                 logout();
             }
+            return false;
         },
     });
 };
 
-export const useDeleteData = (endpoint, withToken = false) => {
+export const useDeleteData = (endpoint: string, withToken = false) => {
     return useMutation({
         mutationFn: async (id) => {
-            const headers = {};
+            const headers: Record<string, string> = {};
 
             if (withToken) {
-                const token = getToken();
+                const token = window.localStorage.getItem("access");
                 if (token) {
                     headers.Authorization = `Bearer ${token}`;
                 }
             }
 
             const response = await axios.delete(`${endpoint}${id}/`, {
-                headers,
+                headers: headers,
             });
-
             return response.data;
         },
-        throwOnError: (error) => {
-            if (error.response && error.response.status === 401) {
+        throwOnError: (error: unknown) => {
+            if (
+                axios.isAxiosError(error) &&
+                error.response?.status === 401
+            ) {
                 logout();
             }
+            return false;
         },
     });
 };

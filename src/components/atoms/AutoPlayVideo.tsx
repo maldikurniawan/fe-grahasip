@@ -1,4 +1,3 @@
-/* eslint-disable @next/next/no-img-element */
 "use client";
 
 import React, { useEffect, useRef } from "react";
@@ -13,27 +12,28 @@ const AutoPlayVideo: React.FC<AutoPlayVideoProps> = ({ id, src, poster }) => {
     const videoRef = useRef<HTMLVideoElement | null>(null);
 
     useEffect(() => {
-        // Function to handle IntersectionObserver logic
+        // Save the ref to avoid issues if it changes during cleanup
+        const currentVideo = videoRef.current;
+
         const handleIntersection = (entries: IntersectionObserverEntry[]) => {
             entries.forEach((entry) => {
-                if (entry.isIntersecting && videoRef.current) {
-                    // Play the video when it enters the viewport
-                    videoRef.current.play();
+                if (entry.isIntersecting && currentVideo) {
+                    currentVideo.play();
                 }
             });
         };
 
         const observer = new IntersectionObserver(handleIntersection, {
-            threshold: 0.5, // Trigger when 50% of the video is visible
+            threshold: 0.5,
         });
 
-        if (videoRef.current) {
-            observer.observe(videoRef.current);
+        if (currentVideo) {
+            observer.observe(currentVideo);
         }
 
         return () => {
-            if (videoRef.current) {
-                observer.unobserve(videoRef.current);
+            if (currentVideo) {
+                observer.unobserve(currentVideo);
             }
         };
     }, []);

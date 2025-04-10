@@ -35,7 +35,7 @@
     ".next/types/**/*.ts",
     "src/app/(Landing)/page.jsx",
     "src/app/layout.tsx",
-    "src/actions/index.js"
+    "src/actions/index.tsx"
   ],
   "exclude": [
     "node_modules"

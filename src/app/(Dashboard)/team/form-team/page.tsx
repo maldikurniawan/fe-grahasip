@@ -46,7 +46,7 @@ const FormTeam: React.FC = () => {
 
       if (plainId) {
         // Update existing team
-        updateTeamApi.mutate(form as FormData, {
+        updateTeamApi.mutate(form, {
           onSuccess: (res) => {
             const data = res as { message: string };
             showToast(data.message, "success", 3000);
@@ -60,7 +60,7 @@ const FormTeam: React.FC = () => {
         });
       } else {
         // Create new team
-        createTeamApi.mutate(form as FormData, {
+        createTeamApi.mutate(form, {
           onSuccess: (res) => {
             const data = res as { message: string };
             showToast(data.message, "success", 3000);
