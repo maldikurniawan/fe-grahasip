@@ -11,9 +11,21 @@ import slugify from "slugify";
 import { showToast } from "@/utils/showToast";
 import { errorResponse } from "@/utils/errorResponse";
 import { decrypted } from "@/utils/crypto";
-import { CKEditor } from "ckeditor4-react";
+import { CKEditor, CKEditorInstance } from "ckeditor4-react";
 import { TbLoader } from "react-icons/tb";
 import { InputField, SelectInput } from "@/components";
+
+interface ArtikelInterface {
+  id: string;
+  title: string;
+  image: string;
+  content: string;
+  slug: string;
+  author: string;
+  status: string;
+  created_at: string;
+  updated_at: string;
+}
 
 const FormArtikel: React.FC = () => {
   const router = useRouter();
@@ -61,7 +73,7 @@ const FormArtikel: React.FC = () => {
       if (plainId) {
         // Update existing article
         updateArtikelApi.mutate(form as any, {
-          onSuccess: (res: any) => {
+          onSuccess: (res: { message: string }) => {
             showToast(res.message, "success", 3000);
             router.push("/artikel");
             formik.resetForm(); // Reset form on success
@@ -74,7 +86,7 @@ const FormArtikel: React.FC = () => {
       } else {
         // Create new article
         createArtikelApi.mutate(form as any, {
-          onSuccess: (res: any) => {
+          onSuccess: (res: { message: string }) => {
             showToast(res.message, "success", 3000);
             router.push("/artikel");
             formik.resetForm(); // Reset form on success
@@ -118,7 +130,7 @@ const FormArtikel: React.FC = () => {
       setImagePreview(getArtikelApi.data?.image || null);
       formik.setFieldValue("status", getArtikelApi.data?.status);
     }
-  }, [getArtikelApi.isSuccess]);
+  }, [formik, getArtikelApi.isSuccess, getArtikelApi.data]);
 
   useEffect(() => {
     if (formik.values.content && plainId) {
@@ -235,7 +247,10 @@ const FormArtikel: React.FC = () => {
               type="classic"
               initData={formik.values.content}
               onInstanceReady={onEditorReady}
-              onChange={(e: any) => formik.setFieldValue("content", e.editor.getData())}
+              onChange={(editor: CKEditorInstance) => {
+                const data = editor.getData();
+                formik.setFieldValue("content", data);
+              }}
             />
             {formik.touched.content && formik.errors.content && (
               <div className="text-red-500 text-sm">{formik.errors.content}</div>

@@ -93,7 +93,7 @@ const Artikel = () => {
   const onDelete = (item: any) => {
     showSweetAlert(`Apakah Anda yakin menghapus artikel ${item.title}`, () => {
       deleteGetArtikel.mutate(item.id, {
-        onSuccess: (res: any) => {
+        onSuccess: (res: { message: string }) => {
           showToast(res.message, "success", 3000);
           getArtikel.refetch();
         },
@@ -104,7 +104,6 @@ const Artikel = () => {
       });
     });
   };
-
 
   const onSearch = debounce((value) => {
     setQueryParams((prev) => ({ ...prev, search: value, offset: 0 }));
@@ -163,8 +162,6 @@ const Artikel = () => {
       func: onDelete,
     },
   ];
-
-  // console.log("Artikel Data:", getArtikel.data);
 
   return (
     <Fragment>
@@ -255,7 +252,7 @@ const Artikel = () => {
                   )}
 
                 {getArtikel.data &&
-                  getArtikel.data?.results?.map((item: any, itemIdx: any) => (
+                  getArtikel.data?.results?.map((item: ArtikelInterface, itemIdx: number) => (
                     <tr
                       key={itemIdx}
                       className="border-b border-gray-200 text-sm hover:bg-white/60 transition-all"
