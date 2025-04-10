@@ -72,8 +72,8 @@ const Page: React.FC = () => {
         ["visitor", queryParams],
         true,
         {
-            limit: queryParams.limit,
-            offset: queryParams.offset,
+            limit: queryParams.limit.toString(),
+            offset: queryParams.offset.toString(),
             ordering:
                 queryParams.sortOrder === "desc"
                     ? `-${queryParams.sortColumn}`
