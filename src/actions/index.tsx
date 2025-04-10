@@ -51,10 +51,8 @@ export const useGetData = (
 
 export const usePostData = (endpoint: string, withToken = false) => {
     return useMutation({
-        mutationFn: async (data) => {
-            const headers: Record<string, string> = {
-                "Content-Type": "multipart/form-data",
-            };
+        mutationFn: async (data: any) => {
+            const headers: Record<string, string> = {};
 
             if (withToken) {
                 const token = window.localStorage.getItem("access");
@@ -64,8 +62,9 @@ export const usePostData = (endpoint: string, withToken = false) => {
             }
 
             const response = await axios.post(endpoint, data, {
-                headers: headers,
+                headers,
             });
+
             return response.data;
         },
         throwOnError: (error: unknown) => {
@@ -82,10 +81,8 @@ export const usePostData = (endpoint: string, withToken = false) => {
 
 export const usePutData = (endpoint: string, withToken = false) => {
     return useMutation({
-        mutationFn: async (data) => {
-            const headers: Record<string, string> = {
-                "Content-Type": "multipart/form-data",
-            };
+        mutationFn: async (data: any) => {
+            const headers: Record<string, string> = {};
 
             if (withToken) {
                 const token = window.localStorage.getItem("access");
