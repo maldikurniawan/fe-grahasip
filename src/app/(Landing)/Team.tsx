@@ -22,7 +22,7 @@ const Team = () => {
     const getTeam = useGetData(API_URL_team, ["team"], true);
 
     return (
-        <div className="relative min-h-screen px-4 sm:px-8 md:px-16 lg:px-32 xl:px-[220px] bg-[#FAFAFA] flex flex-col py-[60px] sm:py-[80px] md:py-[90px] items-center">
+        <div className="relative min-h-screen px-4 sm:px-8 md:px-16 lg:px-32 xl:px-[220px] bg-[#FAFAFA] flex flex-col justify-center py-[60px] sm:py-[80px] md:py-[90px] items-center">
             {/* Section Title */}
             <div className="text-center text-[#4479BC] text-2xl sm:text-3xl md:text-[40px] font-bold mb-4">
                 Team Graha Skrip <br className="block sm:hidden" /> Infra Prima

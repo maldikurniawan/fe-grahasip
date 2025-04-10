@@ -26,17 +26,20 @@ const Keuntungan = () => {
     ]);
 
     return (
-        <div id='Keuntungan' className="min-h-screen bg-[#FAFAFA] py-[60px] px-4 sm:px-[20px] md:px-[80px] lg:px-[150px] xl:px-[220px] text-center">
+        <div
+            id='Keuntungan'
+            className="min-h-screen bg-[#FAFAFA] py-[60px] px-4 flex flex-col items-center sm:px-[20px] md:px-[80px] lg:px-[150px] xl:px-[220px] justify-center text-center"
+        >
             {/* Title Section */}
             <p className="text-[28px] sm:text-[36px] md:text-[42px] font-bold leading-none tracking-tight text-[#4479BC]">
-                Keuntungan <br className='sm:hidden block'/> Memilih Kami
+                Keuntungan <br className='sm:hidden block' /> Memilih Kami
             </p>
             <p className="text-[12px] sm:text-[14px] mt-[16px] sm:mt-[20px] md:mt-[24px] text-[#42526B]">
                 Dapatkan keuntungan maksimal dengan solusi yang disesuaikan dengan kebutuhan Anda
             </p>
 
             {/* Cards Grid */}
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 mt-[20px] sm:mt-[28px]">
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 mt-[20px] sm:mt-[28px] justify-center">
                 {keuntungan.map((item, itemIdx) => (
                     <div
                         key={itemIdx}
@@ -47,7 +50,7 @@ const Keuntungan = () => {
                         <img
                             src={item.image}
                             alt={item.title}
-                            className="w-[120px] sm:w-[140px] md:w-[165px] h-[120px] sm:h-[140px] md:h-[165px] object-cover mb-4"
+                            className="w-[120px] sm:w-[140px] md:w-[165px] h-[120px] sm:h-[140px] md:h-[165px] object-cover mb-4 mx-auto"
                         />
                         {/* Title */}
                         <div className="text-[#061C3D] text-[14px] sm:text-[16px] font-semibold mb-2 text-start">

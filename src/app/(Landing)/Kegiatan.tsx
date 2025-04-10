@@ -31,7 +31,7 @@ const Kegiatan = () => {
     return (
         <div
             id="Kegiatan"
-            className="relative min-h-screen flex py-[70px] max-[450px]:px-4 flex-col items-center justify-center"
+            className="relative min-h-screen flex py-[90px] max-[450px]:px-4 flex-col items-center justify-center"
             style={{
                 background: "linear-gradient(180deg, #4479BC 0%, #4E89D4 100%)",
             }}

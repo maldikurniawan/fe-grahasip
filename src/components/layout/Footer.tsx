@@ -7,11 +7,11 @@ const Footer = () => {
   const currentYear = new Date().getFullYear();
 
   const sosialFooter = {
-    facebook: "https://www.facebook.com/",
-    instagram: "https://www.instagram.com/",
-    linkedin: "https://www.linkedin.com/",
-    twitter: "https://twitter.com/",
-    location: "https://www.google.com/maps",
+    facebook: "#",
+    instagram: "#",
+    linkedin: "#",
+    twitter: "#",
+    location: "#",
   };
 
   const socialIcons = [
