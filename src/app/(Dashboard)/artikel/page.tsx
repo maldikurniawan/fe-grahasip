@@ -93,7 +93,7 @@ const Artikel = () => {
   const onDelete = (item: any) => {
     showSweetAlert(`Apakah Anda yakin menghapus artikel ${item.title}`, () => {
       deleteGetArtikel.mutate(item.id, {
-        onSuccess: (res: { message: string }) => {
+        onSuccess: (res: any) => {
           showToast(res.message, "success", 3000);
           getArtikel.refetch();
         },
