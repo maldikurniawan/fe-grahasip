@@ -1,4 +1,3 @@
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
 import axios from "axios";
 import { useQuery, useMutation } from "@tanstack/react-query";
 import { QueryKey } from "@tanstack/react-query";
@@ -50,9 +49,16 @@ export const useGetData = (
     });
 };
 
-export const usePostData = (endpoint: string, withToken = false) => {
-    return useMutation({
-        mutationFn: async (data: any) => {
+export const usePostData = <
+    TResponse = any,
+    TError = unknown,
+    TVariables = any
+>(
+    endpoint: string,
+    withToken = false
+) => {
+    return useMutation<TResponse, TError, TVariables>({
+        mutationFn: async (data) => {
             const headers: Record<string, string> = {};
 
             if (withToken) {
@@ -80,9 +86,16 @@ export const usePostData = (endpoint: string, withToken = false) => {
     });
 };
 
-export const usePutData = (endpoint: string, withToken = false) => {
-    return useMutation({
-        mutationFn: async (data: any) => {
+export const usePutData = <
+    TResponse = any,
+    TError = unknown,
+    TVariables = any
+>(
+    endpoint: string,
+    withToken = false
+) => {
+    return useMutation<TResponse, TError, TVariables>({
+        mutationFn: async (data) => {
             const headers: Record<string, string> = {};
 
             if (withToken) {

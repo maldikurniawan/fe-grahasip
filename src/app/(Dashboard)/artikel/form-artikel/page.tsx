@@ -1,5 +1,4 @@
 /* eslint-disable @next/next/no-img-element */
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
 "use client";
 
 import React, { useState, Fragment, useEffect } from "react";
@@ -238,7 +237,7 @@ const FormArtikel: React.FC = () => {
               type="classic"
               initData={formik.values.content}
               onInstanceReady={onEditorReady}
-              onChange={(e: any) => formik.setFieldValue("content", e.editor.getData())}
+              onChange={(e) => formik.setFieldValue("content", e.editor.getData())}
             />
             {formik.touched.content && formik.errors.content && (
               <div className="text-red-500 text-sm">{formik.errors.content}</div>
