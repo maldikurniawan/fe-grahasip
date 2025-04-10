@@ -65,7 +65,7 @@ const Team = () => {
 
   const deleteGetTeam = useDeleteData(API_URL_team, true);
 
-  const onEdit = (item: any) => {
+  const onEdit = (item: TeamInterface) => {
     const key = encrypted(item.id);
     router.push(`/team/form-team?id=${key}`);
   };
