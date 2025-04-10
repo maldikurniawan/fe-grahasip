@@ -85,7 +85,7 @@ const Artikel = () => {
     (document.getElementById("modal_artikel") as HTMLDialogElement)?.showModal();
   };
 
-  const onEdit = (item: ArtikelInterface) => {
+  const onEdit = (item: any) => {
     const key = encrypted(item.id);
     router.push(`/artikel/form-artikel?id=${key}`);
   };
