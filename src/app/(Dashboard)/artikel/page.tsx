@@ -25,7 +25,7 @@ import { FaTimes } from "react-icons/fa";
 import { LuCalendarDays } from "react-icons/lu";
 
 interface ArtikelInterface {
-  id: string;
+  id: void;
   title: string;
   image: string;
   content: string;
@@ -93,8 +93,9 @@ const Artikel = () => {
   const onDelete = (item: ArtikelInterface) => {
     showSweetAlert(`Apakah Anda yakin menghapus artikel ${item.title}`, () => {
       deleteGetArtikel.mutate(item.id, {
-        onSuccess: (res: { message: string }) => {
-          showToast(res.message, "success", 3000);
+        onSuccess: (res) => {
+          const data = res as { message: string };
+          showToast(data.message, "success", 3000);
           getArtikel.refetch();
         },
         onError: (error) => {
@@ -202,7 +203,9 @@ const Artikel = () => {
                       key={itemIdx}
                       className="p-2 text-sm whitespace-nowrap"
                       onClick={() => {
-                        item.field && handleSort(item.field);
+                        if (item.field) {
+                          handleSort(item.field);
+                        }
                       }}
                     >
                       <span className="flex text-center items-center gap-2 justify-center">
