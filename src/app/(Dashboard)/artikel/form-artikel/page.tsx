@@ -11,7 +11,7 @@ import slugify from "slugify";
 import { showToast } from "@/utils/showToast";
 import { errorResponse } from "@/utils/errorResponse";
 import { decrypted } from "@/utils/crypto";
-import { CKEditor } from "ckeditor4-react";
+import { CKEditor, CKEditorInstance } from "ckeditor4-react";
 import { TbLoader } from "react-icons/tb";
 import { InputField, SelectInput } from "@/components";
 
@@ -235,7 +235,10 @@ const FormArtikel: React.FC = () => {
               type="classic"
               initData={formik.values.content}
               onInstanceReady={onEditorReady}
-              onChange={(e: any) => formik.setFieldValue("content", e.editor.getData())}
+              onChange={(editor: CKEditorInstance) => {
+                const data = editor.getData();
+                formik.setFieldValue("content", data);
+              }}
             />
             {formik.touched.content && formik.errors.content && (
               <div className="text-red-500 text-sm">{formik.errors.content}</div>

@@ -229,7 +229,7 @@ const Team = () => {
                   )}
 
                 {getTeam.data &&
-                  getTeam.data?.results?.map((item: any, itemIdx: number) => (
+                  getTeam.data?.results?.map((item: TeamInterface, itemIdx: number) => (
                     <tr
                       key={itemIdx}
                       className="border-b border-gray-200 text-sm hover:bg-white/60 transition-all"

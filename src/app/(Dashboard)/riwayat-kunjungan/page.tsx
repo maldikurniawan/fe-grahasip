@@ -5,7 +5,7 @@ import { BiDetail, BiSearch, BiSortDown, BiSortUp } from "react-icons/bi";
 import { API_URL_visitor } from "@/constants";
 import { debounce } from "lodash";
 import { useGetData } from "@/actions";
-import { Pagination, MapLeaflet } from "@/components";
+import { Pagination } from "@/components";
 import { FaTimes } from "react-icons/fa";
 import moment from "moment";
 
@@ -31,7 +31,7 @@ interface VisitorData {
         asn?: string;
         latitude?: number;
         longitude?: number;
-        [key: string]: any;
+        [key: string]: string | number | undefined;
     };
     created_at: string;
 }
@@ -140,13 +140,13 @@ const Page: React.FC = () => {
         dialogRef.current?.close();
     };
 
-    const handleClickOutside = (event: MouseEvent) => {
-        if (dialogRef.current && event.target === dialogRef.current) {
-            closeModal();
-        }
-    };
-
     useEffect(() => {
+        const handleClickOutside = (event: MouseEvent) => {
+            if (dialogRef.current && event.target === dialogRef.current) {
+                closeModal();
+            }
+        };
+
         document.addEventListener("mousedown", handleClickOutside);
         return () => {
             document.removeEventListener("mousedown", handleClickOutside);
@@ -238,7 +238,7 @@ const Page: React.FC = () => {
                                     )}
 
                                 {getVisitorApi.data &&
-                                    getVisitorApi.data?.results?.map((item: any, itemIdx: any) => (
+                                    getVisitorApi.data?.results?.map((item: VisitorData, itemIdx: number) => (
                                         <tr
                                             key={itemIdx}
                                             className="border-b border-gray-200 text-sm hover:bg-white/60 transition-all"

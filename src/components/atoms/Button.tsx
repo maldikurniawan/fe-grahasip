@@ -7,10 +7,10 @@ interface ButtonProps {
     loading?: boolean;
     className?: string;
     color?: string; // Background color
-    textColor?: any;
+    textColor?: string;
     variant?: "solid" | "flat"; // Type of button
-    rounded?: any;
-    size?: any;
+    rounded?: string;
+    size?: string;
     children: React.ReactNode; // Button content (text or other components)
 }
 

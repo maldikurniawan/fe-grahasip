@@ -16,6 +16,14 @@ import moment from "moment";
 import { TbLoader2 } from "react-icons/tb";
 import { encrypted } from "@/utils/crypto";
 
+interface Activity {
+    image?: string;
+    title: string;
+    created_at: string;
+    content: string;
+    slug: string;
+}
+
 const Kegiatan = () => {
     const router = useRouter();
     const getArtikel = useGetData(API_URL_artikel, ["artikel"], true);
@@ -83,7 +91,7 @@ const Kegiatan = () => {
                     modules={[Autoplay, Navigation]}
                 >
                     {getArtikel.data &&
-                        getArtikel.data?.results?.map((activity: any, index: any) => (
+                        getArtikel.data?.results?.map((activity: Activity, index: number) => (
                             <SwiperSlide key={index}>
                                 <div className="flex flex-col md:flex-row items-center md:items-start p-0 sm:p-5 bg-white rounded-xl sm:rounded-3xl shadow-lg h-auto md:h-[300px]">
                                     {/* Left Image */}
