@@ -60,9 +60,10 @@ const FormArtikel: React.FC = () => {
 
       if (plainId) {
         // Update existing article
-        updateArtikelApi.mutate(form as any, {
-          onSuccess: (res: any) => {
-            showToast(res.message, "success", 3000);
+        updateArtikelApi.mutate(form, {
+          onSuccess: (res) => {
+            const data = res as { message: string };
+            showToast(data.message, "success", 3000);
             router.push("/artikel");
             formik.resetForm(); // Reset form on success
           },
@@ -73,9 +74,10 @@ const FormArtikel: React.FC = () => {
         });
       } else {
         // Create new article
-        createArtikelApi.mutate(form as any, {
-          onSuccess: (res: any) => {
-            showToast(res.message, "success", 3000);
+        createArtikelApi.mutate(form, {
+          onSuccess: (res) => {
+            const data = res as { message: string };
+            showToast(data.message, "success", 3000);
             router.push("/artikel");
             formik.resetForm(); // Reset form on success
           },

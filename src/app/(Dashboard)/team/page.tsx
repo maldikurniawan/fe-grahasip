@@ -179,7 +179,9 @@ const Team = () => {
                       key={itemIdx}
                       className="p-2 text-sm whitespace-nowrap"
                       onClick={() => {
-                        item.field && handleSort(item.field);
+                        if (item.field) {
+                          handleSort(item.field);
+                        }
                       }}
                     >
                       <span className="flex text-center items-center gap-2 justify-center">

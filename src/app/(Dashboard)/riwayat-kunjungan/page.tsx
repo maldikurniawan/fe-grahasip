@@ -36,8 +36,17 @@ interface VisitorData {
     created_at: string;
 }
 
+type IPAddressDetail = {
+    org?: string;
+    city?: string;
+    asn?: string;
+    latitude?: number;
+    longitude?: number;
+    [key: string]: string | number | undefined;
+};
+
 const Page: React.FC = () => {
-    const [dataLocationIP, setDataLocationIP] = useState<Record<string, any>>({});
+    const [dataLocationIP, setDataLocationIP] = useState<IPAddressDetail>({});
     const dialogRef = useRef<HTMLDialogElement>(null);
     const [queryParams, setQueryParams] = useState<QueryParams>({
         limit: 10,
@@ -185,7 +194,9 @@ const Page: React.FC = () => {
                                             key={itemIdx}
                                             className="p-2 text-sm whitespace-nowrap"
                                             onClick={() => {
-                                                item.field && handleSort(item.field);
+                                                if (item.field) {
+                                                    handleSort(item.field);
+                                                }
                                             }}
                                         >
                                             <span className="flex text-center items-center gap-2 justify-center">
