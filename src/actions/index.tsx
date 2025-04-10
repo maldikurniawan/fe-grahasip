@@ -13,7 +13,7 @@ export const useGetData = (
     endpoint: string,
     queryKey: QueryKey,
     withToken = false,
-    params: Record<string, any> = {},
+    params: Record<string, string> = {},
     options: object = {}
 ) => {
     return useQuery({
