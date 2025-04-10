@@ -92,7 +92,7 @@ const FormTeam: React.FC = () => {
       formik.setFieldValue("image", null); // Reset menjadi null untuk menghindari kesalahan
       setImagePreview(getTeamApi.data?.image || null);
     }
-  }, [formik, getTeamApi.isSuccess, getTeamApi.data]);
+  }, [getTeamApi.isSuccess]);
 
   // Handle image change
   const handleImageChange = (e: React.ChangeEvent<HTMLInputElement>) => {

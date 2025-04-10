@@ -120,7 +120,7 @@ const FormArtikel: React.FC = () => {
       setImagePreview(getArtikelApi.data?.image || null);
       formik.setFieldValue("status", getArtikelApi.data?.status);
     }
-  }, [formik, getArtikelApi.isSuccess, getArtikelApi.data]);
+  }, [getArtikelApi.isSuccess]);
 
   useEffect(() => {
     if (formik.values.content && plainId) {
