@@ -90,10 +90,10 @@ const Artikel = () => {
     router.push(`/artikel/form-artikel?id=${key}`);
   };
 
-  const onDelete = (item: any) => {
+  const onDelete = (item: ArtikelInterface) => {
     showSweetAlert(`Apakah Anda yakin menghapus artikel ${item.title}`, () => {
       deleteGetArtikel.mutate(item.id, {
-        onSuccess: (res: any) => {
+        onSuccess: (res: { message: string }) => {
           showToast(res.message, "success", 3000);
           getArtikel.refetch();
         },
