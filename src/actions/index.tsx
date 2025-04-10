@@ -1,3 +1,4 @@
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 import axios from "axios";
 import { useQuery, useMutation } from "@tanstack/react-query";
 import { QueryKey } from "@tanstack/react-query";
