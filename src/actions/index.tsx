@@ -50,9 +50,9 @@ export const useGetData = (
 };
 
 export const usePostData = <
-    TResponse = any,
+    TResponse = unknown,
     TError = unknown,
-    TVariables = any
+    TVariables = unknown
 >(
     endpoint: string,
     withToken = false
@@ -87,9 +87,9 @@ export const usePostData = <
 };
 
 export const usePutData = <
-    TResponse = any,
+    TResponse = unknown,
     TError = unknown,
-    TVariables = any
+    TVariables = unknown
 >(
     endpoint: string,
     withToken = false
