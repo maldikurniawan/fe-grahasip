@@ -46,9 +46,10 @@ const FormTeam: React.FC = () => {
 
       if (plainId) {
         // Update existing team
-        updateTeamApi.mutate(form as any, {
-          onSuccess: (res: any) => {
-            showToast(res.message, "success", 3000);
+        updateTeamApi.mutate(form, {
+          onSuccess: (res) => {
+            const data = res as { message: string };
+            showToast(data.message, "success", 3000);
             router.push("/team");
             formik.resetForm(); // Reset form on success
           },
@@ -59,9 +60,10 @@ const FormTeam: React.FC = () => {
         });
       } else {
         // Create new team
-        createTeamApi.mutate(form as any, {
-          onSuccess: (res: any) => {
-            showToast(res.message, "success", 3000);
+        createTeamApi.mutate(form, {
+          onSuccess: (res) => {
+            const data = res as { message: string };
+            showToast(data.message, "success", 3000);
             router.push("/team");
             formik.resetForm(); // Reset form on success
           },

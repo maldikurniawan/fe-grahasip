@@ -237,7 +237,7 @@ const FormArtikel: React.FC = () => {
               type="classic"
               initData={formik.values.content}
               onInstanceReady={onEditorReady}
-              onChange={(e: any) => formik.setFieldValue("content", e.editor.getData())}
+              onChange={(e) => formik.setFieldValue("content", e.editor.getData())}
             />
             {formik.touched.content && formik.errors.content && (
               <div className="text-red-500 text-sm">{formik.errors.content}</div>

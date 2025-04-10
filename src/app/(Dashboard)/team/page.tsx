@@ -21,7 +21,7 @@ import { showSweetAlert } from "@/utils/showSweetAlert";
 import { showToast } from "@/utils/showToast";
 
 interface TeamInterface {
-  id: string;
+  id: void;
   name: string;
   image: string;
   position: string;
@@ -70,11 +70,12 @@ const Team = () => {
     router.push(`/team/form-team?id=${key}`);
   };
 
-  const onDelete = (item: any) => {
-    showSweetAlert(`Apakah Anda yakin menghapus ${item.title} dari tim`, () => {
+  const onDelete = (item: TeamInterface) => {
+    showSweetAlert(`Apakah Anda yakin menghapus ${item.name} dari tim`, () => {
       deleteGetTeam.mutate(item.id, {
-        onSuccess: (res: any) => {
-          showToast(res.message, "success", 3000);
+        onSuccess: (res) => {
+          const data = res as { message: string };
+          showToast(data.message, "success", 3000);
           getTeam.refetch();
         },
         onError: (error) => {
