@@ -227,7 +227,9 @@ const Page: React.FC = () => {
                                     <tr>
                                         <td className="text-center" colSpan={tableHead.length + 1}>
                                             <div className="pt-20 pb-12 flex justify-center items-center text-xs text-red-500">
-                                                {getVisitorApi.error.message}
+                                                {getVisitorApi.error instanceof Error
+                                                    ? getVisitorApi.error.message
+                                                    : "An unknown error occurred."}
                                             </div>
                                         </td>
                                     </tr>

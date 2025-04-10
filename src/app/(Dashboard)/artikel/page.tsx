@@ -100,7 +100,8 @@ const Artikel = () => {
         },
         onError: (error) => {
           console.log(error);
-          showToast(error.message, "warning", 3000);
+          const data = error as { message: string };
+          showToast(data.message, "warning", 3000);
         },
       });
     });
@@ -236,7 +237,9 @@ const Artikel = () => {
                   <tr>
                     <td className="text-center" colSpan={tableHead.length + 1}>
                       <div className="pt-20 pb-12 flex justify-center items-center text-xs text-red-500">
-                        {getArtikel.error.message}
+                        {getArtikel.error instanceof Error
+                          ? getArtikel.error.message
+                          : "An unknown error occurred."}
                       </div>
                     </td>
                   </tr>

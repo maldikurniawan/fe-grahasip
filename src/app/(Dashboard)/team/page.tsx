@@ -80,7 +80,8 @@ const Team = () => {
         },
         onError: (error) => {
           console.log(error);
-          showToast(error.message, "warning", 3000);
+          const data = error as { message: string };
+          showToast(data.message, "warning", 3000);
         },
       });
     });
@@ -213,7 +214,9 @@ const Team = () => {
                   <tr>
                     <td className="text-center" colSpan={tableHead.length + 1}>
                       <div className="pt-20 pb-12 flex justify-center items-center text-xs text-red-500">
-                        {getTeam.error.message}
+                        {getTeam.error instanceof Error
+                          ? getTeam.error.message
+                          : "An unknown error occurred."}
                       </div>
                     </td>
                   </tr>
