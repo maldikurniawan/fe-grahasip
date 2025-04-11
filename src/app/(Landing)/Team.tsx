@@ -27,7 +27,7 @@ const Team = () => {
             <div className="text-center text-[#4479BC] text-2xl sm:text-3xl md:text-[40px] font-bold mb-4">
                 Team Graha Skrip <br className="block sm:hidden" /> Infra Prima
             </div>
-            <div className="text-center text-[#42526B] text-sm sm:text-base md:text-[14px] mb-8 md:mb-[100px]">
+            <div className="text-center text-[#42526B] text-sm sm:text-base md:text-[14px] mb-8 md:mb-[60px]">
                 Unit kami terdiri dari para ahli di bidangnya masing-masing, siap mendukung Anda.
             </div>
 
